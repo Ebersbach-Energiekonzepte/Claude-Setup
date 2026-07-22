@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pong – Der Klassiker</title>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --fg: #e8f0ff;
+    --accent: #35d0a5;
+    --accent2: #ff5d73;
+    --dim: #4a5568;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    overflow: hidden;
+    user-select: none;
+  }
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  #wrap {
+    position: relative;
+  }
+  canvas {
+    background: #060910;
+    border: 2px solid #1c2432;
+    border-radius: 6px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    display: block;
+    max-width: 96vw;
+    max-height: 70vh;
+  }
+  #overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 18px;
+    background: rgba(6,9,16,0.86);
+    border-radius: 6px;
+    padding: 24px;
+  }
+  #overlay.hidden { display: none; }
+  #overlay h2 { font-size: 1.6rem; color: var(--fg); }
+  #overlay p { color: #9fb0c7; line-height: 1.5; max-width: 420px; font-size: 0.95rem; }
+  .modes { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  button {
+    background: var(--accent);
+    color: #04120d;
+    border: none;
+    padding: 12px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.08s ease, filter 0.15s ease;
+  }
+  button.secondary { background: #263141; color: var(--fg); }
+  button:hover { filter: brightness(1.1); }
+  button:active { transform: translateY(1px); }
+  .controls {
+    display: flex;
+    gap: 28px;
+    color: #7f8ea6;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .controls b { color: var(--fg); }
+  kbd {
+    background: #1a2130;
+    border: 1px solid #2b3648;
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: monospace;
+    color: var(--fg);
+  }
+</style>
+</head>
+<body>
+  <h1>P&nbsp;O&nbsp;N&nbsp;G</h1>
+  <div id="wrap">
+    <canvas id="game" width="820" height="500"></canvas>
+    <div id="overlay">
+      <h2>Bereit zum Spielen?</h2>
+      <p>Verteidige dein Tor mit dem Schläger! Wer zuerst <b>7 Punkte</b> hat, gewinnt.</p>
+      <div class="modes">
+        <button data-mode="ai">1 Spieler (gegen Computer)</button>
+        <button class="secondary" data-mode="2p">2 Spieler</button>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <span><b>Links:</b> <kbd>W</kbd> hoch &nbsp; <kbd>S</kbd> runter</span>
+    <span><b>Rechts:</b> <kbd>↑</kbd> hoch &nbsp; <kbd>↓</kbd> runter</span>
+    <span><kbd>Leertaste</kbd> Pause</span>
+  </div>
+
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const overlay = document.getElementById('overlay');
+const W = canvas.width, H = canvas.height;
+
+const PADDLE_W = 14, PADDLE_H = 90, PADDLE_SPEED = 7;
+const WIN_SCORE = 7;
+
+let mode = 'ai';        // 'ai' oder '2p'
+let running = false;
+let paused = false;
+
+const left  = { x: 22,         y: H/2 - PADDLE_H/2, score: 0 };
+const right = { x: W - 22 - PADDLE_W, y: H/2 - PADDLE_H/2, score: 0 };
+
+const ball = { x: W/2, y: H/2, r: 9, vx: 0, vy: 0, speed: 6 };
+
+const keys = {};
+document.addEventListener('keydown', e => {
+  keys[e.key.toLowerCase()] = true;
+  if (e.key === ' ') { e.preventDefault(); togglePause(); }
+});
+document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+function resetBall(dir) {
+  ball.x = W/2; ball.y = H/2;
+  ball.speed = 6;
+  const angle = (Math.random() * 0.6 - 0.3); // leichter Winkel nach oben/unten
+  ball.vx = dir * ball.speed * Math.cos(angle);
+  ball.vy = ball.speed * Math.sin(angle);
+}
+
+function startGame(selectedMode) {
+  mode = selectedMode;
+  left.score = 0; right.score = 0;
+  left.y = right.y = H/2 - PADDLE_H/2;
+  running = true; paused = false;
+  overlay.classList.add('hidden');
+  resetBall(Math.random() < 0.5 ? -1 : 1);
+}
+
+function togglePause() {
+  if (!running) return;
+  paused = !paused;
+}
+
+function endGame(winnerText) {
+  running = false;
+  overlay.classList.remove('hidden');
+  overlay.querySelector('h2').textContent = winnerText;
+  overlay.querySelector('p').innerHTML =
+    'Endstand <b>' + left.score + ' : ' + right.score + '</b>. Noch eine Runde?';
+  overlay.querySelectorAll('button').forEach(b => {
+    b.textContent = b.dataset.mode === 'ai' ? 'Nochmal (gegen Computer)' : 'Nochmal (2 Spieler)';
+  });
+}
+
+function movePaddle(p, upKey, downKey) {
+  if (keys[upKey])   p.y -= PADDLE_SPEED;
+  if (keys[downKey]) p.y += PADDLE_SPEED;
+  p.y = Math.max(0, Math.min(H - PADDLE_H, p.y));
+}
+
+function moveAI(p) {
+  // Computer verfolgt den Ball, aber leicht "faul", damit es schaffbar ist
+  const target = ball.y - PADDLE_H/2;
+  const diff = target - p.y;
+  const maxStep = PADDLE_SPEED * 0.82;
+  p.y += Math.max(-maxStep, Math.min(maxStep, diff));
+  p.y = Math.max(0, Math.min(H - PADDLE_H, p.y));
+}
+
+function collidePaddle(p, isLeft) {
+  const withinX = isLeft
+    ? (ball.x - ball.r <= p.x + PADDLE_W && ball.x > p.x)
+    : (ball.x + ball.r >= p.x && ball.x < p.x + PADDLE_W);
+  const withinY = ball.y >= p.y && ball.y <= p.y + PADDLE_H;
+  if (withinX && withinY && ((isLeft && ball.vx < 0) || (!isLeft && ball.vx > 0))) {
+    // Abprallwinkel abhängig davon, wo der Ball auftrifft
+    const rel = (ball.y - (p.y + PADDLE_H/2)) / (PADDLE_H/2); // -1 .. 1
+    const bounce = rel * (Math.PI / 3.2); // max ~56°
+    ball.speed = Math.min(ball.speed + 0.35, 14);
+    const dir = isLeft ? 1 : -1;
+    ball.vx = dir * ball.speed * Math.cos(bounce);
+    ball.vy = ball.speed * Math.sin(bounce);
+    // Ball aus dem Schläger schieben, damit er nicht klebt
+    ball.x = isLeft ? p.x + PADDLE_W + ball.r : p.x - ball.r;
+  }
+}
+
+function update() {
+  movePaddle(left, 'w', 's');
+  if (mode === '2p') movePaddle(right, 'arrowup', 'arrowdown');
+  else moveAI(right);
+
+  ball.x += ball.vx;
+  ball.y += ball.vy;
+
+  // Wände oben/unten
+  if (ball.y - ball.r <= 0)  { ball.y = ball.r; ball.vy *= -1; }
+  if (ball.y + ball.r >= H)  { ball.y = H - ball.r; ball.vy *= -1; }
+
+  collidePaddle(left, true);
+  collidePaddle(right, false);
+
+  // Tore
+  if (ball.x + ball.r < 0)  { right.score++; goalCheck(-1); }
+  if (ball.x - ball.r > W)  { left.score++;  goalCheck(1);  }
+}
+
+function goalCheck(nextDir) {
+  if (left.score >= WIN_SCORE)      endGame(mode === '2p' ? 'Spieler Links gewinnt! 🏆' : 'Du gewinnst! 🏆');
+  else if (right.score >= WIN_SCORE) endGame(mode === '2p' ? 'Spieler Rechts gewinnt! 🏆' : 'Computer gewinnt!');
+  else resetBall(nextDir);
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Mittellinie
+  ctx.strokeStyle = '#1c2634';
+  ctx.lineWidth = 3;
+  ctx.setLineDash([10, 14]);
+  ctx.beginPath();
+  ctx.moveTo(W/2, 0); ctx.lineTo(W/2, H);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Punktestand
+  ctx.fillStyle = '#28394f';
+  ctx.font = 'bold 90px "Segoe UI", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(left.score,  W/2 - 70, 96);
+  ctx.fillText(right.score, W/2 + 70, 96);
+
+  // Schläger
+  ctx.fillStyle = '#35d0a5';
+  roundRect(left.x, left.y, PADDLE_W, PADDLE_H, 6);
+  ctx.fillStyle = '#ff5d73';
+  roundRect(right.x, right.y, PADDLE_W, PADDLE_H, 6);
+
+  // Ball
+  ctx.fillStyle = '#e8f0ff';
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+  ctx.fill();
+
+  if (paused) {
+    ctx.fillStyle = 'rgba(6,9,16,0.6)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#e8f0ff';
+    ctx.font = 'bold 40px "Segoe UI", sans-serif';
+    ctx.fillText('Pause', W/2, H/2 + 14);
+  }
+}
+
+function roundRect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y,     x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x,     y + h, r);
+  ctx.arcTo(x,     y + h, x,     y,     r);
+  ctx.arcTo(x,     y,     x + w, y,     r);
+  ctx.fill();
+}
+
+function loop() {
+  if (running && !paused) update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+overlay.querySelectorAll('button').forEach(btn => {
+  btn.addEventListener('click', () => startGame(btn.dataset.mode));
+});
+
+loop();
+</script>
+</body>
+</html>
