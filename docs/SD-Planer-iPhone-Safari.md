@@ -28,12 +28,17 @@ erreichbar. Der Workflow `Deploy SD-Planer to GitHub Pages` veröffentlicht
 ausschließlich die für die Web-App benötigten Dateien.
 
 Für die erste Veröffentlichung muss im Repository unter **Settings → Pages →
-Build and deployment → Source** einmal **GitHub Actions** ausgewählt werden.
-Anschließend den Workflow unter **Actions** starten oder Änderungen an der
-veröffentlichten Branch pushen. Die öffentliche Adresse lautet:
+Build and deployment → Source** einmal **GitHub Actions** ausgewählt und
+gespeichert werden. Die Seiteneinstellung findest du direkt unter:
+
+<https://github.com/Ebersbach-Energiekonzepte/Claude-Setup/settings/pages>
+
+Anschließend den fehlgeschlagenen Lauf unter **Actions** erneut starten oder
+Änderungen an der veröffentlichten Branch pushen. Die öffentliche Adresse lautet:
 
 `https://ebersbach-energiekonzepte.github.io/Claude-Setup/`
 
 Diese URL funktioniert, sobald die erste GitHub-Pages-Bereitstellung erfolgreich
 abgeschlossen ist. Der Repository-Inhalt ist öffentlich; es werden keine
 Aufnahme- oder Fotodaten an GitHub übertragen.
+git push origin HEAD:claude/nuos-ios-port-zk07cz
