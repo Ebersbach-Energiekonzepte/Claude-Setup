@@ -1,9 +1,19 @@
 # SD-Planer auf dem iPhone (Safari)
 
 Der SD-Planer ist eine installierbare Web-App (PWA). Er wird über eine
-HTTPS-Adresse in Safari geöffnet. Die Formulare, Aufnahmen und Fotos bleiben
-in der lokalen Browser-Speicherung des jeweiligen iPhones; es gibt keinen
-automatischen Upload.
+HTTPS-Adresse in Safari geöffnet. Die Formulare, Aufnahmen und Fotos bleiben in der lokalen Browser-Speicherung
+des jeweiligen iPhones; es gibt keinen automatischen Upload. Aufnahmen werden
+unter dem Vornamen angezeigt und lassen sich nach Vorname, vollständigem
+Namen, Auftragsnummer und Adresse durchsuchen.
+
+## PDF erstellen und teilen
+
+Im SD-Planer die gewünschte Aufnahme öffnen und oben auf **PDF** tippen. Die
+Druckansicht enthält alle Aufnahmebereiche in der Reihenfolge der App und die
+zugehörigen Fotos. In der iPhone-Druckvorschau die Vorschau mit zwei Fingern
+auseinanderziehen, um das PDF zu öffnen. Über **Teilen** kann es anschließend
+zum Beispiel in **Dateien** gesichert, per Mail versendet oder per AirDrop
+geteilt werden. Die Aufnahme bleibt zusätzlich lokal in der App gespeichert.
 
 ## Auf dem iPhone installieren
 
