@@ -8,12 +8,18 @@ Namen, Auftragsnummer und Adresse durchsuchen.
 
 ## PDF erstellen und teilen
 
-Im SD-Planer die gewünschte Aufnahme öffnen und oben auf **PDF** tippen. Die
-Druckansicht enthält alle Aufnahmebereiche in der Reihenfolge der App und die
-zugehörigen Fotos. In der iPhone-Druckvorschau die Vorschau mit zwei Fingern
-auseinanderziehen, um das PDF zu öffnen. Über **Teilen** kann es anschließend
-zum Beispiel in **Dateien** gesichert, per Mail versendet oder per AirDrop
-geteilt werden. Die Aufnahme bleibt zusätzlich lokal in der App gespeichert.
+Im SD-Planer die gewünschte Aufnahme öffnen und oben auf **PDF** tippen. Es
+öffnet sich ein eigenständiger, druckoptimierter Aufnahmebericht mit
+Auftragsdaten, Kontakt- und Objektadresse, den ausgefüllten Angaben je
+Aufnahmebereich sowie einer nach Kategorien geordneten Fotodokumentation. Text
+und Fotos werden als Berichtselemente gesetzt; die App-Seite wird nicht als
+Screenshot übernommen.
+
+Im Bericht **PDF speichern / Drucken** wählen. Auf dem iPhone in der
+Druckvorschau die Vorschau mit zwei Fingern auseinanderziehen, um das PDF zu
+öffnen. Über **Teilen** kann es anschließend zum Beispiel in **Dateien**
+gesichert, per Mail versendet oder per AirDrop geteilt werden. Die Aufnahme
+bleibt zusätzlich lokal in der App gespeichert.
 
 ## Auf dem iPhone installieren
 

@@ -23,6 +23,27 @@
 .search-result-name{display:block;font-size:13px;font-weight:700}.search-result-detail{display:block;margin-top:3px;color:var(--muted);font-size:11px}
 .search-empty{padding:13px;color:var(--muted);font-size:12px}
 .pdf-short{display:none}
+[hidden]{display:none!important}
+.button.danger{color:#8f302b;border-color:#d8a29d}.button.danger:hover{background:#fff2f0}
+.report-window{margin:0;background:#fff;color:#202923;font:14px/1.5 Arial,sans-serif}
+.report{max-width:900px;margin:0 auto;padding:32px}
+.report-brand{padding-bottom:16px;margin-bottom:22px;border-bottom:3px solid #173f36}
+.report-kicker{color:#527487;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.report h1{margin:5px 0 4px;font:500 30px/1.15 Georgia,serif}.report h2{margin:0;color:#173f36;font-size:17px}.report-subtitle{margin:0;color:#59645c;font-size:12px}
+.report-section{margin:0 0 20px;break-inside:auto}
+.report-section-heading{padding:0 0 8px;margin:0 0 9px;border-bottom:1px solid #dce2da;break-after:avoid}
+.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.report-field{padding:8px 10px;min-width:0;border:1px solid #e4e8e0;border-radius:3px;break-inside:avoid}
+.report-field.full{grid-column:1/-1}
+.report-label{display:block;margin-bottom:2px;color:#6f7972;font-size:10px;font-weight:700}
+.report-value{overflow-wrap:anywhere;white-space:pre-wrap}
+.report-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.report-photo{padding:7px;border:1px solid #e4e8e0;border-radius:3px;break-inside:avoid}
+.report-photo img{width:100%;height:220px;display:block;object-fit:contain;background:#f3f4ee}
+.report-photo figcaption{padding-top:5px;color:#465249;font-size:10px}
+.report-action{position:fixed;right:20px;bottom:20px;padding:12px 18px;color:white;background:#173f36;border:0;border-radius:5px;font:600 15px Arial,sans-serif;box-shadow:0 5px 18px #0003;cursor:pointer}
+@media(max-width:680px){.top-left{display:flex}.report{padding:18px}.report-grid{grid-template-columns:1fr}.report-field.full{grid-column:auto}.report-photo img{height:190px}}
+@media print{@page{size:A4;margin:14mm 13mm 16mm;@bottom-right{content:"Seite " counter(page) " von " counter(pages);color:#6f7972;font:9px Arial,sans-serif}}.report{max-width:none;padding:0}.report-section{margin-bottom:16px}.report-section-heading{padding-bottom:6px;margin-bottom:7px}.report-field{padding:6px 8px}.report-photos{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.report-photo img{height:175px}.report-action{display:none}}
 @media(max-width:680px){.topbar{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px 6px;height:auto;min-height:0;padding:env(safe-area-inset-top) 12px 8px}.top-left{grid-column:1/-1;width:100%;min-height:39px}.job-select{width:min(39vw,175px)}.project-search{grid-column:1;grid-row:2;min-width:0;max-width:none;width:100%}.project-search input{min-height:44px;font-size:16px}.top-actions{display:contents}.top-actions .save-state{display:none}.top-actions #newJobButton{grid-column:2;grid-row:2;min-height:44px;padding:0 10px}.top-actions #printButton{grid-column:3;grid-row:2;display:inline-flex;min-height:44px;padding:0 9px}.new-job-short{display:inline}.new-job-full{display:none}.pdf-full{display:none}.pdf-short{display:inline}.search-results{position:fixed;top:auto;left:10px;right:10px;max-height:55vh}.search-result{min-height:54px}}
 @media(max-width:360px){.topbar{padding-right:8px;padding-left:8px}.job-select{width:34vw}.top-actions #newJobButton,.top-actions #printButton{padding:0 7px}.project-search{min-width:0}}
 @media print{@page{size:A4;margin:14mm}.panel{animation:none!important}.field input:not([type=radio]),.field select,.field textarea,.check-row input,.check-row select{min-height:0;padding:3px 0;background:transparent;border:0;border-bottom:1px solid #dce2da;border-radius:0;box-shadow:none!important;color:#202923;font-size:11px}.field textarea{min-height:34px;height:auto;overflow:visible;resize:none}.choice input[type=radio]:checked+span::before{content:'✓';margin-right:6px}.choice input:checked+span{outline:2px solid #173f36;font-weight:750;-webkit-print-color-adjust:exact;print-color-adjust:exact}.photo-delete,.search-results{display:none!important}.photo-item img{object-fit:contain}.photo-area,.circuit-block,.valve-section{break-inside:avoid}.box-head,.intro{break-after:avoid}}
@@ -38,7 +59,7 @@
 <main class="main"><div class="page-heading"><div><div class="eyebrow" id="eyebrow">VOR-ORT-AUFNAHME · <span id="jobReference">NEU</span></div><h1 id="pageTitle">Projektübersicht</h1><p class="subtitle" id="pageSubtitle">Kundendaten erfassen und die technische Aufnahme starten.</p></div><div class="completion"><span id="progressText">0 von 5 Bereichen</span><span class="progress-track"><span class="progress-fill" id="progressFill"></span></span></div></div>
 <form id="surveyForm" autocomplete="on">
 <section class="panel active" id="panel-overview"><div class="summary-grid"><div class="summary-item"><div class="summary-label">Bereiche bearbeitet</div><div class="summary-value"><span id="summaryProgress">0</span><span class="unit"> / 5</span></div></div><div class="summary-item"><div class="summary-label">Aufgenommene Fotos</div><div class="summary-value"><span id="summaryPhotos">0</span><span class="unit"> Bilder</span></div></div><div class="summary-item"><div class="summary-label">Außeneinheit</div><div class="summary-value" id="summaryPower">–<span class="unit"> kW</span></div></div></div>
-<div class="box"><div class="box-head"><div><h2>Auftrag &amp; Kunde</h2><p>Die wichtigsten Angaben für die Zuordnung.</p></div></div><div class="fields three">
+<div class="box"><div class="box-head"><div><h2>Auftrag &amp; Kunde</h2><p>Die wichtigsten Angaben für die Zuordnung.</p></div><button type="button" class="button small danger" id="deleteProjectButton">Aufnahme löschen</button></div><div class="fields three">
 <div class="field"><label for="customerName">Kunde / Ansprechpartner</label><input id="customerName" name="customerName" placeholder="Vor- und Nachname"></div><div class="field"><label for="customerPhone">Telefon</label><input id="customerPhone" name="customerPhone" type="tel" placeholder="Telefonnummer"></div><div class="field"><label for="orderNumber">Auftragsnummer</label><input id="orderNumber" name="orderNumber" placeholder="Optional"></div><div class="field"><label for="street">Straße &amp; Hausnummer</label><input id="street" name="street" autocomplete="street-address" placeholder="Musterstraße 12"></div><div class="field"><label for="postalCity">PLZ &amp; Ort</label><input id="postalCity" name="postalCity" placeholder="12345 Musterstadt"></div><div class="field"><label for="visitDate">Besichtigung am</label><input id="visitDate" name="visitDate" type="date"></div><div class="field full"><label for="generalNotes">Allgemeine Notizen</label><textarea id="generalNotes" name="generalNotes" placeholder="Besonderheiten, Absprachen, offene Fragen …"></textarea></div>
 </div></div><div class="box soft"><div class="box-head"><div><h2>Aufnahmebereiche</h2><p>Bereich öffnen, Fragen beantworten und Fotos hinzufügen.</p></div></div><div class="quick-grid">
 <button class="quick-link" type="button" data-go="elektro"><span class="quick-symbol">ϟ</span><span><span class="quick-name">Elektroinstallation</span><span class="quick-detail">Hausanschluss, Schutz, Zählerschrank &amp; PV</span></span></button><button class="quick-link" type="button" data-go="waermepumpe"><span class="quick-symbol">♨</span><span><span class="quick-name">Heizung &amp; Wärmepumpe</span><span class="quick-detail">Bestand, Speicher, Heizraum &amp; Auslegung</span></span></button><button class="quick-link" type="button" data-go="ausseneinheit"><span class="quick-symbol">▧</span><span><span class="quick-name">Außeneinheit</span><span class="quick-detail">Leistung, Abstände &amp; Gerätedokumentation</span></span></button><button class="quick-link" type="button" data-go="aufstellort"><span class="quick-symbol">⌖</span><span><span class="quick-name">Aufstellort</span><span class="quick-detail">Untergrund, Leitungsweg &amp; Situation</span></span></button><button class="quick-link" type="button" data-go="solar"><span class="quick-symbol">☼</span><span><span class="quick-name">Solar &amp; Photovoltaik</span><span class="quick-detail">Bestand, Alter &amp; gewünschte Einbindung</span></span></button>
@@ -62,10 +83,10 @@
 <section class="panel" id="panel-aufstellort"><div class="intro"><h2>Aufstellort</h2><p>Situation aus verschiedenen Blickwinkeln aufnehmen, damit Zugänglichkeit und Einbauweg planbar sind.</p></div><div class="box"><div class="box-head"><div><h2>Standort &amp; Montage</h2><p>Vorgesehene Fläche und bauliche Randbedingungen.</p></div></div><div class="fields three"><div class="field"><label for="locationType">Standort</label><select id="locationType" name="locationType"><option value="">Bitte auswählen</option><option>Boden / Garten</option><option>Wandkonsole</option><option>Dach / Flachdach</option><option>Anderer Standort</option><option>Noch offen</option></select></div><div class="field"><label for="foundation">Untergrund / Fundament</label><input id="foundation" name="foundation" placeholder="Beton, Pflaster, Erde …"></div><div class="field"><label for="accessRoute">Zugang für Montage</label><input id="accessRoute" name="accessRoute" placeholder="Zufahrt, Kran, Tragweg …"></div><div class="field"><label for="wallPenetration">Wanddurchführung möglich?</label><select id="wallPenetration" name="wallPenetration"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Prüfen</option></select></div><div class="field"><label for="undergroundLines">Leitungen im Erdreich bekannt?</label><select id="undergroundLines" name="undergroundLines"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="field"><label for="locationDirection">Ausrichtung / Himmelsrichtung</label><input id="locationDirection" name="locationDirection" placeholder="z. B. Nordseite"></div><div class="field full"><label for="locationObstacles">Hindernisse / Besonderheiten</label><input id="locationObstacles" name="locationObstacles" placeholder="Dachüberstand, Lichtschacht, Pflanzen, Schnee …"></div></div><div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos Aufstellort <small>Übersicht, Boden, Wanddurchführung, Montageweg</small></span><label class="button small" for="photo-aufstellort">＋ Foto hinzufügen</label><input class="photo-input" id="photo-aufstellort" type="file" accept="image/*" capture="environment" multiple data-category="aufstellort"></div><div class="photo-grid" data-gallery="aufstellort"></div></div><div class="field full" style="margin-top:15px"><label for="locationNotes">Notizen Aufstellort</label><textarea id="locationNotes" name="locationNotes" placeholder="Alternative Standorte, Maße, Klärungsbedarf …"></textarea></div></div><div class="panel-footer"><button type="button" class="button" data-go="ausseneinheit">← Außeneinheit</button><button type="button" class="button primary" data-go="solar">Weiter zu Solar &amp; PV →</button></div></section>
 
 <section class="panel" id="panel-solar"><div class="intro"><h2>Solar &amp; Photovoltaik</h2><p>Solarthermie und Photovoltaik getrennt betrachten. Bei vorhandener Solarthermie festhalten, ob sie bestehen bleibt, eingebunden oder zurückgebaut werden soll.</p></div><div class="box"><div class="box-head"><div><h2>Solarthermie</h2><p>Kollektoren und vorhandene Einbindung dokumentieren.</p></div></div><div class="fields three"><div class="field"><label for="solarThermalPresent">Solarthermie vorhanden?</label><select id="solarThermalPresent" name="solarThermalPresent"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="field"><label for="solarThermalYear">Baujahr / Alter</label><input id="solarThermalYear" name="solarThermalYear" placeholder="Jahr oder geschätztes Alter"></div><div class="field"><label for="solarThermalType">Art / Fläche</label><input id="solarThermalType" name="solarThermalType" placeholder="Kollektortyp, Anzahl, Fläche"></div><div class="field full"><label for="solarThermalPlan">Was soll mit der Solarthermie geschehen?</label><select id="solarThermalPlan" name="solarThermalPlan"><option value="">Bitte auswählen</option><option>Weiter betreiben und an Wärmepumpe anbinden</option><option>Bestehen lassen, nicht anbinden</option><option>Für Photovoltaik zurückbauen</option><option>Vollständig zurückbauen</option><option>Noch abstimmen</option></select></div></div><div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos Solarthermie <small>Kollektoren, Speicher, Rohranschlüsse</small></span><label class="button small" for="photo-solarthermie">＋ Foto hinzufügen</label><input class="photo-input" id="photo-solarthermie" type="file" accept="image/*" capture="environment" multiple data-category="solarthermie"></div><div class="photo-grid" data-gallery="solarthermie"></div></div><div class="field full" style="margin-top:15px"><label for="solarThermalNotes">Notizen Solarthermie</label><textarea id="solarThermalNotes" name="solarThermalNotes" placeholder="Dachzugang, Rückbau, Leitungsweg, Kundenwunsch …"></textarea></div></div>
-<div class="box"><div class="box-head"><div><h2>Photovoltaik</h2><p>Bestandsanlage und gewünschte Kopplung mit der Wärmepumpe.</p></div></div><div class="fields three"><div class="field"><label for="solarPvPresent">Photovoltaik vorhanden?</label><select id="solarPvPresent" name="solarPvPresent"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Geplant</option><option>Unbekannt</option></select></div><div class="field"><label for="solarPvYear">Baujahr / Alter</label><input id="solarPvYear" name="solarPvYear" placeholder="Jahr oder geschätztes Alter"></div><div class="field"><label for="solarPvPower">Leistung</label><input id="solarPvPower" name="solarPvPower" type="number" min="0" step="0.1" placeholder="kWp"></div><div class="field full"><label for="solarPvPlan">PV für Wärmepumpe nutzen?</label><select id="solarPvPlan" name="solarPvPlan"><option value="">Bitte auswählen</option><option>Ja, Wärmepumpe einbinden</option><option>Vorhandene PV weiterbetreiben, keine Kopplung</option><option>PV neu installieren</option><option>Noch abstimmen</option><option>Nicht zutreffend</option></select></div><div class="field full"><label for="solarPvNotes">Notizen PV / gewünschte Einbindung</label><textarea id="solarPvNotes" name="solarPvNotes" placeholder="Wechselrichter, Speicher, Energiemanagement, Kundenwunsch …"></textarea></div></div><div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos PV-Bestand <small>Module, Wechselrichter, Speicher</small></span><label class="button small" for="photo-solar-pv">＋ Foto hinzufügen</label><input class="photo-input" id="photo-solar-pv" type="file" accept="image/*" capture="environment" multiple data-category="solar-pv"></div><div class="photo-grid" data-gallery="solar-pv"></div></div></div><div class="panel-footer"><button type="button" class="button" data-go="aufstellort">← Aufstellort</button><button type="button" class="button primary" data-go="overview">Zur Projektübersicht ✓</button></div></section>
+<div class="box"><div class="box-head"><div><h2>Photovoltaik</h2><p>Bestandsanlage und gewünschte Kopplung mit der Wärmepumpe.</p></div></div><div class="fields three"><div class="field"><label for="solarPvPresent">Photovoltaik vorhanden?</label><select id="solarPvPresent" name="solarPvPresent"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="field"><label for="solarPvYear">Baujahr / Alter</label><input id="solarPvYear" name="solarPvYear" placeholder="Jahr oder geschätztes Alter"></div><div class="field"><label for="solarPvPower">Leistung</label><input id="solarPvPower" name="solarPvPower" type="number" min="0" step="0.1" placeholder="kWp"></div><div class="field full"><label for="solarPvPlan">PV für Wärmepumpe nutzen?</label><select id="solarPvPlan" name="solarPvPlan"><option value="">Bitte auswählen</option><option>Ja, Wärmepumpe einbinden</option><option>Vorhandene PV weiterbetreiben, keine Kopplung</option><option>PV neu installieren</option><option>Noch abstimmen</option><option>Nicht zutreffend</option></select></div><div class="field full"><label for="solarPvNotes">Notizen PV / gewünschte Einbindung</label><textarea id="solarPvNotes" name="solarPvNotes" placeholder="Wechselrichter, Speicher, Energiemanagement, Kundenwunsch …"></textarea></div></div><div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos PV-Bestand <small>Module, Wechselrichter, Speicher</small></span><label class="button small" for="photo-solar-pv">＋ Foto hinzufügen</label><input class="photo-input" id="photo-solar-pv" type="file" accept="image/*" capture="environment" multiple data-category="solar-pv"></div><div class="photo-grid" data-gallery="solar-pv"></div></div></div><div class="panel-footer"><button type="button" class="button" data-go="aufstellort">← Aufstellort</button><button type="button" class="button primary" data-go="overview">Zur Projektübersicht ✓</button></div></section>
 </form></main></div></div>
 <nav class="mobile-nav" aria-label="Aufnahmebereiche"><button class="active" data-panel="overview"><span class="nav-icon">⌂</span>Übersicht</button><button data-panel="elektro"><span class="nav-icon">ϟ</span>Elektro</button><button data-panel="waermepumpe"><span class="nav-icon">♨</span>Heizung</button><button data-panel="ausseneinheit"><span class="nav-icon">▧</span>Außen</button><button data-panel="aufstellort"><span class="nav-icon">⌖</span>Aufstellort</button><button data-panel="solar"><span class="nav-icon">☼</span>Solar / PV</button></nav>
-<div class="toast" id="toast" role="status" aria-live="polite"></div><input id="importFile" type="file" accept="application/json,.json" hidden><dialog id="newDialog"><div class="dialog-body"><h2>Neue Aufnahme</h2><p>Die Aufnahme wird lokal auf diesem Gerät gespeichert. Bereits gespeicherte Aufnahmen bleiben erhalten.</p><div class="field"><label for="newName">Vorname des Kunden (optional)</label><input id="newName" autocomplete="given-name" placeholder="z. B. Anna"></div><div class="dialog-actions"><button class="button" id="cancelNew">Abbrechen</button><button class="button primary" id="confirmNew">Aufnahme anlegen</button></div></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div><input id="importFile" type="file" accept="application/json,.json" hidden><dialog id="newDialog"><div class="dialog-body"><h2>Neue Aufnahme</h2><p>Eine neue, leere Aufnahme wird angelegt. Bestehende Kunden bleiben erhalten.</p><div class="field"><label for="newName">Vorname des Kunden (optional)</label><input id="newName" autocomplete="given-name" placeholder="z. B. Anna"></div><div class="dialog-actions"><button class="button" id="cancelNew">Abbrechen</button><button class="button primary" id="confirmNew">Leere Aufnahme anlegen</button></div></div></dialog><dialog id="deleteDialog"><div class="dialog-body"><h2>Aufnahme löschen?</h2><p id="deleteConfirmationText">Diese Aufnahme wird einschließlich aller zugehörigen Fotos dauerhaft von diesem Gerät gelöscht.</p><div class="dialog-actions"><button type="button" class="button" id="cancelDelete">Abbrechen</button><button type="button" class="button danger" id="confirmDelete">Aufnahme endgültig löschen</button></div></div></dialog>
 <script>
 (()=>{
 const DB='nuos-aufnahme',STORE='projects';
@@ -144,6 +165,47 @@ function createLabeledField(labelText,id,tag='input'){
 	const label=document.createElement('label');label.htmlFor=id;label.textContent=labelText;
 	const control=document.createElement(tag);control.id=id;field.append(label,control);return{field,control};
 }
+const solarPvPresent=document.querySelector('#solarPvPresent'),solarPvPresentField=solarPvPresent.closest('.field');
+const overviewFields=document.querySelector('#panel-overview .box .fields');
+const visitDateField=document.querySelector('#visitDate').closest('.field');
+overviewFields.insertBefore(solarPvPresentField,visitDateField.nextSibling);
+solarPvPresentField.querySelector('label').textContent='Photovoltaik am Gebäude vorhanden?';
+const solarPvYearField=document.querySelector('#solarPvYear').closest('.field');
+const solarPvPowerField=document.querySelector('#solarPvPower').closest('.field');
+const solarPvPlan=document.querySelector('#solarPvPlan'),solarPvPlanField=solarPvPlan.closest('.field');
+const solarPvNotesField=document.querySelector('#solarPvNotes').closest('.field');
+const solarPvGallery=document.querySelector('[data-gallery="solar-pv"]').closest('.photo-area');
+const solarPvElectricalBox=[...document.querySelectorAll('#panel-elektro .box')].find(box=>box.querySelector('h2')?.textContent.trim()==='Photovoltaik am Gebäude');
+const electricalPvPresent=document.querySelector('#pvPresent');
+const solarPvTarget=createLabeledField('Gewünschte PV-Leistung','solarPvTargetPower');
+solarPvTarget.control.name='solarPvTargetPower';solarPvTarget.control.type='number';solarPvTarget.control.min='0';solarPvTarget.control.step='0.1';solarPvTarget.control.placeholder='kWp';
+solarPvPowerField.parentElement.insertBefore(solarPvTarget.field,solarPvPowerField.nextSibling);
+function setSolarPvPlanOptions(options){
+	const previous=solarPvPlan.value;
+	solarPvPlan.replaceChildren(new Option('Bitte auswählen',''),...options.map(([label,value])=>new Option(label,value)));
+	if(previous&&![...solarPvPlan.options].some(option=>option.value===previous)){
+		solarPvPlan.add(new Option(`Bisherige Auswahl: ${previous}`,previous));
+	}
+	solarPvPlan.value=previous;
+}
+function syncSolarPvFields(){
+	const present=solarPvPresent.value,hasExistingPv=present==='Ja',offerOptions=[['Angebot gewünscht','Angebot gewünscht'],['In Planung','In Planung'],['Angebot liegt vor','Angebot liegt vor'],['Kein Angebot gewünscht','Kein Angebot gewünscht'],['Noch abstimmen','Noch abstimmen']],existingOptions=[['Wärmepumpe einbinden','Ja, Wärmepumpe einbinden'],['Vorhandene PV weiterbetreiben, keine Kopplung','Vorhandene PV weiterbetreiben, keine Kopplung'],['PV-Anlage erweitern','PV-Anlage erweitern'],['Noch abstimmen','Noch abstimmen'],['Nicht zutreffend','Nicht zutreffend']];
+	electricalPvPresent.value=present;
+	solarPvElectricalBox.hidden=!hasExistingPv;
+	solarPvYearField.hidden=!hasExistingPv;
+	solarPvPowerField.hidden=!hasExistingPv;
+	solarPvGallery.hidden=!hasExistingPv;
+	setSolarPvPlanOptions(hasExistingPv?existingOptions:offerOptions);
+	solarPvPlanField.querySelector('label').textContent=hasExistingPv?'Wie soll die vorhandene PV-Anlage genutzt werden?':'PV-Angebot / Planung';
+	const planning=!hasExistingPv&&['Angebot gewünscht','In Planung','Angebot liegt vor'].includes(solarPvPlan.value);
+	solarPvTarget.field.hidden=!planning;
+	solarPvNotesField.hidden=present==='Nein'&&!planning;
+	solarPvNotesField.querySelector('label').textContent=hasExistingPv?'Notizen PV / gewünschte Einbindung':'Angaben zum PV-Angebot / zur Planung';
+	solarPvNotesField.querySelector('textarea').placeholder=hasExistingPv?'Wechselrichter, Speicher, Energiemanagement, Kundenwunsch …':'Gewünschter Umfang, Dachfläche, Speicher, Energiemanagement …';
+}
+solarPvPresent.addEventListener('change',()=>{syncSolarPvFields();queueSave()});
+solarPvPlan.addEventListener('change',()=>{syncSolarPvFields();queueSave()});
+syncSolarPvFields();
 const modelSelectField=createLabeledField('Wärmepumpen-Baureihe','hpModel','select');
 const hpModel=modelSelectField.control;hpModel.name='hpModel';
 const allHpModels=[...new Set(Object.values(hpModelCatalog).flat())];
@@ -183,7 +245,6 @@ const addCircuitButton=document.createElement('button');addCircuitButton.type='b
 circuitBox.append(circuitBoxHead,circuitList,addCircuitButton,circuitData);
 const utilityRoomHeading=[...document.querySelectorAll('#panel-waermepumpe .box h2')].find(heading=>heading.textContent==='Heizraum');
 utilityRoomHeading.closest('.box').before(circuitBox);
-function circuitDefaults(){return[{id:crypto.randomUUID(),designation:'Heizkreis 1',type:'Fußbodenheizung',count:'',valves:[]}]}
 function readCircuitState(){
 	return [...circuitList.querySelectorAll('.circuit-block')].map(card=>({
 		id:card.dataset.id,designation:card.querySelector('[data-role="designation"]').value,
@@ -204,7 +265,7 @@ function circuitSelect(id,role,options,value){
 function renderCircuitEditor(value){
 	let circuits=[];
 	try{circuits=Array.isArray(value)?value:JSON.parse(value||'[]')}catch{}
-	if(!Array.isArray(circuits)||!circuits.length)circuits=circuitDefaults();
+	if(!Array.isArray(circuits))circuits=[];
 	circuits=circuits.slice(0,5).map((circuit,index)=>({id:circuit.id||crypto.randomUUID(),designation:circuit.designation??`Heizkreis ${index+1}`,type:circuit.type==='Heizkörper'?'Heizkörper':'Fußbodenheizung',count:circuit.count??'',manifoldLocation:circuit.manifoldLocation??'',valves:Array.isArray(circuit.valves)?circuit.valves:[]}));
 	circuitList.replaceChildren();
 	circuits.forEach((circuit,index)=>{
@@ -212,7 +273,7 @@ function renderCircuitEditor(value){
 		const head=document.createElement('div');head.className='circuit-head';
 		const title=document.createElement('h3');title.textContent=circuit.designation||`Heizkreis ${index+1}`;
 		head.append(title);
-		if(index>0){const remove=document.createElement('button');remove.type='button';remove.className='button small danger';remove.textContent='Entfernen';remove.addEventListener('click',()=>{project.photos=project.photos.filter(photo=>photo.circuitId!==circuit.id);renderCircuitEditor(readCircuitState().filter(item=>item.id!==circuit.id));queueSave()});head.append(remove)}
+		const remove=document.createElement('button');remove.type='button';remove.className='button small danger';remove.textContent='Entfernen';remove.addEventListener('click',()=>{project.photos=project.photos.filter(photo=>photo.circuitId!==circuit.id);renderCircuitEditor(readCircuitState().filter(item=>item.id!==circuit.id));queueSave()});head.append(remove);
 		const fields=document.createElement('div');fields.className='fields three';
 		const designation=document.createElement('input');designation.dataset.role='designation';designation.value=circuit.designation;
 		const type=circuitSelect('','type',['Fußbodenheizung','Heizkörper'],circuit.type);
@@ -267,8 +328,27 @@ function request(req){return new Promise((resolve,reject)=>{req.onsuccess=()=>re
 function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB,1);req.onupgradeneeded=()=>req.result.createObjectStore(STORE,{keyPath:'id'});req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
 function getAll(){return request(db.transaction(STORE).objectStore(STORE).getAll()).then(items=>items.sort((a,b)=>b.updatedAt-a.updatedAt))}
 function save(item){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(item);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+function remove(id){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
 function fields(){const result={};for(const el of form.querySelectorAll('[name]')){if(el.type==='radio'){if(el.checked)result[el.name]=el.value}else if(el.type==='checkbox'){if(!Array.isArray(result[el.name]))result[el.name]=[];if(el.checked)result[el.name].push(el.value)}else result[el.name]=el.value}return result}
-function setFields(data={}){for(const el of form.querySelectorAll('[name]')){if(!(el.name in data))continue;if(el.type==='radio')el.checked=el.value===data[el.name];else if(el.type==='checkbox')el.checked=Array.isArray(data[el.name])?data[el.name].includes(el.value):data[el.name]===el.value;else el.value=data[el.name]??''}syncGroundObstacleNote();syncHakFields();updateManufacturerFields();renderCircuitEditor(data.heatingCircuits)}
+function setFields(data={}){
+	const restored={...data};
+	if(!restored.solarPvPresent&&restored.pvPresent)restored.solarPvPresent=restored.pvPresent;
+	if(restored.solarPvPresent==='Geplant'){restored.solarPvPresent='Nein';if(!restored.solarPvPlan)restored.solarPvPlan='Angebot gewünscht'}
+	if(restored.solarPvPlan==='PV neu installieren')restored.solarPvPlan='Angebot gewünscht';
+	for(const el of form.querySelectorAll('[name]')){
+		if(el.type==='radio'||el.type==='checkbox')el.checked=false;
+		else el.value='';
+	}
+	for(const el of form.querySelectorAll('[name]')){
+		if(!(el.name in restored))continue;
+		if(el.type==='radio')el.checked=el.value===restored[el.name];
+		else if(el.type==='checkbox')el.checked=Array.isArray(restored[el.name])?restored[el.name].includes(el.value):restored[el.name]===el.value;
+		else if(el.name!=='solarPvPlan')el.value=restored[el.name]??'';
+	}
+	syncGroundObstacleNote();syncHakFields();updateManufacturerFields();
+	if(restored.solarPvPlan)solarPvPlan.value=restored.solarPvPlan;
+	syncSolarPvFields();renderCircuitEditor(restored.heatingCircuits)
+}
 function showToast(text){const node=document.querySelector('#toast');node.textContent=text;node.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>node.classList.remove('show'),2400)}
 function nameOf(item){const customerName=String(item.fields?.customerName??'').trim();return customerName.split(/\s+/)[0]||String(item.name??'').trim()||'Neue Aufnahme'}
 function normalizeSearch(value){return String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('de-DE').trim()}
@@ -296,17 +376,77 @@ async function renderProjectSearch(){
  results.hidden=false;input.setAttribute('aria-expanded','true');
 }
 async function renderSelect(){if(!db)return;const select=document.querySelector('#jobSelect');select.replaceChildren();for(const item of await getAll()){const option=new Option(nameOf(item),item.id,item.id===project?.id,item.id===project?.id);select.add(option)}if(searchFocused)await renderProjectSearch()}
-function printProject(){
- if(!project)return;
- project.fields=fields();project.name=nameOf(project);project.updatedAt=Date.now();
- document.querySelectorAll('.photo-item img').forEach(image=>{image.loading='eager'});
- const originalTitle=document.title,filename=(project.name.replace(/[^a-z0-9äöüß-]+/gi,'-').replace(/^-|-$/g,'')||project.reference).toLowerCase();
- document.title=`${filename}-SD-Planer`;
- const restoreTitle=()=>{document.title=originalTitle;window.removeEventListener('afterprint',restoreTitle)};
- window.addEventListener('afterprint',restoreTitle,{once:true});setTimeout(restoreTitle,60000);
- save(project).then(()=>{document.querySelector('#saveStatus').textContent='Lokal gespeichert'}).catch(error=>{console.error(error);document.querySelector('#saveStatus').textContent='Speichern fehlgeschlagen';showToast('Aufnahme konnte nicht gespeichert werden.')});
- showToast('Alle Bereiche und Fotos werden vorbereitet. Im Druckdialog kannst du die PDF teilen oder sichern.');
- window.print();
+function reportValue(control){
+	if(control.type==='radio'||control.type==='checkbox')return control.checked?(control.value||'Ja'):'';
+	if(control.tagName==='SELECT')return control.value?control.selectedOptions[0]?.textContent.trim()||'':'';
+	return control.value.trim()
+}
+function reportLabel(control){
+	const field=control.closest('.field');
+	const label=field?.querySelector('label')?.textContent.trim()||field?.querySelector('.field-label')?.textContent.trim();
+	if(label)return label;
+	const row=control.closest('.check-row'),name=row?.querySelector('.check-name');
+	return name?.childNodes[0]?.textContent.trim()||control.getAttribute('aria-label')||control.name
+}
+function reportBox(box){
+	const values=[],seen=new Set();
+	for(const control of box.querySelectorAll('[name]')){
+		if(seen.has(control.name)||control.type==='file'||control.closest('[hidden]'))continue;
+		seen.add(control.name);
+		if(control.name==='heatingCircuits'){
+			try{
+				const circuits=JSON.parse(control.value||'[]');
+				for(const [index,circuit] of circuits.entries()){
+					const valves=(circuit.valves||[]).map(valve=>`${valve.quantity||1} × ${valve.size||''}, ${valve.shape||''}`).join('; ');
+					values.push([circuit.designation||`Heizkreis ${index+1}`,[circuit.type,circuit.count?`${circuit.count} Stück`:null,circuit.manifoldLocation,valves?`Ventile: ${valves}`:null].filter(Boolean).join(' · ')])
+				}
+			}catch(error){console.error('Heizkreise konnten nicht für den Bericht aufbereitet werden.',error)}
+			continue
+		}
+		const group=[...box.querySelectorAll(`[name="${CSS.escape(control.name)}"]`)];
+		const value=group.map(reportValue).filter(Boolean).join(', ');
+		if(value)values.push([reportLabel(control),value])
+	}
+	return values
+}
+async function printProject(){
+	if(!project)return;
+	const reportWindow=window.open('','_blank');
+	if(!reportWindow){showToast('Bericht konnte nicht geöffnet werden. Bitte Pop-ups für diese App erlauben.');return}
+	project.fields=fields();project.name=nameOf(project);project.updatedAt=Date.now();
+	try{await save(project);document.querySelector('#saveStatus').textContent='Lokal gespeichert'}
+	catch(error){console.error(error);reportWindow.close();document.querySelector('#saveStatus').textContent='Speichern fehlgeschlagen';showToast('Aufnahme konnte nicht gespeichert werden.');return}
+	const sections=[];
+	for(const panel of form.querySelectorAll('.panel')){
+		const panelName=panel.querySelector('.intro h2')?.textContent.trim()||titles[panel.id.replace('panel-','')];
+		for(const box of panel.querySelectorAll(':scope > .box')){
+			const values=reportBox(box);
+			if(!values.length)continue;
+			const heading=box.querySelector('.box-head h2')?.textContent.trim()||panelName;
+			sections.push(`<section class="report-section"><h2>${escapeHTML(heading)}</h2><div class="report-grid">${values.map(([label,value])=>`<div class="report-field"><span class="report-label">${escapeHTML(label)}</span><span class="report-value">${escapeHTML(value)}</span></div>`).join('')}</div></section>`)
+		}
+	}
+	const photoCategories=[...new Set([...Object.keys(categories),...(project.photos||[]).map(photo=>photo.category)])];
+	const photosByCategory=photoCategories.map(category=>[category,(project.photos||[]).filter(photo=>photo.category===category).sort((a,b)=>(a.addedAt||0)-(b.addedAt||0))]).filter(([,items])=>items.length);
+	if(photosByCategory.length){
+		const photos=photosByCategory.map(([category,items])=>`<section class="report-photo-group"><h3>${escapeHTML(categories[category]||category)}</h3><div class="report-photos">${items.map(photo=>{const source=/^data:image\/(?:jpeg|png|webp|gif);base64,[a-z0-9+/]+={0,2}$/i.test(photo.data||'')?photo.data:'';return`<figure class="report-photo">${source?`<img src="${source}" alt="${escapeHTML(categories[category]||category)}">`:'<div class="report-photo-missing">Bilddatei nicht verfügbar</div>'}<figcaption>${escapeHTML(photo.name||categories[category]||'Foto')}</figcaption></figure>`}).join('')}</div></section>`).join('');
+		sections.push(`<section class="report-section report-photo-section"><h2>Fotodokumentation</h2>${photos}</section>`)
+	}
+	const customer=escapeHTML(String(project.fields.customerName||project.name||'Aufnahme'));
+	const safeReference=escapeHTML(project.reference||'');
+	const dateValue=project.fields.visitDate?new Date(`${project.fields.visitDate}T00:00:00`):new Date();
+	const safeDate=escapeHTML(dateValue.toLocaleDateString('de-DE'));
+	const orderNumber=escapeHTML(String(project.fields.orderNumber||'–'));
+	const phone=escapeHTML(String(project.fields.customerPhone||'–'));
+	const address=escapeHTML([project.fields.street,project.fields.postalCity].filter(Boolean).join(', ')||'–');
+	const filename=(project.name.replace(/[^a-z0-9äöüß-]+/gi,'-').replace(/^-|-$/g,'')||project.reference).toLowerCase();
+	reportWindow.document.open();
+	reportWindow.document.write(`<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHTML(filename)}-SD-Planer</title><style>
+@page{size:A4;margin:15mm 14mm 17mm}*{box-sizing:border-box}html{color-scheme:light}body{margin:0;color:#202923;background:#fff;font:11px/1.5 Arial,Helvetica,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}.report{max-width:850px;margin:auto;padding:30px}.report-header{position:relative;padding:20px 22px 18px;margin-bottom:24px;overflow:hidden;color:#fff;background:#173f36;border-radius:5px}.report-header:after{position:absolute;right:0;bottom:0;width:35%;height:5px;background:#d8f078;content:""}.report-brand{margin-bottom:15px;color:#d8f078;font-size:9px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase}.report-title{margin:0;color:#fff;font:600 27px/1.15 Arial,Helvetica,sans-serif}.report-customer{margin:6px 0 0;color:#e1ebe4;font-size:15px}.report-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:18px}.report-meta div{min-width:0;padding:8px 10px;background:#ffffff12;border:1px solid #ffffff32;border-radius:3px}.report-meta span{display:block;margin-bottom:2px;color:#d3e2d6;font-size:8px;font-weight:bold;letter-spacing:.5px;text-transform:uppercase}.report-meta strong{display:block;overflow-wrap:anywhere;color:white;font-size:11px}.report-contact{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;padding:12px 14px;margin:0 0 23px;background:#f4f6f2;border-left:3px solid #9bbd9a}.report-contact div{min-width:0}.report-contact span{display:block;color:#6f7972;font-size:8px;font-weight:bold;letter-spacing:.5px;text-transform:uppercase}.report-contact strong{display:block;margin-top:2px;overflow-wrap:anywhere;font-size:10px;font-weight:600}.report-section{margin:0 0 20px;break-inside:auto}.report-section>h2{padding:0 0 7px;margin:0 0 10px;color:#173f36;font-size:14px;border-bottom:1px solid #cfd8d0;break-after:avoid}.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.report-field{min-width:0;padding:7px 9px;border:1px solid #e4e8e0;border-radius:3px;break-inside:avoid}.report-label{display:block;margin-bottom:2px;color:#6f7972;font-size:8px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase}.report-value{overflow-wrap:anywhere;white-space:pre-wrap}.report-photo-group{margin:14px 0 0;break-inside:auto}.report-photo-group h3{padding-bottom:5px;margin:0 0 8px;color:#465249;font-size:10px;break-after:avoid}.report-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.report-photo{min-width:0;padding:6px;margin:0;border:1px solid #e4e8e0;border-radius:3px;break-inside:avoid}.report-photo img{display:block;width:100%;height:190px;object-fit:contain;background:#f3f4ee}.report-photo figcaption{padding-top:5px;color:#465249;font-size:8px;overflow-wrap:anywhere}.report-photo-missing{height:190px;display:grid;place-items:center;color:#6f7972;background:#f3f4ee;font-size:10px}.report-empty{padding:14px;color:#6f7972;background:#f4f6f2;border:1px dashed #cfd8d0}.report-action{position:fixed;right:18px;bottom:18px;padding:11px 16px;color:white;background:#173f36;border:0;border-radius:5px;font:bold 13px Arial,sans-serif;cursor:pointer;box-shadow:0 3px 12px #0003}@media(max-width:650px){.report{padding:16px}.report-header{padding:17px}.report-title{font-size:23px}.report-meta{grid-template-columns:1fr}.report-contact,.report-grid{grid-template-columns:1fr}.report-photo img,.report-photo-missing{height:180px}}@media print{.report{max-width:none;padding:0}.report-header{border-radius:0}.report-action{display:none}.report-section{margin-bottom:16px}.report-field{padding:6px 8px}.report-photo img,.report-photo-missing{height:170px}.report-photo-section{break-before:page}.report-photo-section>h2{break-after:avoid}.report-photo-group h3{break-after:avoid}.report-photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head><body><main class="report"><header class="report-header"><div class="report-brand">Ebersbach Energiekonzepte · SD-Planer</div><h1 class="report-title">Vor-Ort-Aufnahme</h1><p class="report-customer">${customer}</p><div class="report-meta"><div><span>Auftragsnummer</span><strong>${orderNumber}</strong></div><div><span>Vorgangs-ID</span><strong>${safeReference||'–'}</strong></div><div><span>Besichtigung</span><strong>${safeDate}</strong></div></div></header><section class="report-contact"><div><span>Ansprechpartner</span><strong>${customer}</strong></div><div><span>Telefon</span><strong>${phone}</strong></div><div><span>Objektadresse</span><strong>${address}</strong></div><div><span>Bericht erstellt</span><strong>${escapeHTML(new Date().toLocaleDateString('de-DE'))}</strong></div></section>${sections.join('')||'<p class="report-empty">Für diese Aufnahme wurden noch keine Angaben erfasst.</p>'}</main><button class="report-action" id="printReport" type="button">PDF speichern / Drucken</button></body></html>`);
+	reportWindow.document.close();
+	reportWindow.document.querySelector('#printReport').addEventListener('click',async()=>{const button=reportWindow.document.querySelector('#printReport');button.disabled=true;button.textContent='Bericht wird vorbereitet …';try{await Promise.all([...reportWindow.document.images].map(image=>image.decode().catch(error=>{console.error('Berichtsfoto konnte nicht geladen werden.',error)})));reportWindow.focus();reportWindow.print()}finally{button.disabled=false;button.textContent='PDF speichern / Drucken'}});
+	showToast('Der strukturierte Aufnahmebericht ist bereit. Über „PDF speichern / Drucken“ kannst du ihn als PDF sichern oder teilen.')
 }
 function renderPhotos(){document.querySelectorAll('[data-gallery]').forEach(grid=>{const photos=(project.photos||[]).filter(photo=>photo.category===grid.dataset.gallery);grid.replaceChildren();if(!photos.length){const empty=document.createElement('div');empty.className='photo-empty';empty.textContent='Noch keine Fotos hinzugefügt.';grid.append(empty);return}for(const photo of photos){const item=document.createElement('div');item.className='photo-item';const img=document.createElement('img');img.src=photo.data;img.alt=`${categories[photo.category]}: ${photo.name}`;img.loading='lazy';const caption=document.createElement('div');caption.className='photo-caption';caption.textContent=photo.name;const remove=document.createElement('button');remove.type='button';remove.className='photo-delete';remove.title='Foto entfernen';remove.setAttribute('aria-label',`Foto ${photo.name} entfernen`);remove.textContent='×';remove.onclick=()=>{project.photos=project.photos.filter(p=>p.id!==photo.id);renderPhotos();updateSummary();queueSave()};item.append(img,caption,remove);grid.append(item)}})}
 function updateSummary(){
@@ -343,7 +483,20 @@ async function addCircuitPhotos(input,circuitId){const files=[...input.files].fi
 function downloadJSON(data,filename){const url=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=filename;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 async function exportProject(){project.fields=fields();await save(project);const filename=(nameOf(project).replace(/[^a-z0-9äöüß-]+/gi,'-').replace(/^-|-$/g,'')||project.reference).toLowerCase();downloadJSON({format:'sd-planer-aufnahme',version:1,project},`${filename}.sd-planer.json`);showToast('Aufnahme inklusive Fotos exportiert.')}
 async function importProject(file){try{const parsed=JSON.parse(await file.text()),item=parsed.project||parsed;if(!item.fields||!Array.isArray(item.photos))throw Error('Format');item.id=crypto.randomUUID();item.reference=reference();item.name=item.fields.customerName?.trim()||item.name||'Importierte Aufnahme';item.updatedAt=Date.now();await save(item);await fill(item);showToast('Aufnahme mit Fotos importiert.')}catch{showToast('Datei ist keine gültige SD-Planer-Aufnahme.')}}
-document.querySelectorAll('[data-panel]').forEach(button=>button.addEventListener('click',()=>changePanel(button.dataset.panel)));document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>changePanel(button.dataset.go)));form.addEventListener('input',queueSave);form.addEventListener('change',queueSave);document.querySelectorAll('.photo-input').forEach(input=>input.addEventListener('change',()=>addPhotos(input)));document.querySelector('#jobSelect').addEventListener('change',async event=>{const item=(await getAll()).find(entry=>entry.id===event.target.value);if(item)await fill(item)});document.querySelector('#newJobButton').onclick=()=>document.querySelector('#newDialog').showModal();document.querySelector('#cancelNew').onclick=()=>document.querySelector('#newDialog').close();document.querySelector('#confirmNew').onclick=async()=>{const name=document.querySelector('#newName').value.trim();await createProject(name);document.querySelector('#newName').value='';document.querySelector('#newDialog').close()};document.querySelector('#printButton').onclick=printProject;document.querySelector('#exportButton').onclick=exportProject;document.querySelector('#importButton').onclick=()=>document.querySelector('#importFile').click();document.querySelector('#importFile').onchange=event=>{if(event.target.files[0])importProject(event.target.files[0]);event.target.value=''};
+async function deleteCurrentProject(){
+	if(!project)return;
+	clearTimeout(saveTimer);
+	const deletedId=project.id;
+	try{
+		await remove(deletedId);
+		project=null;
+		const remaining=await getAll();
+		if(remaining.length)await fill(remaining[0]);else await createProject();
+		document.querySelector('#deleteDialog').close();
+		showToast('Aufnahme und zugehörige Fotos wurden gelöscht.')
+	}catch(error){console.error(error);showToast('Aufnahme konnte nicht gelöscht werden.')}
+}
+document.querySelectorAll('[data-panel]').forEach(button=>button.addEventListener('click',()=>changePanel(button.dataset.panel)));document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>changePanel(button.dataset.go)));form.addEventListener('input',queueSave);form.addEventListener('change',queueSave);document.querySelectorAll('.photo-input').forEach(input=>input.addEventListener('change',()=>addPhotos(input)));document.querySelector('#jobSelect').addEventListener('change',async event=>{const item=(await getAll()).find(entry=>entry.id===event.target.value);if(item)await fill(item)});document.querySelector('#newJobButton').onclick=()=>document.querySelector('#newDialog').showModal();document.querySelector('#cancelNew').onclick=()=>document.querySelector('#newDialog').close();document.querySelector('#confirmNew').onclick=async()=>{const name=document.querySelector('#newName').value.trim();await createProject(name);document.querySelector('#newName').value='';document.querySelector('#newDialog').close()};document.querySelector('#printButton').onclick=printProject;document.querySelector('#deleteProjectButton').onclick=()=>{if(!project)return;document.querySelector('#deleteConfirmationText').textContent=`„${nameOf(project)}“ (${project.reference}) wird einschließlich aller Fotos dauerhaft von diesem Gerät gelöscht.`;document.querySelector('#deleteDialog').showModal()};document.querySelector('#cancelDelete').onclick=()=>document.querySelector('#deleteDialog').close();document.querySelector('#confirmDelete').onclick=deleteCurrentProject;document.querySelector('#exportButton').onclick=exportProject;document.querySelector('#importButton').onclick=()=>document.querySelector('#importFile').click();document.querySelector('#importFile').onchange=event=>{if(event.target.files[0])importProject(event.target.files[0]);event.target.value=''};
 const projectSearch=document.querySelector('#projectSearch'),projectSearchResults=document.querySelector('#projectSearchResults');
 projectSearch.addEventListener('focus',()=>{searchFocused=true;renderProjectSearch()});
 projectSearch.addEventListener('input',renderProjectSearch);
