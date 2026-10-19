@@ -221,24 +221,24 @@ const outdoorCatalog={
 		]}
 	},
 	Vaillant:{
-		'aroTHERM plus':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-plus_1483561.pdf',title:'Installationsanleitungen 8000041775_03 / 8000035176_05, S. 17–22 und 48–49'},flexibleSpace:true,protectionZone:{below400:1000,above400:500,flexible:500},clearances:{front:100,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A (Montagezeichnung)',back:'Maß B (Montagezeichnung)',left:'Maß C (Montagezeichnung)',right:'Maß D (Montagezeichnung)',above:'Maß E (Montagezeichnung)'},stages:[
-			{code:'VWL 35/8.1 A 230V',kw:4.26,point:'A−7/W35 · LWA max. Tag',sound:52.7},{code:'VWL 55/8.1 A 230V',kw:5.59,point:'A−7/W35 · LWA max. Tag',sound:55.6},
-			{code:'VWL 75/8.1 A 230V',kw:6.94,point:'A−7/W35 · LWA max. Tag',sound:57.4},{code:'VWL 105/8.1 A 400V',kw:10.58,point:'A−7/W35 · LWA max. Tag',sound:58.2},
-			{code:'VWL 125/8.1 A 400V',kw:12.14,point:'A−7/W35 · LWA max. Tag',sound:59.9},			{code:'VWL 105/8.1 A 230V',point:'A−7/W35 und max. LWA nicht separat ausgewiesen · LWA ErP 55 °C',sound:50}
+		'aroTHERM plus':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-plus_1483561.pdf',title:'Installationsanleitungen 8000041775_03 / 8000035176_05, S. 17–22 und 48–49'},additionalSources:[{url:'https://www.vaillant.de/api/download/product/de/flyer_produktinfo-arotherm-plus8.1_1429692.pdf',title:'Produktinfo aroTHERM plus 8.1, S. 2'},{url:'https://www.vaillant.de/api/download/product/de/erp-datenblatt_arotherm-plus_782705.pdf',title:'ErP-Datenblatt aroTHERM plus 8.1, S. 1'}],flexibleSpace:true,protectionZone:{below400:1000,above400:500,flexible:500},clearances:{front:100,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A',back:'Maß B',left:'Maß C',right:'Maß D',above:'Maß E'},stages:[
+			{code:'VWL 35/8.1 A 230V',kw:4.26,point:'A−7/W35',sound:52.7,soundMetric:'LWA max. Tag'},{code:'VWL 55/8.1 A 230V',kw:5.59,point:'A−7/W35',sound:55.6,soundMetric:'LWA max. Tag'},
+			{code:'VWL 75/8.1 A 230V',kw:6.94,point:'A−7/W35',sound:57.4,soundMetric:'LWA max. Tag'},{code:'VWL 105/8.1 A 400V',kw:10.58,point:'A−7/W35',sound:58.2,soundMetric:'LWA max. Tag'},
+			{code:'VWL 125/8.1 A 400V',kw:12.14,point:'A−7/W35',sound:59.9,soundMetric:'LWA max. Tag'},			{code:'VWL 105/8.1 A 230V',point:'A−7/W35 nicht separat ausgewiesen',sound:50,soundMetric:'LWA ErP 55 °C'}
 		]},
-		'aroTHERM pro':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-pro_1500353.pdf',title:'Installationsanleitung 8000026880_02, S. 15–25 und 53–54; Produktinfo 1511399'},flexibleSpace:true,protectionZone:{below400:1000,above400:500},clearances:{front:250,back:300,left:250,right:450,above:600},clearanceLabels:{front:'Maß A (Montagezeichnung)',back:'Maß B (Montagezeichnung)',left:'Maß C (Montagezeichnung)',right:'Maß D (Montagezeichnung)',above:'Maß E (Montagezeichnung)'},stages:[
-			{code:'VWL 55/7.1 A 230V',kw:4.84,point:'A−7/W35 · LWA max. Tag',sound:57.7},{code:'VWL 75/7.1 A 230V',kw:6.37,point:'A−7/W35 · LWA max. Tag',sound:60.9},
-			{code:'VWL 115/7.1 A 400V',kw:11.12,point:'A−7/W35 · LWA max. Tag',sound:65.6}
+		'aroTHERM pro':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-pro_1500353.pdf',title:'Installationsanleitung 8000026880_02, S. 15–25 und 53–54'},additionalSources:[{url:'https://www.vaillant.de/api/download/product/de/flyer_produktinfo-arotherm-pro_1511399.pdf',title:'Produktinfo aroTHERM pro, S. 2'},{url:'https://www.vaillant.de/api/download/product/de/erp-datenblatt_arotherm-pro_794700.pdf',title:'ErP-Datenblatt aroTHERM pro, S. 1'}],flexibleSpace:true,protectionZone:{below400:1000,above400:500},clearances:{front:250,back:300,left:250,right:450,above:600},clearanceLabels:{front:'Maß A',back:'Maß B',left:'Maß C',right:'Maß D',above:'Maß E'},stages:[
+			{code:'VWL 55/7.1 A 230V',kw:4.84,point:'A−7/W35',sound:57.7,soundMetric:'LWA max. Tag'},{code:'VWL 75/7.1 A 230V',kw:6.37,point:'A−7/W35',sound:60.9,soundMetric:'LWA max. Tag'},
+			{code:'VWL 115/7.1 A 400V',kw:11.12,point:'A−7/W35',sound:65.6,soundMetric:'LWA max. Tag'}
 		]},
-		'aroTHERM perform':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-perform_1519550.pdf',title:'Installationsanleitung 8000032825_02, S. 14–24, 47–48; Produktinfo 1485141'},flexibleSpace:true,protectionZone:{below400:1200,above400:500},clearances:{front:500,back:300,left:400,right:500,above:600},clearanceLabels:{front:'Maß A (Montagezeichnung)',back:'Maß B (Montagezeichnung)',left:'Maß C (Montagezeichnung, Anschlusskonsole beachten)',right:'Maß D (Montagezeichnung)',above:'Maß E (Montagezeichnung)'},stages:[
-			{code:'VWL 155/8.1 A S2 Q',point:'LWA ErP 55 °C-Anwendung; A−7/W35 im Produktblatt nicht ausgewiesen',sound:49},{code:'VWL 205/8.1 A S2 Q',kw:19.6,point:'A−7/W35 · LWA ErP 55 °C-Anwendung',sound:50}
+		'aroTHERM perform':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-perform_1519550.pdf',title:'Installationsanleitung 8000032825_02, S. 14–24, 47–48'},additionalSources:[{url:'https://www.vaillant.de/api/download/product/de/flyer_produktinfo-arotherm-perform_1485141.pdf',title:'Produktinfo aroTHERM perform, S. 2'},{url:'https://www.vaillant.de/api/download/product/de/erp-datenblatt_arotherm-perform_1517327.pdf',title:'ErP-Datenblatt aroTHERM perform, S. 1–2'}],flexibleSpace:true,protectionZone:{below400:1200,above400:500},clearances:{front:500,back:300,left:400,right:500,above:600},clearanceLabels:{front:'Maß A',back:'Maß B',left:'Maß C (Anschlusskonsole beachten)',right:'Maß D',above:'Maß E'},stages:[
+			{code:'VWL 155/8.1 A S2 Q',point:'A−7/W35 im Produktblatt nicht ausgewiesen',sound:49,soundMetric:'LWA ErP 55 °C'},{code:'VWL 205/8.1 A S2 Q',kw:19.6,point:'A−7/W35',sound:50,soundMetric:'LWA ErP 55 °C'}
 		]},
-		'aroTHERM Split plus':{source:{url:'https://www.vaillant.de/api/download/product/de/betriebs--und-installationsanleitung_arotherm-split-plus_1411481.pdf',title:'Installations- und Wartungsanleitung 8000015888_03, S. 18, 42–43; Produktinfo 1413678'},clearances:{front:300,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A (Montagezeichnung)',back:'Maß B (Montagezeichnung)',left:'Maß C (Montagezeichnung)',right:'Maß D (Montagezeichnung)',above:'Maß E (Montagezeichnung)'},stages:[
-			{code:'VWL 35/8.2 AS 230V S2',kw:3.54,point:'A−7/W35 · LWA max. Tag',sound:57},{code:'VWL 55/8.2 AS 230V S2',kw:4.89,point:'A−7/W35 · LWA max. Tag',sound:57},
-			{code:'VWL 75/8.2 AS 230V S2',kw:6.39,point:'A−7/W35 · LWA max. Tag',sound:58}
+		'aroTHERM Split plus':{source:{url:'https://www.vaillant.de/api/download/product/de/betriebs--und-installationsanleitung_arotherm-split-plus_1411481.pdf',title:'Installations- und Wartungsanleitung 8000015888_03, S. 18, 42–43'},additionalSources:[{url:'https://www.vaillant.de/api/download/product/de/flyer_produktinfo-arotherm-split-plus_1413678.pdf',title:'Produktinfo aroTHERM Split plus, S. 2'}],clearances:{front:300,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A',back:'Maß B',left:'Maß C',right:'Maß D',above:'Maß E'},stages:[
+			{code:'VWL 35/8.2 AS 230V S2',kw:3.54,point:'A−7/W35',sound:57,soundMetric:'LWA max. Tag'},{code:'VWL 55/8.2 AS 230V S2',kw:4.89,point:'A−7/W35',sound:57,soundMetric:'LWA max. Tag'},
+			{code:'VWL 75/8.2 AS 230V S2',kw:6.39,point:'A−7/W35',sound:58,soundMetric:'LWA max. Tag'}
 		]},
-		'aroTHERM Split':{source:{url:'https://www.vaillant.de/api/download/product/de/betriebs--und-installationsanleitung_arotherm-split_1459720.pdf',title:'Installations- und Wartungsanleitung 8000016459_03, S. 17; Produktinfo 1359266'},clearances:{front:100,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A (Montagezeichnung)',back:'Maß B (Montagezeichnung)',left:'Maß C (Heiz-/Kühlbetrieb)',right:'Maß D (Montagezeichnung)',above:'Maß E (Montagezeichnung)'},stages:[
-			{code:'VWL 105/5 AS S2',kw:10.15,point:'A−7/W35 · LWA A7/W55',sound:52},{code:'VWL 125/5 AS S2',kw:11.8,point:'A−7/W35 · LWA A7/W55',sound:52}
+		'aroTHERM Split':{source:{url:'https://www.vaillant.de/api/download/product/de/betriebs--und-installationsanleitung_arotherm-split_1459720.pdf',title:'Installations- und Wartungsanleitung 8000016459_03, S. 17'},additionalSources:[{url:'https://www.vaillant.de/api/download/product/de/flyer_produktinfo-arotherm-split_1359266.pdf',title:'Produktinfo aroTHERM Split, S. 2'}],clearances:{front:100,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A',back:'Maß B',left:'Maß C',right:'Maß D',above:'Maß E'},stages:[
+			{code:'VWL 105/5 AS S2',kw:10.15,point:'A−7/W35',sound:52,soundMetric:'LWA ErP A7/W55'},{code:'VWL 125/5 AS S2',kw:11.8,point:'A−7/W35',sound:52,soundMetric:'LWA ErP A7/W55'}
 		]}
 	},
 	Solvis:{
@@ -286,7 +286,7 @@ for(const [brand,models] of Object.entries(outdoorCatalog))for(const [model,data
 	const key=`${brand}|${model}|${stage.code}`;
 	const point=stage.point?` · ${stage.point}`:'';
 	const rating=stage.kw!==undefined?` · ${stage.kw.toLocaleString('de-DE')} kW${point}`:stage.kwLabel?` · ${stage.kwLabel} kW${point}`:'';
-	const sound=stage.sound!==undefined?` · LWA ${stage.sound.toLocaleString('de-DE')} dB(A)`:'';
+	const sound=stage.sound!==undefined?` · ${outdoorSoundMetric(stage)} ${stage.sound.toLocaleString('de-DE')} dB(A)`:'';
 	const option=new Option(`${stage.code}${rating}${sound}`,key);
 	outdoorStageIndex.set(key,{brand,model,...stage});
 }
@@ -301,9 +301,9 @@ outdoorStyle.textContent='.outdoor-evidence .outdoor-source-field a{display:bloc
 document.head.append(outdoorStyle);
 const outdoorSourceField=document.createElement('div');outdoorSourceField.className='field outdoor-source-field';
 const outdoorSourceLabel=document.createElement('label');outdoorSourceLabel.textContent='Herstellerquelle';
-const outdoorSourceLink=document.createElement('a');outdoorSourceLink.target='_blank';outdoorSourceLink.rel='noopener noreferrer';
+const outdoorSourceLinks=document.createElement('div');
 const outdoorSourceValue=document.createElement('input');outdoorSourceValue.type='text';outdoorSourceValue.name='outdoorSource';outdoorSourceValue.readOnly=true;
-outdoorSourceField.append(outdoorSourceLabel,outdoorSourceLink,outdoorSourceValue);
+outdoorSourceField.append(outdoorSourceLabel,outdoorSourceLinks,outdoorSourceValue);
 const outdoorNoiseNote=document.createElement('div');outdoorNoiseNote.className='note outdoor-noise-note';
 const outdoorSoundPower=createLabeledField('Schallleistungspegel laut Hersteller (LWA)','outdoorSoundPower');
 outdoorSoundPower.control.name='outdoorSoundPower';outdoorSoundPower.control.type='number';outdoorSoundPower.control.min='0';outdoorSoundPower.control.step='0.1';outdoorSoundPower.control.placeholder='dB(A), falls bekannt';
@@ -362,6 +362,12 @@ function outdoorEntry(){
 function formatOutdoorDistance(mm){
 	return mm>=1000?`${(mm/1000).toLocaleString('de-DE')} m`:`${(mm/10).toLocaleString('de-DE')} cm`
 }
+function outdoorSoundMetric(stage){
+	return stage.soundMetric||(
+		stage.point?.includes('LWA ErP')?'LWA ErP':
+		stage.point?.includes('LWA max')?'LWA max':'LWA'
+	)
+}
 function formatNoiseDistance(meters){
 	return `${meters.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1})} m`
 }
@@ -392,7 +398,7 @@ function updateOutdoorCatalog(){
 		const point=item.point?` · ${item.point}`:'';
 		const rating=item.kw!==undefined?` · ${item.kw.toLocaleString('de-DE')} kW${point}`:item.kwLabel?` · ${item.kwLabel} kW${point}`:'';
 		const sound=item.sound!==undefined
-			?` · LWA ${item.sound.toLocaleString('de-DE')} dB(A)`
+			?` · ${outdoorSoundMetric(item)} ${item.sound.toLocaleString('de-DE')} dB(A)`
 			:'';
 		outdoorStageChoice.control.add(new Option(`${item.code}${rating}${sound}`,key));
 	}
@@ -408,6 +414,7 @@ function updateOutdoorCatalog(){
 	updateOutdoorChecks(entry,stage)
 }
 function updateOutdoorChecks(entry=outdoorEntry(),stage=selectedOutdoorStage()){
+	const brand=outdoorBrandControl.value;
 	const clearance=stage?.clearances||entry?.clearances;
 	const hasClearances=!!clearance;
 	const mountType=outdoorMountType.control.value;
@@ -448,20 +455,23 @@ function updateOutdoorChecks(entry=outdoorEntry(),stage=selectedOutdoorStage()){
 			:'Für diese Baureihe sind in den hier geprüften Herstellerunterlagen keine vollständigen, modellbezogenen Mindestabstände hinterlegt. Deshalb bleibt die Abstandsampel neutral.'
 		:'Baureihe auswählen. Für nicht gelistete oder ältere Geräte werden keine Mindestabstände geschätzt.';
 	const stageMessage=entry&&!entry.stages.length?'Für diese Baureihe sind hier noch keine Leistungsstufen verifiziert; die kW-Angabe bitte dem Angebot oder Typenschild entnehmen.'
-		:entry?.stages.some(item=>item.kw===undefined)?'Für einzelne Typstufen ist hier noch keine offizielle kW-Leistungsangabe hinterlegt; bitte Angebot oder Typenschild prüfen.':'';
+		:entry?.stages.some(item=>item.kw===undefined&&!item.kwLabel)?'Für einzelne Typstufen ist hier noch keine offizielle kW-Leistungsangabe hinterlegt; bitte Angebot oder Typenschild prüfen.':'';
 	outdoorCatalogNote.textContent=[clearanceMessage,stageMessage].filter(Boolean).join(' ');
-	const source=entry?.source;
-	outdoorSourceField.hidden=!source;
-	if(source){
-		outdoorSourceLink.href=source.url;outdoorSourceLink.textContent=source.url.includes('api/download')?'Herstelleranleitung öffnen ↗':'Offizielle Herstellerseite / Dokumente öffnen ↗';
-		outdoorSourceValue.value=source.title
-	}else{outdoorSourceLink.removeAttribute('href');outdoorSourceLink.textContent='';outdoorSourceValue.value=''}
+	const sources=entry?[entry.source,...(entry.additionalSources||[])].filter(Boolean):[];
+	outdoorSourceField.hidden=!sources.length;
+	outdoorSourceLinks.replaceChildren(...sources.map(source=>{
+		const link=document.createElement('a');link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=`${source.title} ↗`;return link
+	}));
+	outdoorSourceValue.value=sources.map(source=>source.title).join('; ');
 	const sound=stage?.sound;
+	outdoorSoundPower.field.querySelector('label').textContent=sound===undefined
+		?'Schallleistungspegel laut Hersteller (LWA)'
+		:`Schallleistungspegel laut Hersteller (${outdoorSoundMetric(stage)})`;
 	if(sound!==undefined&&outdoorSoundPower.control.value!==String(sound))outdoorSoundPower.control.value=sound;
 	const hasVerifiedSound=sound!==undefined;
 	outdoorSoundPower.control.readOnly=hasVerifiedSound;
 	outdoorNoiseNote.textContent=hasVerifiedSound
-		?`Hersteller-Schallleistungspegel für den gewählten Typ: ${sound} dB(A). Die angezeigte Entfernung ist eine überschlägige Freifeld-Orientierung mit kugelförmiger Ausbreitung aus Schallleistung und gewähltem Nacht-Richtwert; Reflexionen, Betriebsmodus, Zuschläge und örtliche Situation fehlen. Sie ersetzt keine Schallberechnung.`
+		?`Hersteller-Schallleistungspegel für den gewählten Typ (${outdoorSoundMetric(stage)}): ${sound} dB(A). Die angezeigte Entfernung ist eine überschlägige Freifeld-Orientierung mit kugelförmiger Ausbreitung aus Schallleistung und gewähltem Nacht-Richtwert; Reflexionen, Betriebsmodus, Zuschläge und örtliche Situation fehlen. Sie ersetzt keine Schallberechnung.`
 		:'Schallleistungspegel (LWA) bei Bedarf aus dem Herstellerdatenblatt eintragen. Die überschlägige Freifeld-Orientierung mit kugelförmiger Ausbreitung ist keine verbindliche Schallberechnung; Gelände, Reflexionen, Betriebsmodus und örtliche Vorgaben bleiben zu prüfen.';
 	const isVaillant=brand==='Vaillant';
 	const supportsFlexible=!!entry?.flexibleSpace;

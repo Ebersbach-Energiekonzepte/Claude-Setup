@@ -414,6 +414,7 @@ function updateOutdoorCatalog(){
 	updateOutdoorChecks(entry,stage)
 }
 function updateOutdoorChecks(entry=outdoorEntry(),stage=selectedOutdoorStage()){
+	const brand=outdoorBrandControl.value;
 	const clearance=stage?.clearances||entry?.clearances;
 	const hasClearances=!!clearance;
 	const mountType=outdoorMountType.control.value;
