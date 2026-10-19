@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#173f36"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="SD-Planer"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png"><title>SD-Planer | Vor-Ort-Aufnahme</title>
+<style>
+:root{color-scheme:light;--ink:#202923;--muted:#6f7972;--line:#dce2da;--paper:#f3f4ee;--green:#173f36;--green-soft:#e5eee7;--lime:#d8f078;--blue:#527487;--red:#b75e52;font:15px "Avenir Next",Avenir,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper)}*{box-sizing:border-box}body{min-width:320px;min-height:100vh;margin:0;background:var(--paper)}button,input,select,textarea{font:inherit}button{cursor:pointer}.shell{min-height:100vh;display:grid;grid-template-columns:235px minmax(0,1fr)}.rail{position:sticky;top:0;height:100vh;padding:25px 14px 18px;display:flex;flex-direction:column;color:#f5f5ec;background:var(--green)}.brand{display:flex;align-items:center;gap:11px;padding:0 10px 26px}.mark{width:38px;height:38px;display:grid;place-items:center;color:var(--green);background:var(--lime);border-radius:4px;font:700 20px Georgia}.brand-name{font-size:19px;font-weight:700}.brand-caption{margin-top:2px;color:#b4c4b6;font-size:11px}.rail-label{padding:0 12px;margin:15px 0 8px;color:#a9bdb0;font-size:10px;font-weight:700;text-transform:uppercase}.nav{display:grid;gap:4px}.nav button{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;text-align:left;color:#d6e0d7;background:transparent;border:0;border-radius:4px}.nav button:hover{color:white;background:#ffffff14}.nav button.active{color:var(--green);background:var(--lime);font-weight:700}.nav-icon{width:19px;text-align:center;font-size:16px}.count{min-width:22px;margin-left:auto;padding:2px 6px;text-align:center;color:#dce8df;background:#ffffff20;border-radius:10px;font-size:11px}.rail-foot{margin-top:auto;padding:14px 11px 0;color:#b4c4b6;border-top:1px solid #ffffff29;font-size:11px;line-height:1.6}.workspace{min-width:0}.topbar{position:sticky;top:0;z-index:4;height:68px;padding:0 32px;display:flex;align-items:center;justify-content:space-between;background:#fffffff0;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}.top-left,.top-actions,.save-state{display:flex;align-items:center;gap:11px}.mobile-brand{display:none}.job-select{width:min(300px,32vw);height:39px;padding:0 12px;color:var(--ink);background:#f6f7f3;border:1px solid var(--line);border-radius:4px}.save-state{color:var(--muted);font-size:12px;white-space:nowrap}.save-dot{width:8px;height:8px;background:#72a783;border-radius:50%}.button{min-height:38px;padding:0 13px;display:inline-flex;align-items:center;justify-content:center;gap:8px;color:var(--ink);background:white;border:1px solid var(--line);border-radius:4px;font-weight:600}.button:hover{background:#f0f3ed}.button.primary{color:white;background:var(--green);border-color:var(--green)}.button.small{min-height:32px;padding:0 10px;font-size:12px}.main{width:min(1200px,100%);margin:0 auto;padding:34px 40px 65px}.page-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:24px}.eyebrow{margin-bottom:8px;color:var(--blue);font-size:11px;font-weight:750;text-transform:uppercase}h1,h2,h3,p{margin-top:0}h1{margin-bottom:7px;font:500 clamp(29px,3vw,38px)/1.12 Georgia,"Times New Roman",serif}h2{margin-bottom:5px;font-size:19px}h3{margin-bottom:8px;font-size:14px}.subtitle{margin:0;color:var(--muted);font-size:13px}.completion{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px}.progress-track{width:90px;height:5px;overflow:hidden;background:#dfe4dc;border-radius:5px}.progress-fill{width:0;height:100%;background:#69947a;transition:width .25s}.panel{display:none;animation:rise .2s ease both}.panel.active{display:block}@keyframes rise{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}.intro{padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--line)}.intro p{max-width:710px;margin:7px 0 0;color:var(--muted);font-size:13px;line-height:1.55}.box{padding:22px 24px;margin-bottom:14px;background:white;border:1px solid #e5e9e2;border-radius:5px;box-shadow:0 5px 16px #1f302507}.box.soft{background:#f8faf6;box-shadow:none}.box-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:17px}.box-head p{margin:3px 0 0;color:var(--muted);font-size:12px}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 19px}.fields.three{grid-template-columns:repeat(3,minmax(0,1fr))}.field{min-width:0}.field.full{grid-column:1/-1}.field>label,.field-label{display:block;margin-bottom:6px;color:#465249;font-size:12px;font-weight:650}.field input:not([type=radio]),.field select,.field textarea{width:100%;min-height:41px;padding:10px 11px;color:var(--ink);background:white;border:1px solid #d7ded5;border-radius:3px;outline:0}.field textarea{min-height:85px;resize:vertical;line-height:1.5}.field input:focus,.field select:focus,.field textarea:focus,.check-row input:focus,.check-row select:focus{border-color:#6c9478;box-shadow:0 0 0 3px #6c947822}.field input::placeholder,.field textarea::placeholder{color:#a1aaa2}.choices{display:flex;flex-wrap:wrap;gap:8px}.choice{position:relative}.choice input{position:absolute;width:1px;height:1px;opacity:0}.choice span{min-height:37px;padding:8px 12px;display:inline-flex;align-items:center;color:#4d5950;background:white;border:1px solid #d7ded5;border-radius:3px;cursor:pointer;font-size:12px}.choice input:checked+span{color:var(--green);background:var(--green-soft);border-color:#73947b;font-weight:700}.check-row{padding:13px 0;display:grid;grid-template-columns:minmax(150px,1fr) minmax(0,1.3fr) 125px;align-items:center;gap:13px;border-top:1px solid #edf0eb}.check-row:first-child{border-top:0}.check-name{font-size:13px;font-weight:650}.hint{display:block;margin-top:3px;color:var(--muted);font-size:11px;font-weight:400}.check-row select,.check-row input{width:100%;min-width:0;min-height:37px;padding:8px 10px;color:var(--ink);background:white;border:1px solid #d7ded5;border-radius:3px}.photo-area{padding-top:15px;margin-top:16px;border-top:1px solid #edf0eb}.photo-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px}.photo-title{color:#465249;font-size:12px;font-weight:650}.photo-title small{margin-left:5px;color:#89938a;font-weight:400}.photo-input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:9px;margin-top:11px}.photo-item{position:relative;min-width:0;overflow:hidden;background:#eef1eb;border:1px solid #e0e5dc;border-radius:3px}.photo-item img{width:100%;height:110px;display:block;object-fit:cover}.photo-caption{padding:7px 8px;overflow:hidden;color:#59645c;font-size:10px;text-overflow:ellipsis;white-space:nowrap}.photo-delete{position:absolute;top:5px;right:5px;width:25px;height:25px;color:white;background:#19261ecc;border:0;border-radius:50%}.photo-empty{padding:10px 0 0;color:#909990;font-size:11px}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:15px}.summary-item{padding:16px 18px;background:white;border:1px solid #e4e8e0;border-radius:4px}.summary-label{color:var(--muted);font-size:11px}.summary-value{margin-top:7px;font:27px Georgia,serif}.unit{color:var(--muted);font:12px inherit}.quick-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.quick-link{padding:15px;display:flex;align-items:center;gap:13px;text-align:left;color:var(--ink);background:white;border:1px solid #e4e8e0;border-radius:4px}.quick-link:hover{border-color:#8aa694}.quick-symbol{width:37px;height:37px;display:grid;flex:0 0 auto;place-items:center;color:var(--green);background:var(--green-soft);border-radius:4px;font-size:18px}.quick-name{font-size:13px;font-weight:700}.quick-detail{display:block;margin-top:3px;color:var(--muted);font-size:11px}.subhead{margin:20px 0 8px;color:var(--green);font-size:12px;font-weight:750}.note{padding:12px 14px;color:#4a6054;background:#eaf1e9;border-left:3px solid #71957a;font-size:12px;line-height:1.5}.panel-footer{padding-top:16px;display:flex;justify-content:space-between;gap:12px}.toast{position:fixed;right:22px;bottom:20px;z-index:10;padding:12px 16px;color:white;background:var(--green);border-radius:4px;box-shadow:0 16px 44px #1f302512;font-size:13px;transform:translateY(20px);opacity:0;pointer-events:none;transition:.2s}.toast.show{transform:none;opacity:1}.mobile-nav{display:none}dialog{width:min(430px,calc(100% - 30px));padding:0;color:var(--ink);border:0;border-radius:5px;box-shadow:0 20px 70px #0005}dialog::backdrop{background:#1121198a;backdrop-filter:blur(2px)}.dialog-body{padding:24px}.dialog-body h2{font:500 25px Georgia,serif}.dialog-body p{color:var(--muted);font-size:13px;line-height:1.5}.dialog-actions{margin-top:19px;display:flex;justify-content:flex-end;gap:8px}
+@media(max-width:950px){.shell{grid-template-columns:200px minmax(0,1fr)}.topbar{padding:0 20px}.main{padding:27px 22px 50px}.check-row{grid-template-columns:minmax(120px,.8fr) minmax(0,1.2fr) 110px;gap:9px}}
+@media(max-width:680px){.shell{display:block;padding-bottom:62px}.rail{display:none}.topbar{height:60px;padding:0 12px;gap:7px}.mobile-brand{display:flex;align-items:center;gap:7px;color:var(--green);font-size:15px;font-weight:750;white-space:nowrap}.mobile-brand .mark{width:30px;height:30px;font-size:16px}.job-select{width:min(39vw,175px);height:35px;font-size:12px}.top-actions{gap:4px}.top-actions .button{min-height:34px;padding:0 8px;font-size:11px}.top-actions #printButton,.save-state{display:none}.main{padding:23px 14px 30px}.page-heading{align-items:flex-start;margin-bottom:18px}h1{font-size:29px}.page-heading .completion{display:none}.box{padding:17px 15px}.fields,.fields.three{grid-template-columns:1fr;gap:13px}.field.full{grid-column:auto}.check-row{grid-template-columns:minmax(0,1fr) 112px;gap:8px}.check-entry{grid-column:1/-1;grid-row:2}.check-row select{grid-column:2;grid-row:1}.summary-grid{gap:7px}.summary-item{padding:12px 9px}.summary-value{font-size:23px}.quick-grid{grid-template-columns:1fr}.mobile-nav{position:fixed;inset:auto 0 0;z-index:5;height:62px;padding:5px 4px env(safe-area-inset-bottom);display:grid;grid-template-columns:repeat(5,1fr);background:white;border-top:1px solid var(--line)}.mobile-nav button{padding:5px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#778078;background:transparent;border:0;font-size:9px}.mobile-nav button.active{color:var(--green);font-weight:750}.mobile-nav .nav-icon{font-size:16px}.photo-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}.photo-item img{height:90px}}
+@media print{body{background:white}.shell{display:block}.rail,.topbar,.completion,.panel-footer,.photo-toolbar .button,.mobile-nav{display:none!important}.main{width:100%;padding:0}.panel{display:block!important;page-break-inside:auto}.panel:not(#panel-overview){page-break-before:always}.box,.summary-item{box-shadow:none;break-inside:avoid}.photo-item img{height:85px}.photo-input,.toast{display:none!important}h1{font-size:25px}}
+@media(max-width:680px){.mobile-nav{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.circuit-block{padding:17px 0;border-top:1px solid var(--line)}.circuit-head,.valve-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.circuit-head h3{margin:0 0 13px}.valve-section{padding-top:14px;margin-top:14px;border-top:1px solid var(--line)}.valve-head{margin-bottom:12px;color:var(--green);font-size:13px}.valve-row{margin-bottom:10px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;align-items:end;gap:12px}.valve-row .field{min-width:0}.choice input[type=checkbox]:checked+span::before{content:'✓';margin-right:7px;font-weight:800}
+@media(max-width:680px){.valve-row{grid-template-columns:1fr}}
+.new-job-short{display:none}
+@media(max-width:680px){body{min-height:100dvh}.topbar{top:0;height:calc(60px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 12px 0}.top-left{min-width:0;flex:1}.job-select{width:min(39vw,175px);min-width:0}.new-job-full{display:none}.new-job-short{display:inline}.top-actions{flex:0 0 auto}.top-actions #newJobButton{min-height:44px;padding:0 10px}.button,.quick-link,.mobile-nav button{min-height:44px}.field input:not([type=radio]),.field select,.field textarea,.check-row select,.check-row input{min-height:44px;font-size:16px}.choice span{min-height:44px;align-items:center}.photo-delete{width:36px;height:36px}.mobile-nav{height:calc(62px + env(safe-area-inset-bottom));padding:5px 4px calc(5px + env(safe-area-inset-bottom));padding-bottom:calc(5px + env(safe-area-inset-bottom))}.shell{padding-bottom:calc(62px + env(safe-area-inset-bottom))}.main{padding-bottom:calc(30px + env(safe-area-inset-bottom))}}
+@media(max-width:360px){.mobile-brand{font-size:13px;gap:5px}.mobile-brand .mark{width:27px;height:27px}.job-select{width:34vw}.topbar{padding-right:8px;padding-left:8px}.top-actions #newJobButton{padding:0 7px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.project-search{position:relative;flex:1;min-width:170px;max-width:280px;z-index:6}
+.project-search input{width:100%;min-height:39px;padding:8px 11px;color:var(--ink);background:#f6f7f3;border:1px solid var(--line);border-radius:4px}
+.search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;max-height:min(55vh,390px);overflow:auto;background:white;border:1px solid var(--line);border-radius:5px;box-shadow:0 8px 24px #1f30251c}
+.search-result{width:100%;padding:11px 13px;display:block;text-align:left;color:var(--ink);background:white;border:0;border-bottom:1px solid #edf0eb}
+.search-result:last-child{border-bottom:0}.search-result:hover,.search-result:focus{background:var(--green-soft)}
+.search-result-name{display:block;font-size:13px;font-weight:700}.search-result-detail{display:block;margin-top:3px;color:var(--muted);font-size:11px}
+.search-empty{padding:13px;color:var(--muted);font-size:12px}
+.pdf-short{display:none}
+[hidden]{display:none!important}
+.button.danger{color:#8f302b;border-color:#d8a29d}.button.danger:hover{background:#fff2f0}
+.report-window{margin:0;background:#fff;color:#202923;font:14px/1.5 Arial,sans-serif}
+.report{max-width:900px;margin:0 auto;padding:32px}
+.report-brand{padding-bottom:16px;margin-bottom:22px;border-bottom:3px solid #173f36}
+.report-kicker{color:#527487;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.report h1{margin:5px 0 4px;font:500 30px/1.15 Georgia,serif}.report h2{margin:0;color:#173f36;font-size:17px}.report-subtitle{margin:0;color:#59645c;font-size:12px}
+.report-section{margin:0 0 20px;break-inside:auto}
+.report-section-heading{padding:0 0 8px;margin:0 0 9px;border-bottom:1px solid #dce2da;break-after:avoid}
+.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.report-field{padding:8px 10px;min-width:0;border:1px solid #e4e8e0;border-radius:3px;break-inside:avoid}
+.report-field.full{grid-column:1/-1}
+.report-label{display:block;margin-bottom:2px;color:#6f7972;font-size:10px;font-weight:700}
+.report-value{overflow-wrap:anywhere;white-space:pre-wrap}
+.report-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.report-photo{padding:7px;border:1px solid #e4e8e0;border-radius:3px;break-inside:avoid}
+.report-photo img{width:100%;height:220px;display:block;object-fit:contain;background:#f3f4ee}
+.report-photo figcaption{padding-top:5px;color:#465249;font-size:10px}
+.report-action{position:fixed;right:20px;bottom:20px;padding:12px 18px;color:white;background:#173f36;border:0;border-radius:5px;font:600 15px Arial,sans-serif;box-shadow:0 5px 18px #0003;cursor:pointer}
+@media(max-width:680px){.top-left{display:flex}.report{padding:18px}.report-grid{grid-template-columns:1fr}.report-field.full{grid-column:auto}.report-photo img{height:190px}}
+@media print{@page{size:A4;margin:14mm 13mm 16mm;@bottom-right{content:"Seite " counter(page) " von " counter(pages);color:#6f7972;font:9px Arial,sans-serif}}.report{max-width:none;padding:0}.report-section{margin-bottom:16px}.report-section-heading{padding-bottom:6px;margin-bottom:7px}.report-field{padding:6px 8px}.report-photos{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.report-photo img{height:175px}.report-action{display:none}}
+@media(max-width:680px){.topbar{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px 6px;height:auto;min-height:0;padding:env(safe-area-inset-top) 12px 8px}.top-left{grid-column:1/-1;width:100%;min-height:39px}.job-select{width:min(39vw,175px)}.project-search{grid-column:1;grid-row:2;min-width:0;max-width:none;width:100%}.project-search input{min-height:44px;font-size:16px}.top-actions{display:contents}.top-actions .save-state{display:none}.top-actions #newJobButton{grid-column:2;grid-row:2;min-height:44px;padding:0 10px}.top-actions #printButton{grid-column:3;grid-row:2;display:inline-flex;min-height:44px;padding:0 9px}.new-job-short{display:inline}.new-job-full{display:none}.pdf-full{display:none}.pdf-short{display:inline}.search-results{position:fixed;top:auto;left:10px;right:10px;max-height:55vh}.search-result{min-height:54px}}
+@media(max-width:360px){.topbar{padding-right:8px;padding-left:8px}.job-select{width:34vw}.top-actions #newJobButton,.top-actions #printButton{padding:0 7px}.project-search{min-width:0}}
+@media print{@page{size:A4;margin:14mm}.panel{animation:none!important}.field input:not([type=radio]),.field select,.field textarea,.check-row input,.check-row select{min-height:0;padding:3px 0;background:transparent;border:0;border-bottom:1px solid #dce2da;border-radius:0;box-shadow:none!important;color:#202923;font-size:11px}.field textarea{min-height:34px;height:auto;overflow:visible;resize:none}.choice input[type=radio]:checked+span::before{content:'✓';margin-right:6px}.choice input:checked+span{outline:2px solid #173f36;font-weight:750;-webkit-print-color-adjust:exact;print-color-adjust:exact}.photo-delete,.search-results{display:none!important}.photo-item img{object-fit:contain}.photo-area,.circuit-block,.valve-section{break-inside:avoid}.box-head,.intro{break-after:avoid}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="rail"><div class="brand"><div class="mark">SD</div><div><div class="brand-name">SD-Planer</div><div class="brand-caption">Wärmepumpen-Aufnahme</div></div></div><div class="rail-label">Aufnahme</div>
+<nav class="nav" aria-label="Aufnahmebereiche">
+<button class="active" data-panel="overview"><span class="nav-icon">⌂</span>Übersicht</button><button data-panel="elektro"><span class="nav-icon">ϟ</span>Elektro<span class="count" data-count="elektro">0</span></button><button data-panel="waermepumpe"><span class="nav-icon">♨</span>Wärmepumpe<span class="count" data-count="waermepumpe">0</span></button><button data-panel="ausseneinheit"><span class="nav-icon">▧</span>Außeneinheit<span class="count" data-count="ausseneinheit">0</span></button><button data-panel="aufstellort"><span class="nav-icon">⌖</span>Aufstellort<span class="count" data-count="aufstellort">0</span></button><button data-panel="solar"><span class="nav-icon">☼</span>Solar &amp; PV<span class="count" data-count="solar">0</span></button>
+</nav><div class="rail-label">Dokumentation</div><nav class="nav"><button id="exportButton"><span class="nav-icon">⇩</span>Auftrag exportieren</button><button id="importButton"><span class="nav-icon">⇧</span>Auftrag importieren</button></nav><div class="rail-foot">Aufnahmen werden automatisch<br>auf diesem Gerät gespeichert.</div></aside>
+<div class="workspace"><header class="topbar"><div class="top-left"><div class="mobile-brand"><div class="mark">SD</div>SD-Planer</div><select class="job-select" id="jobSelect" aria-label="Aufnahme auswählen"></select></div><div class="project-search"><label class="visually-hidden" for="projectSearch">Aufnahmen nach Vorname, Name oder Auftragsnummer suchen</label><input id="projectSearch" type="search" placeholder="Name oder Auftragsnummer suchen" autocomplete="off" aria-autocomplete="list" aria-controls="projectSearchResults" aria-expanded="false"><div class="search-results" id="projectSearchResults" role="listbox" aria-label="Suchergebnisse" hidden></div></div><div class="top-actions"><div class="save-state"><span class="save-dot"></span><span id="saveStatus">Lokal gespeichert</span></div><button class="button small" id="newJobButton"><span>＋ </span><span class="new-job-full">Neue Aufnahme</span><span class="new-job-short">Neu</span></button><button class="button small" id="printButton" title="Alle Aufnahmedaten und Fotos als PDF drucken oder teilen"><span class="pdf-full">▤ PDF / Drucken</span><span class="pdf-short">▤ PDF</span></button></div></header>
+<main class="main"><div class="page-heading"><div><div class="eyebrow" id="eyebrow">VOR-ORT-AUFNAHME · <span id="jobReference">NEU</span></div><h1 id="pageTitle">Projektübersicht</h1><p class="subtitle" id="pageSubtitle">Kundendaten erfassen und die technische Aufnahme starten.</p></div><div class="completion"><span id="progressText">0 von 5 Bereichen</span><span class="progress-track"><span class="progress-fill" id="progressFill"></span></span></div></div>
+<form id="surveyForm" autocomplete="on">
+<section class="panel active" id="panel-overview"><div class="summary-grid"><div class="summary-item"><div class="summary-label">Bereiche bearbeitet</div><div class="summary-value"><span id="summaryProgress">0</span><span class="unit"> / 5</span></div></div><div class="summary-item"><div class="summary-label">Aufgenommene Fotos</div><div class="summary-value"><span id="summaryPhotos">0</span><span class="unit"> Bilder</span></div></div><div class="summary-item"><div class="summary-label">Außeneinheit</div><div class="summary-value" id="summaryPower">–<span class="unit"> kW</span></div></div></div>
+<div class="box"><div class="box-head"><div><h2>Auftrag &amp; Kunde</h2><p>Die wichtigsten Angaben für die Zuordnung.</p></div><button type="button" class="button small danger" id="deleteProjectButton">Aufnahme löschen</button></div><div class="fields three">
+<div class="field"><label for="customerName">Kunde / Ansprechpartner</label><input id="customerName" name="customerName" placeholder="Vor- und Nachname"></div><div class="field"><label for="customerPhone">Telefon</label><input id="customerPhone" name="customerPhone" type="tel" placeholder="Telefonnummer"></div><div class="field"><label for="orderNumber">Auftragsnummer</label><input id="orderNumber" name="orderNumber" placeholder="Optional"></div><div class="field"><label for="street">Straße &amp; Hausnummer</label><input id="street" name="street" autocomplete="street-address" placeholder="Musterstraße 12"></div><div class="field"><label for="postalCity">PLZ &amp; Ort</label><input id="postalCity" name="postalCity" placeholder="12345 Musterstadt"></div><div class="field"><label for="visitDate">Besichtigung am</label><input id="visitDate" name="visitDate" type="date"></div><div class="field full"><label for="generalNotes">Allgemeine Notizen</label><textarea id="generalNotes" name="generalNotes" placeholder="Besonderheiten, Absprachen, offene Fragen …"></textarea></div>
+</div></div><div class="box soft"><div class="box-head"><div><h2>Aufnahmebereiche</h2><p>Bereich öffnen, Fragen beantworten und Fotos hinzufügen.</p></div></div><div class="quick-grid">
+<button class="quick-link" type="button" data-go="elektro"><span class="quick-symbol">ϟ</span><span><span class="quick-name">Elektroinstallation</span><span class="quick-detail">Hausanschluss, Schutz, Zählerschrank &amp; PV</span></span></button><button class="quick-link" type="button" data-go="waermepumpe"><span class="quick-symbol">♨</span><span><span class="quick-name">Heizung &amp; Wärmepumpe</span><span class="quick-detail">Bestand, Speicher, Heizraum &amp; Auslegung</span></span></button><button class="quick-link" type="button" data-go="ausseneinheit"><span class="quick-symbol">▧</span><span><span class="quick-name">Außeneinheit</span><span class="quick-detail">Leistung, Abstände &amp; Gerätedokumentation</span></span></button><button class="quick-link" type="button" data-go="aufstellort"><span class="quick-symbol">⌖</span><span><span class="quick-name">Aufstellort</span><span class="quick-detail">Untergrund, Leitungsweg &amp; Situation</span></span></button><button class="quick-link" type="button" data-go="solar"><span class="quick-symbol">☼</span><span><span class="quick-name">Solar &amp; Photovoltaik</span><span class="quick-detail">Bestand, Alter &amp; gewünschte Einbindung</span></span></button>
+</div></div></section>
+
+<section class="panel" id="panel-elektro"><div class="intro"><h2>Elektroinstallation</h2><p>Bestand und Anpassungsbedarf aufnehmen. Fotos direkt mit der Kamera oder aus der Mediathek hinzufügen.</p></div>
+<div class="box"><div class="box-head"><div><h2>Hausanschluss &amp; Zählerschrank</h2><p>Vorhandene Ausführung und möglicher Erneuerungsbedarf.</p></div></div><div class="fields">
+<div class="field"><span class="field-label">Phasen am Hausanschluss</span><div class="choices"><label class="choice"><input type="radio" name="phases" value="1-phasig"><span>1-phasig</span></label><label class="choice"><input type="radio" name="phases" value="3-phasig"><span>3-phasig</span></label><label class="choice"><input type="radio" name="phases" value="Unbekannt"><span>Unbekannt</span></label></div></div><div class="field"><label for="mainFuse">Hausanschlusssicherung</label><input id="mainFuse" name="mainFuse" placeholder="z. B. 3 × 63 A"></div><div class="field"><label for="meterCabinetAge">Alter Zählerschrank (ca.)</label><input id="meterCabinetAge" name="meterCabinetAge" placeholder="Baujahr oder geschätzt"></div><div class="field"><label for="cabinetDecision">Zählerschrank erneuern?</label><select id="cabinetDecision" name="cabinetDecision"><option value="">Bitte auswählen</option><option>Ja, erforderlich</option><option>Voraussichtlich ja</option><option>Nein</option><option>Prüfen</option></select></div></div>
+<div class="subhead">Schutz- und Schaltgeräte</div><div class="check-row"><div class="check-name">Überspannungsschutz<span class="hint">z. B. DEHN; Typ und Zustand</span></div><div class="check-entry"><input name="surgeDetail" placeholder="Hersteller / Typ / Hinweis"></div><select name="surgePresent" aria-label="Überspannungsschutz vorhanden"><option value="">Vorhanden?</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="check-row"><div class="check-name">Hauptschutzschalter<span class="hint">Im Zählerschrank vorhanden?</span></div><div class="check-entry"><input name="mainSwitchDetail" placeholder="Typ / Hinweis"></div><select name="mainSwitchPresent" aria-label="Hauptschutzschalter vorhanden"><option value="">Vorhanden?</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="check-row"><div class="check-name">FI / RCD<span class="hint">Anzahl und Typ, soweit erkennbar</span></div><div class="check-entry"><input name="rcdDetail" placeholder="z. B. Anzahl / Typ"></div><select name="rcdPresent" aria-label="FI / RCD vorhanden"><option value="">Vorhanden?</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="check-row"><div class="check-name">Freie Zählerplätze<span class="hint">Platz für Wärmepumpe / Zusatztechnik</span></div><div class="check-entry"><input name="meterSpaceDetail" placeholder="Anzahl / Hinweis"></div><select name="meterSpace" aria-label="Freie Zählerplätze"><option value="">Einschätzung</option><option>Ausreichend</option><option>Nicht ausreichend</option><option>Prüfen</option></select></div>
+<div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos Elektroverteilung <small>Übersicht, Schutzgeräte, Zähler</small></span><label class="button small" for="photo-elektro">＋ Foto hinzufügen</label><input class="photo-input" id="photo-elektro" type="file" accept="image/*" capture="environment" multiple data-category="elektro"></div><div class="photo-grid" data-gallery="elektro"></div></div><div class="field full" style="margin-top:15px"><label for="electricalNotes">Notizen Elektro</label><textarea id="electricalNotes" name="electricalNotes" placeholder="Auffälligkeiten, erforderliche Arbeiten, Rückfragen …"></textarea></div></div>
+<div class="box"><div class="box-head"><div><h2>Photovoltaik am Gebäude</h2><p>Elektrische Eckdaten und Einbindung aufnehmen.</p></div></div><div class="fields three"><div class="field"><label for="pvPresent">Photovoltaikanlage vorhanden?</label><select id="pvPresent" name="pvPresent"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="field"><label for="pvPower">Anlagengröße</label><input id="pvPower" name="pvPower" type="number" min="0" step="0.1" placeholder="kWp"></div><div class="field"><label for="pvYear">Baujahr / Inbetriebnahme</label><input id="pvYear" name="pvYear" type="number" min="1980" max="2100" placeholder="Jahr"></div><div class="field"><label for="pvInverter">Wechselrichter: Hersteller / Typ</label><input id="pvInverter" name="pvInverter" placeholder="Hersteller und Modell"></div><div class="field"><label for="pvStorage">Batteriespeicher vorhanden?</label><select id="pvStorage" name="pvStorage"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="field"><label for="pvStorageSize">Speichergröße</label><input id="pvStorageSize" name="pvStorageSize" placeholder="z. B. 10 kWh"></div><div class="field full"><label for="pvMeter">Separater Zähler / Wärmepumpentarif</label><input id="pvMeter" name="pvMeter" placeholder="Zählernummer, Tarif oder Hinweis"></div></div><div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos PV &amp; Zähler <small>Wechselrichter, Zählerplatz, Speicher</small></span><label class="button small" for="photo-pv">＋ Foto hinzufügen</label><input class="photo-input" id="photo-pv" type="file" accept="image/*" capture="environment" multiple data-category="pv-elektro"></div><div class="photo-grid" data-gallery="pv-elektro"></div></div><div class="field full" style="margin-top:15px"><label for="pvElectricalNotes">Notizen Photovoltaik / Elektro</label><textarea id="pvElectricalNotes" name="pvElectricalNotes" placeholder="Anschluss, Zähler, Platzverhältnisse …"></textarea></div></div>
+<div class="panel-footer"><button type="button" class="button" data-go="overview">← Übersicht</button><button type="button" class="button primary" data-go="waermepumpe">Weiter zur Wärmepumpe →</button></div></section>
+
+<section class="panel" id="panel-waermepumpe"><div class="intro"><h2>Heizung &amp; Wärmepumpe</h2><p>Bestehendes Gerät und den Heizraum dokumentieren. Fotos von Anlage und Typenschild sind getrennt zugeordnet.</p></div><div class="box"><div class="box-head"><div><h2>Vorhandenes Heizgerät</h2><p>Bestandsanlage identifizieren.</p></div></div><div class="fields three"><div class="field"><label for="existingSystem">Anlagentyp</label><select id="existingSystem" name="existingSystem"><option value="">Bitte auswählen</option><option>Wärmepumpe</option><option>Gasheizung</option><option>Ölheizung</option><option>Biomasse / Pellet</option><option>Fernwärme</option><option>Sonstige</option></select></div><div class="field"><label for="existingYear">Baujahr</label><input id="existingYear" name="existingYear" type="number" min="1900" max="2100" placeholder="Jahr"></div><div class="field"><label for="existingMake">Hersteller</label><input id="existingMake" name="existingMake" placeholder="z. B. Viessmann"></div><div class="field full"><label for="existingModel">Typ / Modell</label><input id="existingModel" name="existingModel" placeholder="Typenbezeichnung"></div></div><div class="fields" style="margin-top:17px"><div class="photo-area" style="margin-top:0;padding-top:0;border:0"><div class="photo-toolbar"><span class="photo-title">Foto der Anlage</span><label class="button small" for="photo-existing-unit">＋ Foto hinzufügen</label><input class="photo-input" id="photo-existing-unit" type="file" accept="image/*" capture="environment" multiple data-category="existing-unit"></div><div class="photo-grid" data-gallery="existing-unit"></div></div><div class="photo-area" style="margin-top:0;padding-top:0;border:0"><div class="photo-toolbar"><span class="photo-title">Foto Typenschild</span><label class="button small" for="photo-existing-label">＋ Foto hinzufügen</label><input class="photo-input" id="photo-existing-label" type="file" accept="image/*" capture="environment" multiple data-category="existing-label"></div><div class="photo-grid" data-gallery="existing-label"></div></div></div></div>
+<div class="box"><div class="box-head"><div><h2>Neue Wärmepumpe &amp; Speicher</h2><p>Hersteller, geplante Leistung und Speicherbedarf auswählen.</p></div></div><div class="fields three"><div class="field"><label for="hpBrand">Wunsch-Hersteller</label><select id="hpBrand" name="hpBrand"><option value="">Bitte auswählen</option><option>Viessmann</option><option>Vaillant</option><option>Solvis</option><option>Andere</option><option>Noch offen</option></select></div><div class="field"><label for="solvisType">Solvis-Typ</label><select id="solvisType" name="solvisType"><option value="">Nicht zutreffend / offen</option><option>Ben</option><option>Leo</option><option>Max</option><option>SolvisLea</option><option>Anderer Typ</option></select></div><div class="field"><label for="solvisOther">Anderer Solvis-Typ</label><input id="solvisOther" name="solvisOther" placeholder="Typ eintragen"></div><div class="field"><label for="hpPower">Leistung Außeneinheit</label><input id="hpPower" name="hpPower" type="number" min="0" step="0.1" placeholder="kW"></div><div class="field"><label for="pipeLength">Strecke Innen- zu Außeneinheit</label><input id="pipeLength" name="pipeLength" type="number" min="0" step="0.1" placeholder="Meter"></div><div class="field"><label for="pipeRoute">Leitungsweg / Durchführung</label><input id="pipeRoute" name="pipeRoute" placeholder="z. B. Kellerdecke, Erdreich"></div><div class="field"><label for="dhwSize">Warmwasserspeicher</label><select id="dhwSize" name="dhwSize"><option value="">Bitte auswählen</option><option>100 Liter</option><option>150 Liter</option><option>200 Liter</option><option>250 Liter</option><option>300 Liter</option><option>350 Liter</option><option>400 Liter</option><option>Andere / offen</option></select></div><div class="field"><label for="bufferSize">Pufferspeicher</label><select id="bufferSize" name="bufferSize"><option value="">Bitte auswählen</option><option>50 Liter</option><option>100 Liter</option><option>150 Liter</option><option>200 Liter</option><option>250 Liter</option><option>300 Liter</option><option>350 Liter</option><option>400 Liter</option><option>450 Liter</option><option>500 Liter</option><option>550 Liter</option><option>600 Liter</option><option>650 Liter</option><option>700 Liter</option><option>750 Liter</option><option>800 Liter</option><option>Andere / offen</option></select></div><div class="field"><label for="freshwaterStation">Frischwasserstation</label><select id="freshwaterStation" name="freshwaterStation"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Offen</option></select></div><div class="field"><label for="householdSize">Personen im Haushalt</label><input id="householdSize" name="householdSize" type="number" min="1" max="30" placeholder="Anzahl"></div></div></div>
+<div class="box"><div class="box-head"><div><h2>Heizraum</h2><p>Raum, Zugänglichkeit und Anschlüsse dokumentieren.</p></div></div><div class="fields"><div class="field"><label for="utilityRoomAccess">Zugang / Einbringung</label><input id="utilityRoomAccess" name="utilityRoomAccess" placeholder="Türbreite, Stufen, Engstellen …"></div><div class="field"><label for="utilityRoomSpace">Platzverhältnisse</label><input id="utilityRoomSpace" name="utilityRoomSpace" placeholder="Freie Fläche / Raumhöhe …"></div></div><div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos Heizraum <small>Übersicht, Anschlüsse, Stellfläche</small></span><label class="button small" for="photo-heizraum">＋ Foto hinzufügen</label><input class="photo-input" id="photo-heizraum" type="file" accept="image/*" capture="environment" multiple data-category="heizraum"></div><div class="photo-grid" data-gallery="heizraum"></div></div><div class="field full" style="margin-top:15px"><label for="hpNotes">Notizen Wärmepumpe / Heizraum</label><textarea id="hpNotes" name="hpNotes" placeholder="Hydraulik, Heizkreise, Rückfragen, Wünsche …"></textarea></div></div><div class="panel-footer"><button type="button" class="button" data-go="elektro">← Elektro</button><button type="button" class="button primary" data-go="ausseneinheit">Weiter zur Außeneinheit →</button></div></section>
+
+<section class="panel" id="panel-ausseneinheit"><div class="intro"><h2>Außeneinheit</h2><p>Vorgesehene Geräteleistung und Umgebung fotografisch festhalten. Abstände vor Ort messen und Herstellervorgaben abgleichen.</p></div><div class="box"><div class="box-head"><div><h2>Gerät &amp; Sicherheitsabstände</h2><p>Freiräume nach Aufstellskizze des geplanten Geräts prüfen.</p></div></div><div class="fields three"><div class="field"><label for="outdoorBrand">Hersteller</label><select id="outdoorBrand" name="outdoorBrand"><option value="">Bitte auswählen</option><option>Viessmann</option><option>Vaillant</option><option>Solvis</option><option>Andere</option><option>Noch offen</option></select></div><div class="field"><label for="outdoorModel">Typ / Modell</label><input id="outdoorModel" name="outdoorModel" placeholder="Modell, falls bekannt"></div><div class="field"><label for="outdoorOutput">Leistung</label><input id="outdoorOutput" name="outdoorOutput" type="number" min="0" step="0.1" placeholder="kW"></div></div><div class="subhead">Gemessener Freiraum am möglichen Standort</div><div class="fields three">
+<div class="field"><label for="clearanceFront">Luftausblas / Vorderseite</label><input id="clearanceFront" name="clearanceFront" type="number" min="0" step="0.1" placeholder="Meter"></div><div class="field"><label for="clearanceBack">Rückseite</label><input id="clearanceBack" name="clearanceBack" type="number" min="0" step="0.1" placeholder="Meter"></div><div class="field"><label for="clearanceLeft">Linke Seite</label><input id="clearanceLeft" name="clearanceLeft" type="number" min="0" step="0.1" placeholder="Meter"></div><div class="field"><label for="clearanceRight">Rechte Seite</label><input id="clearanceRight" name="clearanceRight" type="number" min="0" step="0.1" placeholder="Meter"></div><div class="field"><label for="clearanceAbove">Freiraum nach oben</label><input id="clearanceAbove" name="clearanceAbove" type="number" min="0" step="0.1" placeholder="Meter"></div><div class="field"><label for="distanceWindow">Nächstes Fenster / Nachbar</label><input id="distanceWindow" name="distanceWindow" type="number" min="0" step="0.1" placeholder="Meter"></div><div class="field"><label for="noiseSensitive">Schallschutz kritisch?</label><select id="noiseSensitive" name="noiseSensitive"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Prüfen</option></select></div><div class="field"><label for="airflowClear">Luftstrom frei?</label><select id="airflowClear" name="airflowClear"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Prüfen</option></select></div><div class="field"><label for="drainage">Kondensat / Entwässerung</label><input id="drainage" name="drainage" placeholder="Versickerung / Anschluss"></div></div><div class="note" style="margin-top:16px">Abstände sind vorläufige Vor-Ort-Maße. Verbindliche Mindestabstände und Schallanforderungen immer mit dem konkreten Gerät und örtlichen Vorgaben abgleichen.</div><div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos Außeneinheit <small>Übersicht, Seiten, Typenschild, Umfeld</small></span><label class="button small" for="photo-ausseneinheit">＋ Foto hinzufügen</label><input class="photo-input" id="photo-ausseneinheit" type="file" accept="image/*" capture="environment" multiple data-category="ausseneinheit"></div><div class="photo-grid" data-gallery="ausseneinheit"></div></div><div class="field full" style="margin-top:15px"><label for="outdoorNotes">Notizen Außeneinheit</label><textarea id="outdoorNotes" name="outdoorNotes" placeholder="Abstandsprobleme, Schallreflexion, Sonderbedingungen …"></textarea></div></div><div class="panel-footer"><button type="button" class="button" data-go="waermepumpe">← Wärmepumpe</button><button type="button" class="button primary" data-go="aufstellort">Weiter zum Aufstellort →</button></div></section>
+
+<section class="panel" id="panel-aufstellort"><div class="intro"><h2>Aufstellort</h2><p>Situation aus verschiedenen Blickwinkeln aufnehmen, damit Zugänglichkeit und Einbauweg planbar sind.</p></div><div class="box"><div class="box-head"><div><h2>Standort &amp; Montage</h2><p>Vorgesehene Fläche und bauliche Randbedingungen.</p></div></div><div class="fields three"><div class="field"><label for="locationType">Standort</label><select id="locationType" name="locationType"><option value="">Bitte auswählen</option><option>Boden / Garten</option><option>Wandkonsole</option><option>Dach / Flachdach</option><option>Anderer Standort</option><option>Noch offen</option></select></div><div class="field"><label for="foundation">Untergrund / Fundament</label><input id="foundation" name="foundation" placeholder="Beton, Pflaster, Erde …"></div><div class="field"><label for="accessRoute">Zugang für Montage</label><input id="accessRoute" name="accessRoute" placeholder="Zufahrt, Kran, Tragweg …"></div><div class="field"><label for="wallPenetration">Wanddurchführung möglich?</label><select id="wallPenetration" name="wallPenetration"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Prüfen</option></select></div><div class="field"><label for="undergroundLines">Leitungen im Erdreich bekannt?</label><select id="undergroundLines" name="undergroundLines"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="field"><label for="locationDirection">Ausrichtung / Himmelsrichtung</label><input id="locationDirection" name="locationDirection" placeholder="z. B. Nordseite"></div><div class="field full"><label for="locationObstacles">Hindernisse / Besonderheiten</label><input id="locationObstacles" name="locationObstacles" placeholder="Dachüberstand, Lichtschacht, Pflanzen, Schnee …"></div></div><div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos Aufstellort <small>Übersicht, Boden, Wanddurchführung, Montageweg</small></span><label class="button small" for="photo-aufstellort">＋ Foto hinzufügen</label><input class="photo-input" id="photo-aufstellort" type="file" accept="image/*" capture="environment" multiple data-category="aufstellort"></div><div class="photo-grid" data-gallery="aufstellort"></div></div><div class="field full" style="margin-top:15px"><label for="locationNotes">Notizen Aufstellort</label><textarea id="locationNotes" name="locationNotes" placeholder="Alternative Standorte, Maße, Klärungsbedarf …"></textarea></div></div><div class="panel-footer"><button type="button" class="button" data-go="ausseneinheit">← Außeneinheit</button><button type="button" class="button primary" data-go="solar">Weiter zu Solar &amp; PV →</button></div></section>
+
+<section class="panel" id="panel-solar"><div class="intro"><h2>Solar &amp; Photovoltaik</h2><p>Solarthermie und Photovoltaik getrennt betrachten. Bei vorhandener Solarthermie festhalten, ob sie bestehen bleibt, eingebunden oder zurückgebaut werden soll.</p></div><div class="box"><div class="box-head"><div><h2>Solarthermie</h2><p>Kollektoren und vorhandene Einbindung dokumentieren.</p></div></div><div class="fields three"><div class="field"><label for="solarThermalPresent">Solarthermie vorhanden?</label><select id="solarThermalPresent" name="solarThermalPresent"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="field"><label for="solarThermalYear">Baujahr / Alter</label><input id="solarThermalYear" name="solarThermalYear" placeholder="Jahr oder geschätztes Alter"></div><div class="field"><label for="solarThermalType">Art / Fläche</label><input id="solarThermalType" name="solarThermalType" placeholder="Kollektortyp, Anzahl, Fläche"></div><div class="field full"><label for="solarThermalPlan">Was soll mit der Solarthermie geschehen?</label><select id="solarThermalPlan" name="solarThermalPlan"><option value="">Bitte auswählen</option><option>Weiter betreiben und an Wärmepumpe anbinden</option><option>Bestehen lassen, nicht anbinden</option><option>Für Photovoltaik zurückbauen</option><option>Vollständig zurückbauen</option><option>Noch abstimmen</option></select></div></div><div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos Solarthermie <small>Kollektoren, Speicher, Rohranschlüsse</small></span><label class="button small" for="photo-solarthermie">＋ Foto hinzufügen</label><input class="photo-input" id="photo-solarthermie" type="file" accept="image/*" capture="environment" multiple data-category="solarthermie"></div><div class="photo-grid" data-gallery="solarthermie"></div></div><div class="field full" style="margin-top:15px"><label for="solarThermalNotes">Notizen Solarthermie</label><textarea id="solarThermalNotes" name="solarThermalNotes" placeholder="Dachzugang, Rückbau, Leitungsweg, Kundenwunsch …"></textarea></div></div>
+<div class="box"><div class="box-head"><div><h2>Photovoltaik</h2><p>Bestandsanlage und gewünschte Kopplung mit der Wärmepumpe.</p></div></div><div class="fields three"><div class="field"><label for="solarPvPresent">Photovoltaik vorhanden?</label><select id="solarPvPresent" name="solarPvPresent"><option value="">Bitte auswählen</option><option>Ja</option><option>Nein</option><option>Unbekannt</option></select></div><div class="field"><label for="solarPvYear">Baujahr / Alter</label><input id="solarPvYear" name="solarPvYear" placeholder="Jahr oder geschätztes Alter"></div><div class="field"><label for="solarPvPower">Leistung</label><input id="solarPvPower" name="solarPvPower" type="number" min="0" step="0.1" placeholder="kWp"></div><div class="field full"><label for="solarPvPlan">PV für Wärmepumpe nutzen?</label><select id="solarPvPlan" name="solarPvPlan"><option value="">Bitte auswählen</option><option>Ja, Wärmepumpe einbinden</option><option>Vorhandene PV weiterbetreiben, keine Kopplung</option><option>PV neu installieren</option><option>Noch abstimmen</option><option>Nicht zutreffend</option></select></div><div class="field full"><label for="solarPvNotes">Notizen PV / gewünschte Einbindung</label><textarea id="solarPvNotes" name="solarPvNotes" placeholder="Wechselrichter, Speicher, Energiemanagement, Kundenwunsch …"></textarea></div></div><div class="photo-area"><div class="photo-toolbar"><span class="photo-title">Fotos PV-Bestand <small>Module, Wechselrichter, Speicher</small></span><label class="button small" for="photo-solar-pv">＋ Foto hinzufügen</label><input class="photo-input" id="photo-solar-pv" type="file" accept="image/*" capture="environment" multiple data-category="solar-pv"></div><div class="photo-grid" data-gallery="solar-pv"></div></div></div><div class="panel-footer"><button type="button" class="button" data-go="aufstellort">← Aufstellort</button><button type="button" class="button primary" data-go="overview">Zur Projektübersicht ✓</button></div></section>
+</form></main></div></div>
+<nav class="mobile-nav" aria-label="Aufnahmebereiche"><button class="active" data-panel="overview"><span class="nav-icon">⌂</span>Übersicht</button><button data-panel="elektro"><span class="nav-icon">ϟ</span>Elektro</button><button data-panel="waermepumpe"><span class="nav-icon">♨</span>Heizung</button><button data-panel="ausseneinheit"><span class="nav-icon">▧</span>Außen</button><button data-panel="aufstellort"><span class="nav-icon">⌖</span>Aufstellort</button><button data-panel="solar"><span class="nav-icon">☼</span>Solar / PV</button></nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div><input id="importFile" type="file" accept="application/json,.json" hidden><dialog id="newDialog"><div class="dialog-body"><h2>Neue Aufnahme</h2><p>Eine neue, leere Aufnahme wird angelegt. Bestehende Kunden bleiben erhalten.</p><div class="field"><label for="newName">Vorname des Kunden (optional)</label><input id="newName" autocomplete="given-name" placeholder="z. B. Anna"></div><div class="dialog-actions"><button class="button" id="cancelNew">Abbrechen</button><button class="button primary" id="confirmNew">Leere Aufnahme anlegen</button></div></div></dialog><dialog id="deleteDialog"><div class="dialog-body"><h2>Aufnahme löschen?</h2><p id="deleteConfirmationText">Diese Aufnahme wird einschließlich aller zugehörigen Fotos dauerhaft von diesem Gerät gelöscht.</p><div class="dialog-actions"><button type="button" class="button" id="cancelDelete">Abbrechen</button><button type="button" class="button danger" id="confirmDelete">Aufnahme endgültig löschen</button></div></div></dialog>
+<script>
+(()=>{
+const DB='nuos-aufnahme',STORE='projects';
+const titles={overview:'Projektübersicht',elektro:'Elektroinstallation',waermepumpe:'Heizung & Wärmepumpe',ausseneinheit:'Außeneinheit',aufstellort:'Aufstellort',solar:'Solar & Photovoltaik'};
+const subtitles={overview:'Kundendaten erfassen und die technische Aufnahme starten.',elektro:'Hausanschluss, Schutzorgane, Zählerschrank und Photovoltaik im Bestand.',waermepumpe:'Bestehende Anlage, Hydraulik und benötigte Speicher erfassen.',ausseneinheit:'Gerätedaten, Sicherheitsabstände und Schallumgebung aufnehmen.',aufstellort:'Untergrund, Entwässerung, Leitungsführung und Umgebung prüfen.',solar:'Solarthermie und PV-Bestand, Alter und gewünschte Einbindung klären.'};
+const categories={elektro:'Elektroverteilung','pv-elektro':'PV & Zähler',hak:'Hausanschlusskasten','existing-unit':'Vorhandene Anlage','existing-label':'Typenschild',heizraum:'Heizraum',ausseneinheit:'Außeneinheit',aufstellort:'Aufstellort',solarthermie:'Solarthermie','solar-pv':'Photovoltaik','circuit-manifold':'Fußbodenheizungsverteiler'};
+const form=document.querySelector('#surveyForm');let db,project,activePanel='overview',saveTimer,toastTimer,searchFocused=false;
+const electricalFields=document.querySelector('#panel-elektro .box .fields');
+const hakSection=document.createElement('div');hakSection.className='hak-section';
+const hakTitle=document.createElement('h3');hakTitle.textContent='Hausanschlusskasten (HAK)';
+const hakFields=document.createElement('div');hakFields.className='fields three';
+const hakLocation=createLabeledField('Lage des HAK','hakLocation','select');hakLocation.control.name='hakLocation';
+[['Bitte auswählen',''],['Im Haus','Im Haus'],['Außerhalb des Hauses','Außerhalb des Hauses'],['Unbekannt','Unbekannt']].forEach(([label,value])=>hakLocation.control.add(new Option(label,value)));
+const hakType=createLabeledField('Ausführung bei Außen-HAK','hakType','select');hakType.control.name='hakType';
+[['Bitte auswählen',''],['Einzel-HAK (nur dieses Haus)','Einzel-HAK'],['Geteilter HAK (mehrere Nachbarn)','Geteilter HAK']].forEach(([label,value])=>hakType.control.add(new Option(label,value)));
+const sharedHakHomes=createLabeledField('Angeschlossene Häuser / Nachbarn','sharedHakHomes');sharedHakHomes.control.name='sharedHakHomes';sharedHakHomes.control.type='number';sharedHakHomes.control.min='2';sharedHakHomes.control.step='1';sharedHakHomes.control.placeholder='Anzahl, falls bekannt';
+hakFields.append(hakLocation.field,hakType.field,sharedHakHomes.field);
+const hakPhotoArea=document.createElement('div');hakPhotoArea.className='photo-area';
+const hakPhotoToolbar=document.createElement('div');hakPhotoToolbar.className='photo-toolbar';
+const hakPhotoTitle=document.createElement('span');hakPhotoTitle.className='photo-title';hakPhotoTitle.textContent='Fotos Hausanschlusskasten';
+const hakPhotoInput=document.createElement('input');hakPhotoInput.id='photo-hak';hakPhotoInput.className='photo-input';hakPhotoInput.type='file';hakPhotoInput.accept='image/*';hakPhotoInput.capture='environment';hakPhotoInput.multiple=true;hakPhotoInput.dataset.category='hak';
+const hakPhotoButton=document.createElement('label');hakPhotoButton.className='button small';hakPhotoButton.htmlFor='photo-hak';hakPhotoButton.textContent='＋ Foto hinzufügen';
+hakPhotoToolbar.append(hakPhotoTitle,hakPhotoButton,hakPhotoInput);
+const hakPhotoGallery=document.createElement('div');hakPhotoGallery.className='photo-grid';hakPhotoGallery.dataset.gallery='hak';
+hakPhotoArea.append(hakPhotoToolbar,hakPhotoGallery);hakSection.append(hakTitle,hakFields,hakPhotoArea);
+electricalFields.nextElementSibling.before(hakSection);
+function syncHakFields(){const outside=hakLocation.control.value==='Außerhalb des Hauses';hakType.field.hidden=!outside;sharedHakHomes.field.hidden=!outside||hakType.control.value!=='Geteilter HAK'}
+hakLocation.control.addEventListener('change',syncHakFields);hakType.control.addEventListener('change',syncHakFields);hakPhotoInput.addEventListener('change',()=>addPhotos(hakPhotoInput));syncHakFields();
+const meterTypeField=document.createElement('div');meterTypeField.className='field full';
+const meterTypeLabel=document.createElement('span');meterTypeLabel.className='field-label';meterTypeLabel.textContent='Zählertypen (Mehrfachauswahl)';
+const meterTypeChoices=document.createElement('div');meterTypeChoices.className='choices';
+const meterTypes=['Ferraris-Zähler (analoge Drehscheibe)','Elektronischer Zähler (eHZ)','Moderne Messeinrichtung (mME)','Intelligentes Messsystem (Smart Meter / iMSys)','Zweirichtungszähler','Doppeltarifzähler (HT / NT)','Separater Wärmepumpenzähler','Unterzähler / Zwischenzähler','Sonstiger / unbekannter Zählertyp'];
+meterTypes.forEach((meterType,index)=>{const choice=document.createElement('label');choice.className='choice';const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.name='meterTypes';checkbox.value=meterType;checkbox.id=`meter-type-${index+1}`;const text=document.createElement('span');text.textContent=meterType;choice.append(checkbox,text);meterTypeChoices.append(choice)});
+meterTypeField.append(meterTypeLabel,meterTypeChoices);electricalFields.append(meterTypeField);
+const meterManufacturer=createLabeledField('Zähler-Hersteller / Typ','meterManufacturer');meterManufacturer.control.name='meterManufacturer';meterManufacturer.control.placeholder='z. B. Hersteller, Modell';electricalFields.append(meterManufacturer.field);
+const meterNumber=createLabeledField('Zählernummer','meterNumber');meterNumber.control.name='meterNumber';meterNumber.control.placeholder='Vom Zähler ablesen';electricalFields.append(meterNumber.field);
+const uvAssessment=createLabeledField('Unterverteilung (UV)','uvAssessment','select');uvAssessment.control.name='uvAssessment';['Bitte auswählen','Vorhandene UV reicht','Neue / größere UV nötig','UV nicht erforderlich','Prüfen'].forEach((text,index)=>uvAssessment.control.add(new Option(text,index?text:'')));electricalFields.append(uvAssessment.field);
+const tariffType=createLabeledField('Zählertarif','meterTariff','select');tariffType.control.name='meterTariff';['Bitte auswählen','Eintarif','Doppeltarif (HT / NT)','Wärmepumpentarif','Unbekannt'].forEach((text,index)=>tariffType.control.add(new Option(text,index?text:'')));electricalFields.append(tariffType.field);
+const grounding=createLabeledField('Erdung / Potentialausgleich','grounding','select');grounding.control.name='grounding';['Bitte auswählen','Vorhanden','Fehlt','Zu prüfen','Unbekannt'].forEach((text,index)=>grounding.control.add(new Option(text,index?text:'')));electricalFields.append(grounding.field);
+const gridApproval=createLabeledField('Netzbetreiber / Anschlussfreigabe','gridApproval','select');gridApproval.control.name='gridApproval';['Bitte auswählen','Noch zu klären','Erforderlich','Bereits vorhanden','Nicht erforderlich / unbekannt'].forEach((text,index)=>gridApproval.control.add(new Option(text,index?text:'')));electricalFields.append(gridApproval.field);
+const cableRoute=createLabeledField('Leitungsweg zur Wärmepumpe','electricalCableRoute');cableRoute.control.name='electricalCableRoute';cableRoute.control.placeholder='Weg, Durchführungen, Besonderheiten';electricalFields.append(cableRoute.field);
+const cableLength=createLabeledField('Leitungslänge zur Wärmepumpe','electricalCableLength');cableLength.control.name='electricalCableLength';cableLength.control.type='number';cableLength.control.min='0';cableLength.control.step='0.1';cableLength.control.placeholder='Meter';electricalFields.append(cableLength.field);
+const wallPenetration=document.querySelector('#wallPenetration');
+wallPenetration.closest('.field').querySelector('label').textContent='Wanddurchführung';
+wallPenetration.replaceChildren(new Option('Bitte auswählen',''),new Option('Oberirdisch','Oberirdisch'),new Option('Unterirdisch','Unterirdisch'));
+const groundObstacles=document.querySelector('#undergroundLines');
+groundObstacles.closest('.field').querySelector('label').textContent='Hindernisse im Boden?';
+groundObstacles.replaceChildren(new Option('Bitte auswählen',''),new Option('Ja','Ja'),new Option('Nein','Nein'));
+const groundObstacleNote=document.createElement('div');groundObstacleNote.className='field full';groundObstacleNote.hidden=true;
+const groundObstacleLabel=document.createElement('label');groundObstacleLabel.htmlFor='groundObstacleNote';groundObstacleLabel.textContent='Notiz zu Hindernissen im Boden';
+const groundObstacleInput=document.createElement('textarea');groundObstacleInput.id='groundObstacleNote';groundObstacleInput.name='groundObstacleNote';groundObstacleInput.placeholder='Art und Lage der Hindernisse beschreiben …';
+groundObstacleNote.append(groundObstacleLabel,groundObstacleInput);groundObstacles.closest('.field').after(groundObstacleNote);
+function syncGroundObstacleNote(){groundObstacleNote.hidden=groundObstacles.value!=='Ja'}
+groundObstacles.addEventListener('change',syncGroundObstacleNote);
+const roomSpace=document.querySelector('#utilityRoomSpace');
+roomSpace.closest('.field').querySelector('label').textContent='Freie Fläche';
+roomSpace.placeholder='z. B. Stellfläche 2 × 3 m';
+const roomHeightField=document.createElement('div');roomHeightField.className='field';
+const roomHeightLabel=document.createElement('label');roomHeightLabel.htmlFor='utilityRoomHeight';roomHeightLabel.textContent='Raumhöhe';
+const roomHeight=document.createElement('input');roomHeight.id='utilityRoomHeight';roomHeight.name='utilityRoomHeight';roomHeight.placeholder='z. B. 2,20 m';
+roomHeightField.append(roomHeightLabel,roomHeight);roomSpace.closest('.field').after(roomHeightField);
+const existingSerialField=document.createElement('div');existingSerialField.className='field full';
+const existingSerialLabel=document.createElement('label');existingSerialLabel.htmlFor='existingSerial';existingSerialLabel.textContent='Seriennummer';
+const existingSerial=document.createElement('input');existingSerial.id='existingSerial';existingSerial.name='existingSerial';existingSerial.placeholder='Seriennummer vom Typenschild';
+existingSerialField.append(existingSerialLabel,existingSerial);document.querySelector('#existingModel').closest('.field').after(existingSerialField);
+const solvisTypeField=document.querySelector('#solvisType').closest('.field');
+const solvisOtherField=document.querySelector('#solvisOther').closest('.field');
+const hpBrand=document.querySelector('#hpBrand');
+const hpModelCatalog={
+	Viessmann:['Vitocal 100-A','Vitocal 100-S','Vitocal 111-S','Vitocal 150-A','Vitocal 151-A','Vitocal 200-A','Vitocal 200-G','Vitocal 200-S','Vitocal 222-G','Vitocal 222-S','Vitocal 250-A','Vitocal 250-A PRO','Vitocal 252-A','Vitocal 262-A','Vitocal 300-G','Vitocal 333-G'],
+	Vaillant:['aroTHERM plus','aroTHERM Split','aroTHERM pro','flexoTHERM exclusive','flexoCOMPACT exclusive','geoTHERM','versoTHERM plus','recoCOMPACT exclusive'],
+	Andere:[]
+};
+function createLabeledField(labelText,id,tag='input'){
+	const field=document.createElement('div');field.className='field';
+	const label=document.createElement('label');label.htmlFor=id;label.textContent=labelText;
+	const control=document.createElement(tag);control.id=id;field.append(label,control);return{field,control};
+}
+const outdoorCatalog={
+	Viessmann:{
+		'Vitocal 150-A':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-150-a/Datenblatt-Vitocal-150-A.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/Datenblatt-Vitocal-150-A.pdf',title:'Datenblatt Vitocal 150-A, S. 7–12'},stages:[
+			{code:'AWMOF-151.A1.04/230 V',kw:4.0,point:'A7/W35 · LWA max. A7/W55',sound:56},{code:'AWMOF-151.A1.06/230 V',kw:4.8,point:'A7/W35 · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-151.A1.08/230 V',kw:5.6,point:'A7/W35 · LWA max. A7/W55',sound:59},{code:'AWMOF-151.A1.10/230 V',kw:7.3,point:'A7/W35 · LWA max. A7/W55',sound:61},
+			{code:'AWMOF-151.A1.10/400 V',kw:7.4,point:'A7/W35 · LWA max. A7/W55',sound:61},{code:'AWMOF-151.A1.13/400 V',kw:8.1,point:'A7/W35 · LWA max. A7/W55',sound:61},
+			{code:'AWMOF-151.A1.16/400 V',kw:9.1,point:'A7/W35 · LWA max. A7/W55',sound:66}
+		]},
+		'Vitocal 200-A ie':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-200-a-ie/kpr-vitocal-200-a-ie.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/kpr-vitocal-200-a-ie.pdf',title:'Vorläufige technische Daten 9444 982-1 (09/2026), S. 16'},stages:[
+			{code:'Baugröße 06',kw:5.5,point:'vorläufig · Nennleistung A−7/W35 · Schall max. bei A7/W55',sound:57,soundMetric:'Schallleistung max.'},
+			{code:'Baugröße 08',kw:6.8,point:'vorläufig · Nennleistung A−7/W35 · Schall max. bei A7/W55',sound:59,soundMetric:'Schallleistung max.'},
+			{code:'Baugröße 10',kw:8.7,point:'vorläufig · Nennleistung A−7/W35 · Schall max. bei A7/W55',sound:62,soundMetric:'Schallleistung max.'},
+			{code:'Baugröße 12',kw:9.7,point:'vorläufig · Nennleistung A−7/W35 · Schall max. bei A7/W55',sound:63,soundMetric:'Schallleistung max.'}
+		]},
+		'Vitocal 250-A':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-250-a/db-6246346-vitocal-250-a.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/db-6246346-vitocal-250-a.pdf',title:'Datenblatt 6246346 Vitocal 250-A, S. 10–15'},stages:[
+			{code:'AWMOF-251.A1.04/230 V',kw:4.0,point:'A7/W35 · LWA max. A7/W55',sound:54},{code:'AWMOF-251.A1.06/230 V',kw:4.8,point:'A7/W35 · LWA max. A7/W55',sound:55},
+			{code:'AWMOF-251.A1.08/230 V',kw:5.6,point:'A7/W35 · LWA max. A7/W55',sound:57},{code:'AWMOF-251.A1.10/230 V',kw:7.3,point:'A7/W35 · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-251.A1.10/400 V',kw:7.4,point:'A7/W35 · LWA max. A7/W55',sound:58},{code:'AWMOF-251.A1.13/400 V',kw:8.1,point:'A7/W35 · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-251.A1.16/400 V',kw:8.5,point:'A7/W35 · LWA max. A7/W55',sound:56},{code:'AWMOF-251.A1.19/400 V',kw:9.0,point:'A7/W35 · LWA max. A7/W55',sound:57}
+		]},
+		'Vitocal 200-A PRO':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-200-a-pro/kpr-vitocal-200-a-pro-05-2024.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/kpr-vitocal-200-a-pro-05-2024.pdf',title:'Vitocal 200-A PRO · Produktdaten 9444 471-3, S. 4'},stages:[
+			{code:'AWO-AC 201.A032',kw:32.2,point:'A7/W35 · A−7/W35: 22,1 kW',sound:70},
+			{code:'AWO-AC 202.A064',kw:66.4,point:'A7/W35 · A−7/W35: 44,2 kW',sound:70},
+			{code:'AWO-AC 204.A128',kw:128.7,point:'A7/W35 · A−7/W35: 88,2 kW',sound:72}
+		]},
+		'Vitocal 250-A Compact':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-250-a/compact/db-6246345-vitocal-250-a-compact.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/db-6246345-vitocal-250-a-compact.pdf',title:'Datenblatt 6246345 Vitocal 250-A Compact, S. 9, 11–12, 17–18'},stages:[
+			{code:'AWMOF-251.A1.04-230 V001/V002',kw:4.0,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:54},
+			{code:'AWMOF-251.A1.06-230 V001/V002',kw:4.8,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:55},
+			{code:'AWMOF-251.A1.08-230 V001/V002',kw:5.6,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:57},
+			{code:'AWMOF-251.A1.10-230 V001/V002',kw:7.3,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-251.A1.10-400 V001/V002',kw:7.4,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-251.A1.13-400 V001/V002',kw:8.1,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-251.A1.16-400 V001/V002',kw:8.5,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:56},
+			{code:'AWMOF-251.A1.19-400 V001/V002',kw:9.0,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:57}
+		]},
+		'Vitocal 200-S':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-200-s/kpr-vitocal-200-s.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/kpr-vitocal-200-s.pdf',title:'Herstellerbroschüre Vitocal 200-S, 12/2024, S. 4'},stages:[
+			{code:'201.D010',kwLabel:'5,5–12,6',point:'A7/W35 · Ausgangsleistungsbereich · LWA ErP 55 dB(A)',sound:55},
+			{code:'201.D10',kwLabel:'5,5–12,6',point:'A7/W35 · Ausgangsleistungsbereich · LWA ErP 55 dB(A)',sound:55},
+			{code:'201.D13',kwLabel:'5,9–13,7',point:'A7/W35 · Ausgangsleistungsbereich · LWA ErP 55 dB(A)',sound:55},
+			{code:'201.D16',kwLabel:'6,4–14,7',point:'A7/W35 · Ausgangsleistungsbereich · LWA ErP 55 dB(A)',sound:55}
+		]},
+		'Vitocal 222-S R32':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-222-s-r32/DB-6195455-vitocal-222-s.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/DB-6195455-vitocal-222-s.pdf',title:'Datenblatt 6195455 Vitocal 222-S, S. 6–8'},stages:[
+			{code:'221.E06',kw:5.3,point:'A7/W35 · LWA reduzierter Betrieb A7/W55',sound:50},
+			{code:'221.E08',kw:6.8,point:'A7/W35 · LWA reduzierter Betrieb A7/W55',sound:50},
+			{code:'221.E10',kw:8.32,point:'A7/W35 · LWA reduzierter Betrieb A7/W55',sound:50}
+		]},
+		'Vitocal 300-A':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-300-a/DB-5680568_Vitocal_300-A_50-kW.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/DB-5680568_Vitocal_300-A_50-kW.pdf',title:'Herstellerdatenblatt Vitocal 300-A, S. 4–5'},stages:[
+			{code:'AWO 302.B25, 1-stufig',kw:13.2,point:'A7/W35 · LWA max. A7/W55',sound:67},
+			{code:'AWO 302.B25, 2-stufig',kw:24.5,point:'A7/W35 · LWA max. A7/W55',sound:67},
+			{code:'AWO 302.B40, 1-stufig',kw:19.5,point:'A7/W35 · LWA max. A7/W55',sound:70},
+			{code:'AWO 302.B40, 2-stufig',kw:32.7,point:'A7/W35 · LWA max. A7/W55',sound:70},
+			{code:'AWO 302.B60, 1-stufig',kw:30.1,point:'A7/W35 · LWA max. A7/W55',sound:74},
+			{code:'AWO 302.B60, 2-stufig',kw:55.8,point:'A7/W35 · LWA max. A7/W55 · Nachtbetrieb 70 dB(A)',sound:74}
+		]}
+	},
+	Vaillant:{
+		'aroTHERM plus':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-plus_1483561.pdf',title:'Installationsanleitungen 8000041775_03 / 8000035176_05, S. 17–22 und 48–49'},flexibleSpace:true,protectionZone:{below400:1000,above400:500,flexible:500},clearances:{front:100,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A (Montagezeichnung)',back:'Maß B (Montagezeichnung)',left:'Maß C (Montagezeichnung)',right:'Maß D (Montagezeichnung)',above:'Maß E (Montagezeichnung)'},stages:[
+			{code:'VWL 35/8.1 A 230V',kw:4.26,point:'A−7/W35 · LWA max. Tag',sound:52.7},{code:'VWL 55/8.1 A 230V',kw:5.59,point:'A−7/W35 · LWA max. Tag',sound:55.6},
+			{code:'VWL 75/8.1 A 230V',kw:6.94,point:'A−7/W35 · LWA max. Tag',sound:57.4},{code:'VWL 105/8.1 A 400V',kw:10.58,point:'A−7/W35 · LWA max. Tag',sound:58.2},
+			{code:'VWL 125/8.1 A 400V',kw:12.14,point:'A−7/W35 · LWA max. Tag',sound:59.9},			{code:'VWL 105/8.1 A 230V',point:'A−7/W35 und max. LWA nicht separat ausgewiesen · LWA ErP 55 °C',sound:50}
+		]},
+		'aroTHERM pro':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-pro_1500353.pdf',title:'Installationsanleitung 8000026880_02, S. 15–25 und 53–54; Produktinfo 1511399'},flexibleSpace:true,protectionZone:{below400:1000,above400:500},clearances:{front:250,back:300,left:250,right:450,above:600},clearanceLabels:{front:'Maß A (Montagezeichnung)',back:'Maß B (Montagezeichnung)',left:'Maß C (Montagezeichnung)',right:'Maß D (Montagezeichnung)',above:'Maß E (Montagezeichnung)'},stages:[
+			{code:'VWL 55/7.1 A 230V',kw:4.84,point:'A−7/W35 · LWA max. Tag',sound:57.7},{code:'VWL 75/7.1 A 230V',kw:6.37,point:'A−7/W35 · LWA max. Tag',sound:60.9},
+			{code:'VWL 115/7.1 A 400V',kw:11.12,point:'A−7/W35 · LWA max. Tag',sound:65.6}
+		]},
+		'aroTHERM perform':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-perform_1519550.pdf',title:'Installationsanleitung 8000032825_02, S. 14–24, 47–48; Produktinfo 1485141'},flexibleSpace:true,protectionZone:{below400:1200,above400:500},clearances:{front:500,back:300,left:400,right:500,above:600},clearanceLabels:{front:'Maß A (Montagezeichnung)',back:'Maß B (Montagezeichnung)',left:'Maß C (Montagezeichnung, Anschlusskonsole beachten)',right:'Maß D (Montagezeichnung)',above:'Maß E (Montagezeichnung)'},stages:[
+			{code:'VWL 155/8.1 A S2 Q',point:'LWA ErP 55 °C-Anwendung; A−7/W35 im Produktblatt nicht ausgewiesen',sound:49},{code:'VWL 205/8.1 A S2 Q',kw:19.6,point:'A−7/W35 · LWA ErP 55 °C-Anwendung',sound:50}
+		]},
+		'aroTHERM Split plus':{source:{url:'https://www.vaillant.de/api/download/product/de/betriebs--und-installationsanleitung_arotherm-split-plus_1411481.pdf',title:'Installations- und Wartungsanleitung 8000015888_03, S. 18, 42–43; Produktinfo 1413678'},clearances:{front:300,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A (Montagezeichnung)',back:'Maß B (Montagezeichnung)',left:'Maß C (Montagezeichnung)',right:'Maß D (Montagezeichnung)',above:'Maß E (Montagezeichnung)'},stages:[
+			{code:'VWL 35/8.2 AS 230V S2',kw:3.54,point:'A−7/W35 · LWA max. Tag',sound:57},{code:'VWL 55/8.2 AS 230V S2',kw:4.89,point:'A−7/W35 · LWA max. Tag',sound:57},
+			{code:'VWL 75/8.2 AS 230V S2',kw:6.39,point:'A−7/W35 · LWA max. Tag',sound:58}
+		]},
+		'aroTHERM Split':{source:{url:'https://www.vaillant.de/api/download/product/de/betriebs--und-installationsanleitung_arotherm-split_1459720.pdf',title:'Installations- und Wartungsanleitung 8000016459_03, S. 17; Produktinfo 1359266'},clearances:{front:100,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A (Montagezeichnung)',back:'Maß B (Montagezeichnung)',left:'Maß C (Heiz-/Kühlbetrieb)',right:'Maß D (Montagezeichnung)',above:'Maß E (Montagezeichnung)'},stages:[
+			{code:'VWL 105/5 AS S2',kw:10.15,point:'A−7/W35 · LWA A7/W55',sound:52},{code:'VWL 125/5 AS S2',kw:11.8,point:'A−7/W35 · LWA A7/W55',sound:52}
+		]}
+	},
+	Solvis:{
+		SolvisMia:{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvismia/34404_MAL-MIA.pdf',title:'MAL-MIA 34404-2b, Abstände S. 8, Schall S. 21, Leistungsdaten S. 22'},strictClearances:true,clearances:{left:500,above:300,right:1000,back:300,front:3000},stages:[
+			{code:'SolvisMia 8',kw:4.0,point:'A2/W35 · Nennklasse 8 kW · LWA max. Außenaufstellung',sound:64},
+			{code:'SolvisMia 10',kw:5.65,point:'A2/W35 · Nennklasse 10 kW · LWA max. Außenaufstellung',sound:64},
+			{code:'SolvisMia 14',kw:8.6,point:'A2/W35 · Nennklasse 14 kW · LWA max. Außenaufstellung',sound:64}
+		]},
+		SolvisLea:{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvislea/31427_MAL-LEA.pdf',title:'MAL-LEA 31427-2c, Abstände S. 8, Schall S. 27'},strictClearances:true,clearances:{left:1000,above:800,right:500,back:300,front:2000},stages:[
+			{code:'SolvisLea 7 kW',kw:7,point:'Hersteller-Leistungsklasse · LWA max. Außenaufstellung',sound:61},
+			{code:'SolvisLea 11 kW',kw:11,point:'Hersteller-Leistungsklasse · LWA max. Außenaufstellung',sound:66},
+			{code:'SolvisLea 14 kW',kw:14,point:'Hersteller-Leistungsklasse · LWA max. Außenaufstellung',sound:66}
+		]},
+		'SolvisLea Eco':{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvislea/32704_MAL-LEA-E.pdf',title:'MAL-LEA-E 32704-2a, Abstände S. 7; technische Daten im Handbuch'},strictClearances:true,clearances:{left:1000,above:800,right:500,back:300,front:2000},stages:[
+			{code:'SolvisLea Eco 8 kW',kw:8,point:'Nennklasse · LWA max. Außenaufstellung',sound:66}
+		]},
+		'SolvisLea Premium':{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvislea/33395_MAL-LEA-8P.pdf',title:'MAL-LEA-8P 33395-2f, Abstände S. 10; technische Daten im Handbuch'},strictClearances:true,clearances:{left:1000,above:800,right:500,back:300,front:2000},stages:[
+			{code:'SolvisLea 8,3 Premium',kw:8.3,point:'Nennklasse · LWA max. Außenaufstellung',sound:66}
+		]},
+		'SolvisLea Pro':{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvislea/35081_MAL-LEA-PRO.pdf',title:'MAL-LEA-PRO 35081-2b, Abstände S. 11, Schutzbereich S. 13; Schall und Leistungsdaten S. 40'},protectionZone:{allDirections:1000},strictClearances:true,clearances:{left:500,above:800,right:100,back:300,front:600},stages:[
+			{code:'SolvisLea 5 Pro',kw:3.05,point:'A7/W35 Nennleistung; Modulation 2,77–6,63 kW · LWA max.',sound:54},
+			{code:'SolvisLea 7 Pro',kw:3.05,point:'A7/W35 Nennleistung; Modulation 2,76–8,47 kW · LWA max.',sound:57.1},
+			{code:'SolvisLea 10 Pro',kw:4.32,point:'A7/W35 Nennleistung; Modulation 3,69–11,97 kW · LWA max.',sound:58.8},
+			{code:'SolvisLea 13 Pro',kw:5.79,point:'A7/W35 Nennleistung; Modulation 5,11–15,31 kW · LWA max.',sound:60}
+		]},
+		SolvisPia:{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvispia/35029_MAL-PIA-1317.pdf',title:'MAL-PIA-1317 35029-2c, Abstände S. 11–13; Schallwerte Typenschild-/Seriennummer beachten'},protectionZone:{allDirections:1000},stages:[
+			{code:'SolvisPia 13',kw:8.3,point:'A7/W35 Nennleistung; LWA max. Außenaufstellung',sound:65,clearances:{left:200,above:600,right:700,back:300,front:3000},strictClearances:{front:true}},
+			{code:'SolvisPia 17',kw:11.1,point:'A7/W35 Nennleistung; konservativ max. LWA Außenaufstellung',sound:67,clearances:{left:400,above:1000,right:1000,back:450,front:3000},strictClearances:{front:true}}
+		]}
+	}
+};
+const outdoorBrandControl=document.querySelector('#outdoorBrand');
+const outdoorModelControl=document.querySelector('#outdoorModel');
+const outdoorOutputControl=document.querySelector('#outdoorOutput');
+const outdoorModelField=outdoorModelControl.closest('.field');
+outdoorModelField.querySelector('label').textContent='Modell / Baureihe (Freitext für Altbestand)';
+const outdoorModelChoice=createLabeledField('Offizielle Gerätebaureihe','outdoorModelChoice','select');
+outdoorModelChoice.control.add(new Option('Zuerst Hersteller auswählen',''));
+outdoorModelField.before(outdoorModelChoice.field);
+const outdoorStageChoice=createLabeledField('Offizielle Leistungsstufe / Typ','outdoorStageCode','select');
+outdoorStageChoice.control.name='outdoorStageCode';
+outdoorModelField.after(outdoorStageChoice.field);
+const outdoorStageIndex=new Map();
+for(const [brand,models] of Object.entries(outdoorCatalog))for(const [model,data] of Object.entries(models))for(const stage of data.stages){
+	const key=`${brand}|${model}|${stage.code}`;
+	const point=stage.point?` · ${stage.point}`:'';
+	const rating=stage.kw!==undefined?` · ${stage.kw.toLocaleString('de-DE')} kW${point}`:stage.kwLabel?` · ${stage.kwLabel} kW${point}`:'';
+	const sound=stage.sound!==undefined?` · LWA ${stage.sound.toLocaleString('de-DE')} dB(A)`:'';
+	const option=new Option(`${stage.code}${rating}${sound}`,key);
+	outdoorStageIndex.set(key,{brand,model,...stage});
+}
+outdoorStageChoice.control.add(new Option('Zuerst Baureihe auswählen',''));
+const outdoorEvidenceBox=document.createElement('div');outdoorEvidenceBox.className='box soft outdoor-evidence';
+const outdoorEvidenceHead=document.createElement('div');outdoorEvidenceHead.className='box-head';
+const outdoorEvidenceTitle=document.createElement('div');outdoorEvidenceTitle.innerHTML='<h3>Herstellerdaten &amp; Abstandsprüfung</h3><p>Nur dokumentierte Mindestwerte werden automatisch bewertet.</p>';
+outdoorEvidenceHead.append(outdoorEvidenceTitle);outdoorEvidenceBox.append(outdoorEvidenceHead);
+const outdoorCatalogNote=document.createElement('div');outdoorCatalogNote.className='note outdoor-catalog-note';
+const outdoorStyle=document.createElement('style');
+outdoorStyle.textContent='.outdoor-evidence .outdoor-source-field a{display:block;margin:0 0 8px;font-size:12px;font-weight:650}.outdoor-evidence .note{margin:12px 0}.outdoor-evidence .outdoor-zone-note{margin-bottom:0}.field.clearance-pass input{border-color:#4c8b60;background:#f2f8f2}.field.clearance-fail input{border-color:#b75e52;background:#fcf1ef}.field.clearance-pass>label,.field.clearance-pass .clearance-status{color:#32734a}.field.clearance-fail>label,.field.clearance-fail .clearance-status{color:#a43f35}.clearance-status{display:block;min-height:14px;margin-top:5px;color:var(--muted);font-size:11px}';
+document.head.append(outdoorStyle);
+const outdoorSourceField=document.createElement('div');outdoorSourceField.className='field outdoor-source-field';
+const outdoorSourceLabel=document.createElement('label');outdoorSourceLabel.textContent='Herstellerquelle';
+const outdoorSourceLink=document.createElement('a');outdoorSourceLink.target='_blank';outdoorSourceLink.rel='noopener noreferrer';
+const outdoorSourceValue=document.createElement('input');outdoorSourceValue.type='text';outdoorSourceValue.name='outdoorSource';outdoorSourceValue.readOnly=true;
+outdoorSourceField.append(outdoorSourceLabel,outdoorSourceLink,outdoorSourceValue);
+const outdoorNoiseNote=document.createElement('div');outdoorNoiseNote.className='note outdoor-noise-note';
+const outdoorSoundPower=createLabeledField('Schallleistungspegel laut Hersteller (LWA)','outdoorSoundPower');
+outdoorSoundPower.control.name='outdoorSoundPower';outdoorSoundPower.control.type='number';outdoorSoundPower.control.min='0';outdoorSoundPower.control.step='0.1';outdoorSoundPower.control.placeholder='dB(A), falls bekannt';
+const outdoorNoiseLimit=createLabeledField('Richtwert am Nachbar-Immissionsort (nachts)','outdoorNoiseLimit','select');
+outdoorNoiseLimit.control.name='outdoorNoiseLimit';
+outdoorNoiseLimit.control.append(
+	new Option('Bitte auswählen',''),
+	new Option('35 dB(A) · reines Wohngebiet / Kurgebiet','35'),
+	new Option('40 dB(A) · allgemeines Wohngebiet','40'),
+	new Option('45 dB(A) · urbanes, Kern-, Dorf- oder Mischgebiet','45'),
+	new Option('50 dB(A) · Gewerbegebiet','50'),
+	new Option('70 dB(A) · Industriegebiet','70')
+);
+const outdoorNoiseFields=document.createElement('div');outdoorNoiseFields.className='fields three';
+outdoorNoiseFields.append(outdoorSoundPower.field,outdoorNoiseLimit.field);
+const outdoorZoneTitle=document.createElement('div');outdoorZoneTitle.className='subhead';outdoorZoneTitle.textContent='R290-Schutzbereich (Propan)';
+const outdoorZoneFields=document.createElement('div');outdoorZoneFields.className='fields three';
+const outdoorMountType=createLabeledField('Aufstellart','outdoorMountType','select');
+outdoorMountType.control.name='outdoorMountType';
+outdoorMountType.control.add(new Option('Bitte auswählen',''));
+outdoorMountType.control.add(new Option('Freistehend: Boden / Flachdach','free'));
+outdoorMountType.control.add(new Option('Wand / Ecke / Sonderaufstellung','other'));
+const outdoorMountHeight=createLabeledField('Montagehöhe über Boden','outdoorMountHeight');
+outdoorMountHeight.control.name='outdoorMountHeight';outdoorMountHeight.control.type='number';outdoorMountHeight.control.min='0';outdoorMountHeight.control.step='1';outdoorMountHeight.control.placeholder='cm';
+const outdoorFlexibleSpace=createLabeledField('Flexible Space Funktion','outdoorFlexibleSpace','select');
+outdoorFlexibleSpace.control.name='outdoorFlexibleSpace';
+outdoorFlexibleSpace.control.add(new Option('Bitte auswählen',''));
+outdoorFlexibleSpace.control.add(new Option('Ja','Ja'));
+outdoorFlexibleSpace.control.add(new Option('Nein','Nein'));
+const outdoorOpening=createLabeledField('Nächste Gebäudeöffnung','outdoorDistanceOpening');
+outdoorOpening.control.name='outdoorDistanceOpening';outdoorOpening.control.type='number';outdoorOpening.control.min='0';outdoorOpening.control.step='0.01';outdoorOpening.control.placeholder='Meter';
+const outdoorIgnition=createLabeledField('Nächste Zündquelle','outdoorDistanceIgnition');
+outdoorIgnition.control.name='outdoorDistanceIgnition';outdoorIgnition.control.type='number';outdoorIgnition.control.min='0';outdoorIgnition.control.step='0.01';outdoorIgnition.control.placeholder='Meter';
+const outdoorRecess=createLabeledField('Nächste Vertiefung / Ablauf','outdoorDistanceRecess');
+outdoorRecess.control.name='outdoorDistanceRecess';outdoorRecess.control.type='number';outdoorRecess.control.min='0';outdoorRecess.control.step='0.01';outdoorRecess.control.placeholder='Meter';
+for(const item of [outdoorMountType,outdoorMountHeight,outdoorFlexibleSpace,outdoorOpening,outdoorIgnition,outdoorRecess])outdoorZoneFields.append(item.field);
+const outdoorZoneNote=document.createElement('div');outdoorZoneNote.className='note outdoor-zone-note';
+outdoorEvidenceBox.append(outdoorCatalogNote,outdoorSourceField,outdoorNoiseFields,outdoorNoiseNote,outdoorZoneTitle,outdoorZoneFields,outdoorZoneNote);
+document.querySelector('#panel-ausseneinheit .box').after(outdoorEvidenceBox);
+const outdoorClearanceFields=[
+	{key:'front',id:'clearanceFront',label:'Luftausblas / Vorderseite'},
+	{key:'back',id:'clearanceBack',label:'Rückseite'},
+	{key:'left',id:'clearanceLeft',label:'Linke Seite'},
+	{key:'right',id:'clearanceRight',label:'Rechte Seite'},
+	{key:'above',id:'clearanceAbove',label:'Freiraum nach oben'}
+].map(item=>({...item,control:document.getElementById(item.id)}));
+const outdoorSafetyFields=[
+	{control:outdoorOpening.control,key:'outdoorDistanceOpening',label:'Gebäudeöffnung'},
+	{control:outdoorIgnition.control,key:'outdoorDistanceIgnition',label:'Zündquelle'},
+	{control:outdoorRecess.control,key:'outdoorDistanceRecess',label:'Vertiefung / Ablauf'}
+];
+function outdoorEntry(){
+	const brand=outdoorBrandControl.value,model=outdoorModelControl.value.trim();
+	return outdoorCatalog[brand]?.[model]||null
+}
+function formatOutdoorDistance(mm){
+	return mm>=1000?`${(mm/1000).toLocaleString('de-DE')} m`:`${(mm/10).toLocaleString('de-DE')} cm`
+}
+function formatNoiseDistance(meters){
+	return `${meters.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1})} m`
+}
+function setOutdoorFieldStatus(control,state,text){
+	const field=control.closest('.field');
+	field.classList.remove('clearance-pass','clearance-fail');
+	if(state)field.classList.add(`clearance-${state}`);
+	let status=field.querySelector('.clearance-status');
+	if(!status){status=document.createElement('small');status.className='clearance-status';field.append(status)}
+	status.textContent=text||''
+}
+function selectedOutdoorStage(){
+	return outdoorStageIndex.get(outdoorStageChoice.control.value)||null
+}
+function updateOutdoorCatalog(){
+	const brand=outdoorBrandControl.value,models=outdoorCatalog[brand]||{};
+	const previous=outdoorModelControl.value.trim();
+	outdoorModelChoice.control.replaceChildren(new Option('Bitte Baureihe auswählen',''));
+	for(const model of Object.keys(models))outdoorModelChoice.control.add(new Option(model,model));
+	outdoorModelChoice.control.value=Object.prototype.hasOwnProperty.call(models,previous)?previous:'';
+	const entry=outdoorEntry();
+	const previousStage=selectedOutdoorStage();
+	const previousStageKey=previousStage&&previousStage.brand===brand&&previousStage.model===previous
+		?outdoorStageChoice.control.value:'';
+	outdoorStageChoice.control.replaceChildren(new Option(entry?.stages.length?'Leistungsstufe auswählen':'Keine verifizierten Leistungsstufen hinterlegt',''));
+	if(entry)for(const item of entry.stages){
+		const key=`${brand}|${previous}|${item.code}`;
+		const point=item.point?` · ${item.point}`:'';
+		const rating=item.kw!==undefined?` · ${item.kw.toLocaleString('de-DE')} kW${point}`:item.kwLabel?` · ${item.kwLabel} kW${point}`:'';
+		const sound=item.sound!==undefined
+			?` · LWA ${item.sound.toLocaleString('de-DE')} dB(A)`
+			:'';
+		outdoorStageChoice.control.add(new Option(`${item.code}${rating}${sound}`,key));
+	}
+	outdoorStageChoice.control.value=previousStageKey;
+	outdoorStageChoice.field.hidden=!entry?.stages.length;
+	outdoorModelField.hidden=!!entry;
+	if(entry&&!outdoorStageChoice.control.value&&outdoorOutputControl.value){
+		const matchingStages=entry.stages.filter(item=>item.kw!==undefined&&item.kw===Number(outdoorOutputControl.value));
+		if(matchingStages.length===1)outdoorStageChoice.control.value=`${brand}|${previous}|${matchingStages[0].code}`
+	}
+	const stage=selectedOutdoorStage();
+	if(entry&&stage&&stage.brand===brand&&stage.model===previous&&stage.kw!==undefined&&!outdoorOutputControl.value)outdoorOutputControl.value=stage.kw;
+	updateOutdoorChecks(entry,stage)
+}
+function updateOutdoorChecks(entry=outdoorEntry(),stage=selectedOutdoorStage()){
+	const clearance=stage?.clearances||entry?.clearances;
+	const hasClearances=!!clearance;
+	const mountType=outdoorMountType.control.value;
+	const compareClearances=hasClearances&&mountType==='free';
+	for(const item of outdoorClearanceFields){
+		const label=item.control.closest('.field').querySelector('label');
+		const minimum=clearance?.[item.key];
+		const strictConfiguration=stage?.strictClearances||entry?.strictClearances;
+		const strictMinimum=typeof strictConfiguration==='object'?!!strictConfiguration[item.key]:!!strictConfiguration;
+		const fieldLabel=entry?.clearanceLabels?.[item.key]||item.label;
+		label.textContent=minimum==null?fieldLabel:`${fieldLabel} (min. ${strictMinimum?'> ':''}${formatOutdoorDistance(minimum)})`;
+		const value=Number(item.control.value),validValue=item.control.value.trim()!=='';
+		if(minimum==null){setOutdoorFieldStatus(item.control,null,'');continue}
+		if(!compareClearances){setOutdoorFieldStatus(item.control,null,'Aufstellart Boden-/Flachdach wählen, um automatisch zu prüfen.');continue}
+		const clearanceMet=strictMinimum?value*1000>minimum:value*1000+0.0001>=minimum;
+		setOutdoorFieldStatus(item.control,!validValue?null:clearanceMet?'pass':'fail',
+			!validValue?`Hersteller-Minimum: ${strictMinimum?'> ':''}${formatOutdoorDistance(minimum)}`:clearanceMet?'Mindestabstand eingehalten':'Mindestabstand unterschritten')
+	}
+	const soundPower=Number(outdoorSoundPower.control.value),hasSoundPower=outdoorSoundPower.control.value.trim()!=='';
+	const soundLimit=Number(outdoorNoiseLimit.control.value),hasSoundLimit=outdoorNoiseLimit.control.value!=='';
+	const noiseDistance=hasSoundPower&&hasSoundLimit?10**((soundPower-soundLimit-8)/20):null;
+	for(const control of [document.querySelector('#distanceWindow'),neighborDistanceField.control]){
+		const field=control.closest('.field'),label=field.querySelector('label');
+		const baseLabel=control===document.querySelector('#distanceWindow')?'Abstand zum nächsten Fenster / Immissionsort':'Abstand zum Nachbargrundstück / Immissionsort';
+		label.textContent=noiseDistance===null?baseLabel:`${baseLabel} (Schall-Orientierung: min. ca. ${formatNoiseDistance(noiseDistance)})`;
+		const validValue=control.value.trim()!=='',value=Number(control.value);
+		if(noiseDistance===null){
+			setOutdoorFieldStatus(control,null,'Schallleistung und nächtlichen Richtwert auswählen, um eine Orientierung zu berechnen.');
+			continue
+		}
+		setOutdoorFieldStatus(control,!validValue?null:value>=noiseDistance?'pass':'fail',
+			!validValue?`Orientierungsabstand: ca. ${formatNoiseDistance(noiseDistance)}`:value>=noiseDistance?'Orientierungsabstand erreicht':'Orientierungsabstand unterschritten')
+	}
+	const specialMount=mountType==='other';
+	const clearanceMessage=entry
+		?hasClearances
+			?specialMount?'Für Wand-, Eck- und Sonderaufstellungen gelten andere Herstellerdiagramme; die folgende Ampel ist dafür deaktiviert.':mountType==='free'?entry.clearanceLabels?'Mindestmaße gemäß Maßbuchstaben A–E der Herstellerzeichnung für Boden-/Flachdachaufstellung.':'Mindestmaße gemäß Herstellerdiagramm für Boden-/Flachdachaufstellung.':'Aufstellart auswählen. Die Ampel prüft nur freistehende Boden-/Flachdachaufstellungen.'
+			:'Für diese Baureihe sind in den hier geprüften Herstellerunterlagen keine vollständigen, modellbezogenen Mindestabstände hinterlegt. Deshalb bleibt die Abstandsampel neutral.'
+		:'Baureihe auswählen. Für nicht gelistete oder ältere Geräte werden keine Mindestabstände geschätzt.';
+	const stageMessage=entry&&!entry.stages.length?'Für diese Baureihe sind hier noch keine Leistungsstufen verifiziert; die kW-Angabe bitte dem Angebot oder Typenschild entnehmen.'
+		:entry?.stages.some(item=>item.kw===undefined)?'Für einzelne Typstufen ist hier noch keine offizielle kW-Leistungsangabe hinterlegt; bitte Angebot oder Typenschild prüfen.':'';
+	outdoorCatalogNote.textContent=[clearanceMessage,stageMessage].filter(Boolean).join(' ');
+	const source=entry?.source;
+	outdoorSourceField.hidden=!source;
+	if(source){
+		outdoorSourceLink.href=source.url;outdoorSourceLink.textContent=source.url.includes('api/download')?'Herstelleranleitung öffnen ↗':'Offizielle Herstellerseite / Dokumente öffnen ↗';
+		outdoorSourceValue.value=source.title
+	}else{outdoorSourceLink.removeAttribute('href');outdoorSourceLink.textContent='';outdoorSourceValue.value=''}
+	const sound=stage?.sound;
+	if(sound!==undefined&&outdoorSoundPower.control.value!==String(sound))outdoorSoundPower.control.value=sound;
+	const hasVerifiedSound=sound!==undefined;
+	outdoorSoundPower.control.readOnly=hasVerifiedSound;
+	outdoorNoiseNote.textContent=hasVerifiedSound
+		?`Hersteller-Schallleistungspegel für den gewählten Typ: ${sound} dB(A). Die angezeigte Entfernung ist eine überschlägige Freifeld-Orientierung mit kugelförmiger Ausbreitung aus Schallleistung und gewähltem Nacht-Richtwert; Reflexionen, Betriebsmodus, Zuschläge und örtliche Situation fehlen. Sie ersetzt keine Schallberechnung.`
+		:'Schallleistungspegel (LWA) bei Bedarf aus dem Herstellerdatenblatt eintragen. Die überschlägige Freifeld-Orientierung mit kugelförmiger Ausbreitung ist keine verbindliche Schallberechnung; Gelände, Reflexionen, Betriebsmodus und örtliche Vorgaben bleiben zu prüfen.';
+	const isVaillant=brand==='Vaillant';
+	const supportsFlexible=!!entry?.flexibleSpace;
+	const hasProtectionZone=!!entry?.protectionZone;
+	outdoorZoneTitle.hidden=!hasProtectionZone;
+	outdoorMountType.field.hidden=!(supportsFlexible||hasProtectionZone||hasClearances);
+	outdoorFlexibleSpace.field.hidden=!isVaillant;
+	outdoorFlexibleSpace.control.disabled=isVaillant&&!!entry&&!supportsFlexible;
+	setOutdoorFieldStatus(outdoorFlexibleSpace.control,null,isVaillant&&entry&&!supportsFlexible?'Diese Baureihe unterstützt Flexible Space nicht.':'');
+	for(const item of [outdoorOpening,outdoorIgnition,outdoorRecess])item.field.hidden=!hasProtectionZone;
+	const freeStanding=hasProtectionZone&&outdoorMountType.control.value==='free';
+	outdoorMountHeight.field.hidden=!(freeStanding&&isVaillant&&supportsFlexible);
+	const height=Number(outdoorMountHeight.control.value),hasHeight=outdoorMountHeight.control.value.trim()!=='';
+	const flexible=outdoorFlexibleSpace.control.value==='Ja';
+	const hasFlexibleChoice=outdoorFlexibleSpace.control.value==='Ja'||outdoorFlexibleSpace.control.value==='Nein';
+	const canCheckZone=freeStanding&&(!isVaillant||!supportsFlexible||hasHeight&&hasFlexibleChoice);
+	const zoneMinimum=!canCheckZone?null:isVaillant&&supportsFlexible
+		?flexible?entry.protectionZone?.flexible??null:height<40?entry.protectionZone?.below400??null:entry.protectionZone?.above400??null
+		:entry.protectionZone?.allDirections??null;
+	for(const item of outdoorSafetyFields){
+		const label=item.control.closest('.field').querySelector('label');
+		label.textContent=zoneMinimum==null?item.label:`${item.label} (Schutzbereich, min. ${formatOutdoorDistance(zoneMinimum)})`;
+		const value=Number(item.control.value),validValue=item.control.value.trim()!=='';
+		if(zoneMinimum==null){
+			setOutdoorFieldStatus(item.control,null,flexible?'Für diese Variante ist kein pauschaler Mindestabstand aus der gewählten Montagezeichnung hinterlegt; bitte die Herstellerzeichnung prüfen.':'');
+			continue
+		}
+		setOutdoorFieldStatus(item.control,!validValue?null:value*1000+0.0001>=zoneMinimum?'pass':'fail',
+			!validValue?`Hersteller-Schutzbereich: min. ${formatOutdoorDistance(zoneMinimum)}`:value*1000+0.0001>=zoneMinimum?'Mindestabstand eingehalten':'Mindestabstand unterschritten')
+	}
+	outdoorZoneNote.textContent=!hasProtectionZone?''
+		:!isVaillant
+		?outdoorMountType.control.value!=='free'?'Die automatische Schutzbereichsprüfung gilt nur für freistehende Boden-/Flachdachaufstellung; bei Sonderaufstellungen die Herstellerzeichnung prüfen.':`Die Herstellerzeichnung weist eine richtungsabhängige R290-Schutzzone aus. Für die Ampel wird konservativ ${formatOutdoorDistance(entry.protectionZone.allDirections)} in jeder Richtung angesetzt; Form und Höhe der Zone sowie Sonderfälle (z. B. Flachdach) bitte anhand der Anleitung prüfen.`
+		:!supportsFlexible?'Für diese Vaillant-Baureihe sind hier keine verifizierten Flexible-Space-Schutzbereichsdaten hinterlegt. Bitte die verlinkte Anleitung des konkreten Geräts prüfen; die Schutzbereichsampel bleibt deaktiviert.'
+			:outdoorMountType.control.value!=='free'?'Bei Wand-, Eck- oder Sondermontage ist die Schutzbereichskizze der verlinkten Vaillant-Anleitung maßgeblich; keine automatische Zonenampel.'
+				:flexible&&entry.protectionZone?.flexible==null?'Für Flexible Space ist bei dieser Baureihe kein einzelner, belastbarer Mindestabstand als Zahl hinterlegt; maßgeblich bleibt die konkrete Herstellerzeichnung.'
+					:flexible?'Bei aktivierter Flexible Space Funktion gilt der in der freistehenden Montagezeichnung ausgewiesene Schutzbereich. Die Mindestabstände für Luftstrom und Wartung bleiben unverändert.'
+						:!hasHeight||!hasFlexibleChoice?'Montagehöhe und Flexible Space Ja/Nein eingeben. Für freistehende Boden-/Flachdachmontage gilt unter 40 cm Montagehöhe der konservative Maximalwert aus der Herstellerzeichnung; ab 40 cm der dort angegebene kleinere Schutzbereich. Die Abbildung des konkreten Geräts bleibt maßgeblich.'
+							:`Für freistehende Boden-/Flachdachmontage wird der größte Schutzbereich aus der Herstellerzeichnung vorsorglich als Mindestabstand zu Öffnungen, Zündquellen und Vertiefungen angesetzt (${formatOutdoorDistance(zoneMinimum)}). Die tatsächliche Schutzbereichsform ist der verlinkten Anleitung zu entnehmen.`;
+	if(specialMount&&hasClearances)for(const item of outdoorClearanceFields)setOutdoorFieldStatus(item.control,null,'Für diese Aufstellart nicht automatisch bewertet.')
+}
+outdoorBrandControl.addEventListener('change',()=>{
+	outdoorModelControl.value='';outdoorModelChoice.control.value='';outdoorOutputControl.value='';outdoorStageChoice.control.value='';
+	outdoorSoundPower.control.value='';
+	outdoorMountType.control.value='';outdoorMountHeight.control.value='';outdoorFlexibleSpace.control.value='';
+	updateOutdoorCatalog()
+});
+outdoorModelChoice.control.addEventListener('change',()=>{
+	outdoorModelControl.value=outdoorModelChoice.control.value;outdoorStageChoice.control.value='';outdoorOutputControl.value='';
+	outdoorSoundPower.control.value='';
+	updateOutdoorCatalog()
+});
+outdoorModelControl.addEventListener('input',()=>{
+	outdoorModelChoice.control.value='';outdoorStageChoice.control.value='';outdoorOutputControl.value='';
+	outdoorSoundPower.control.value='';updateOutdoorCatalog()
+});
+outdoorStageChoice.control.addEventListener('change',()=>{
+	const stage=selectedOutdoorStage();
+	if(stage){outdoorModelControl.value=stage.model;outdoorOutputControl.value=stage.kw??''}
+	outdoorSoundPower.control.value=stage?.sound??'';
+	updateOutdoorCatalog()
+});
+for(const control of [outdoorSoundPower.control,outdoorNoiseLimit.control]){
+	control.addEventListener('input',()=>updateOutdoorChecks());
+	control.addEventListener('change',()=>updateOutdoorChecks())
+}
+for(const item of [...outdoorClearanceFields,...outdoorSafetyFields])item.control.addEventListener('input',()=>updateOutdoorChecks());
+for(const control of [outdoorMountType.control,outdoorMountHeight.control,outdoorFlexibleSpace.control])control.addEventListener('change',()=>updateOutdoorChecks());
+outdoorOutputControl.closest('.field').querySelector('label').textContent='Leistung laut Angebot / Typenschild (kW)';
+document.querySelector('#distanceWindow').closest('.field').querySelector('label').textContent='Abstand Fenster / Nachbar (Schall-Orientierung)';
+const existingOutdoorFields=document.querySelector('#clearanceFront').closest('.fields');
+const neighborDistanceField=createLabeledField('Abstand zum Nachbargrundstück / Immissionsort','distanceNeighbor');
+neighborDistanceField.control.name='distanceNeighbor';neighborDistanceField.control.type='number';neighborDistanceField.control.min='0';neighborDistanceField.control.step='0.01';neighborDistanceField.control.placeholder='Meter';
+existingOutdoorFields.append(neighborDistanceField.field);
+for(const item of outdoorClearanceFields){item.control.step='0.01';item.control.min='0'}
+updateOutdoorCatalog();
+const solarPvPresent=document.querySelector('#solarPvPresent'),solarPvPresentField=solarPvPresent.closest('.field');
+const overviewFields=document.querySelector('#panel-overview .box .fields');
+const visitDateField=document.querySelector('#visitDate').closest('.field');
+overviewFields.insertBefore(solarPvPresentField,visitDateField.nextSibling);
+solarPvPresentField.querySelector('label').textContent='Photovoltaik am Gebäude vorhanden?';
+const solarPvYearField=document.querySelector('#solarPvYear').closest('.field');
+const solarPvPowerField=document.querySelector('#solarPvPower').closest('.field');
+const solarPvPlan=document.querySelector('#solarPvPlan'),solarPvPlanField=solarPvPlan.closest('.field');
+const solarPvNotesField=document.querySelector('#solarPvNotes').closest('.field');
+const solarPvGallery=document.querySelector('[data-gallery="solar-pv"]').closest('.photo-area');
+const solarPvElectricalBox=[...document.querySelectorAll('#panel-elektro .box')].find(box=>box.querySelector('h2')?.textContent.trim()==='Photovoltaik am Gebäude');
+const electricalPvPresent=document.querySelector('#pvPresent');
+const solarPvTarget=createLabeledField('Gewünschte PV-Leistung','solarPvTargetPower');
+solarPvTarget.control.name='solarPvTargetPower';solarPvTarget.control.type='number';solarPvTarget.control.min='0';solarPvTarget.control.step='0.1';solarPvTarget.control.placeholder='kWp';
+solarPvPowerField.parentElement.insertBefore(solarPvTarget.field,solarPvPowerField.nextSibling);
+function setSolarPvPlanOptions(options){
+	const previous=solarPvPlan.value;
+	solarPvPlan.replaceChildren(new Option('Bitte auswählen',''),...options.map(([label,value])=>new Option(label,value)));
+	if(previous&&![...solarPvPlan.options].some(option=>option.value===previous)){
+		solarPvPlan.add(new Option(`Bisherige Auswahl: ${previous}`,previous));
+	}
+	solarPvPlan.value=previous;
+}
+function syncSolarPvFields(){
+	const present=solarPvPresent.value,hasExistingPv=present==='Ja',offerOptions=[['Angebot gewünscht','Angebot gewünscht'],['In Planung','In Planung'],['Angebot liegt vor','Angebot liegt vor'],['Kein Angebot gewünscht','Kein Angebot gewünscht'],['Noch abstimmen','Noch abstimmen']],existingOptions=[['Wärmepumpe einbinden','Ja, Wärmepumpe einbinden'],['Vorhandene PV weiterbetreiben, keine Kopplung','Vorhandene PV weiterbetreiben, keine Kopplung'],['PV-Anlage erweitern','PV-Anlage erweitern'],['Noch abstimmen','Noch abstimmen'],['Nicht zutreffend','Nicht zutreffend']];
+	electricalPvPresent.value=present;
+	solarPvElectricalBox.hidden=!hasExistingPv;
+	solarPvYearField.hidden=!hasExistingPv;
+	solarPvPowerField.hidden=!hasExistingPv;
+	solarPvGallery.hidden=!hasExistingPv;
+	setSolarPvPlanOptions(hasExistingPv?existingOptions:offerOptions);
+	solarPvPlanField.querySelector('label').textContent=hasExistingPv?'Wie soll die vorhandene PV-Anlage genutzt werden?':'PV-Angebot / Planung';
+	const planning=!hasExistingPv&&['Angebot gewünscht','In Planung','Angebot liegt vor'].includes(solarPvPlan.value);
+	solarPvTarget.field.hidden=!planning;
+	solarPvNotesField.hidden=present==='Nein'&&!planning;
+	solarPvNotesField.querySelector('label').textContent=hasExistingPv?'Notizen PV / gewünschte Einbindung':'Angaben zum PV-Angebot / zur Planung';
+	solarPvNotesField.querySelector('textarea').placeholder=hasExistingPv?'Wechselrichter, Speicher, Energiemanagement, Kundenwunsch …':'Gewünschter Umfang, Dachfläche, Speicher, Energiemanagement …';
+}
+solarPvPresent.addEventListener('change',()=>{syncSolarPvFields();queueSave()});
+solarPvPlan.addEventListener('change',()=>{syncSolarPvFields();queueSave()});
+syncSolarPvFields();
+const modelSelectField=createLabeledField('Wärmepumpen-Baureihe','hpModel','select');
+const hpModel=modelSelectField.control;hpModel.name='hpModel';
+const allHpModels=[...new Set(Object.values(hpModelCatalog).flat())];
+hpModel.append(new Option('Baureihe auswählen',''),...allHpModels.map(model=>new Option(model,model)),new Option('Andere / Typ manuell eintragen','__manual'));
+hpBrand.closest('.field').after(modelSelectField.field);
+const modelManualField=createLabeledField('Typ / Modell manuell','hpModelDetail');
+modelManualField.control.name='hpModelDetail';modelManualField.control.placeholder='Exakte Typnummer laut Angebot oder Typenschild';
+modelSelectField.field.after(modelManualField.field);
+const dhwSelect=document.querySelector('#dhwSize');
+dhwSelect.add(new Option('Nicht benötigt','Nicht benötigt'));
+const towerField=createLabeledField('Vaillant Tower','vaillantTower','select');
+towerField.control.name='vaillantTower';
+towerField.control.append(new Option('Bitte auswählen',''),new Option('uniTOWER plus','uniTOWER plus'),new Option('uniTOWER','uniTOWER'),new Option('Nicht benötigt','Nicht benötigt'));
+dhwSelect.closest('.field').after(towerField.field);
+function updateManufacturerFields(){
+	const brand=hpBrand.value;
+	solvisTypeField.hidden=brand!=='Solvis';solvisOtherField.hidden=brand!=='Solvis'||document.querySelector('#solvisType').value!=='Anderer Typ';
+	modelSelectField.field.hidden=!hpModelCatalog[brand];
+	modelSelectField.field.querySelector('label').textContent=brand&&brand!=='Andere'?`${brand}-Typ`:'Wärmepumpen-Baureihe';
+	towerField.field.hidden=brand!=='Vaillant';
+	const currentModel=hpModel.value;hpModel.replaceChildren(new Option('Baureihe auswählen',''),...(hpModelCatalog[brand]||[]).map(model=>new Option(model,model)),new Option('Andere / Typ manuell eintragen','__manual'));
+	if([...hpModel.options].some(option=>option.value===currentModel))hpModel.value=currentModel;
+	modelManualField.field.hidden=!hpModelCatalog[brand]||hpModel.value!=='__manual';
+	modelManualField.field.querySelector('label').textContent=brand&&brand!=='Andere'?`${brand}-Typ manuell eintragen`:'Typ / Modell manuell';
+}
+hpBrand.addEventListener('change',updateManufacturerFields);
+hpModel.addEventListener('change',updateManufacturerFields);
+document.querySelector('#solvisType').addEventListener('change',updateManufacturerFields);
+const circuitBox=document.createElement('div');circuitBox.className='box';
+const circuitBoxHead=document.createElement('div');circuitBoxHead.className='box-head';
+const circuitHeading=document.createElement('div');const circuitTitle=document.createElement('h2');circuitTitle.textContent='Heizkreise';
+const circuitDescription=document.createElement('p');circuitDescription.textContent='Heizkreisart, Bezeichnung und Anzahl erfassen. Bei Heizkörpern Oventrop-Ventile ergänzen.';
+circuitHeading.append(circuitTitle,circuitDescription);circuitBoxHead.append(circuitHeading);
+const circuitList=document.createElement('div');circuitList.id='heatingCircuitList';
+const circuitData=document.createElement('input');circuitData.type='hidden';circuitData.name='heatingCircuits';circuitData.id='heatingCircuitsData';
+const addCircuitButton=document.createElement('button');addCircuitButton.type='button';addCircuitButton.className='button small';addCircuitButton.textContent='＋ Heizkreis hinzufügen';
+circuitBox.append(circuitBoxHead,circuitList,addCircuitButton,circuitData);
+const utilityRoomHeading=[...document.querySelectorAll('#panel-waermepumpe .box h2')].find(heading=>heading.textContent==='Heizraum');
+utilityRoomHeading.closest('.box').before(circuitBox);
+function readCircuitState(){
+	return [...circuitList.querySelectorAll('.circuit-block')].map(card=>({
+		id:card.dataset.id,designation:card.querySelector('[data-role="designation"]').value,
+		type:card.querySelector('[data-role="type"]').value,count:card.querySelector('[data-role="count"]').value,
+		manifoldLocation:card.querySelector('[data-role="manifold-location"]')?.value||'',
+		valves:[...card.querySelectorAll('.valve-row')].map(row=>({quantity:row.querySelector('[data-role="valve-quantity"]').value,size:row.querySelector('[data-role="valve-size"]').value,shape:row.querySelector('[data-role="valve-shape"]').value}))
+	}));
+}
+function labeledControl(labelText,id,control){
+	const field=document.createElement('div');field.className='field';
+	const label=document.createElement('label');label.htmlFor=id;label.textContent=labelText;control.id=id;field.append(label,control);return field;
+}
+function circuitSelect(id,role,options,value){
+	const select=document.createElement('select');select.dataset.role=role;
+	for(const option of options)select.add(new Option(option,option));
+	select.value=value;return select;
+}
+function renderCircuitEditor(value){
+	let circuits=[];
+	try{circuits=Array.isArray(value)?value:JSON.parse(value||'[]')}catch{}
+	if(!Array.isArray(circuits))circuits=[];
+	circuits=circuits.slice(0,5).map((circuit,index)=>({id:circuit.id||crypto.randomUUID(),designation:circuit.designation??`Heizkreis ${index+1}`,type:circuit.type==='Heizkörper'?'Heizkörper':'Fußbodenheizung',count:circuit.count??'',manifoldLocation:circuit.manifoldLocation??'',valves:Array.isArray(circuit.valves)?circuit.valves:[]}));
+	circuitList.replaceChildren();
+	circuits.forEach((circuit,index)=>{
+		const card=document.createElement('div');card.className='circuit-block';card.dataset.id=circuit.id;
+		const head=document.createElement('div');head.className='circuit-head';
+		const title=document.createElement('h3');title.textContent=circuit.designation||`Heizkreis ${index+1}`;
+		head.append(title);
+		const remove=document.createElement('button');remove.type='button';remove.className='button small danger';remove.textContent='Entfernen';remove.addEventListener('click',()=>{project.photos=project.photos.filter(photo=>photo.circuitId!==circuit.id);renderCircuitEditor(readCircuitState().filter(item=>item.id!==circuit.id));queueSave()});head.append(remove);
+		const fields=document.createElement('div');fields.className='fields three';
+		const designation=document.createElement('input');designation.dataset.role='designation';designation.value=circuit.designation;
+		const type=circuitSelect('','type',['Fußbodenheizung','Heizkörper'],circuit.type);
+		const count=document.createElement('input');count.type='number';count.min='0';count.step='1';count.dataset.role='count';count.value=circuit.count;
+		const countField=labeledControl(circuit.type==='Heizkörper'?'Anzahl Heizkörper':'Anzahl Fußbodenheizkreise',`circuit-count-${index+1}`,count);
+		fields.append(labeledControl('Bezeichnung',`circuit-name-${index+1}`,designation),labeledControl('Heizkreisart',`circuit-type-${index+1}`,type),countField);
+		type.addEventListener('change',()=>{const state=readCircuitState();state[index].type=type.value;renderCircuitEditor(state);queueSave()});
+		const refreshTitle=()=>{title.textContent=designation.value.trim()||`Heizkreis ${index+1}`};
+		designation.addEventListener('input',refreshTitle);
+		card.append(head,fields);
+		const manifoldNote=document.createElement('textarea');manifoldNote.dataset.role='manifold-location';manifoldNote.value=circuit.manifoldLocation;
+		const manifoldNoteField=labeledControl('Lage des Fußbodenheizungsverteilers',`manifold-location-${index+1}`,manifoldNote);manifoldNoteField.classList.add('full');manifoldNoteField.hidden=circuit.type!=='Fußbodenheizung';card.append(manifoldNoteField);
+		if(circuit.type==='Fußbodenheizung'){
+			const photoArea=document.createElement('div');photoArea.className='photo-area';
+			const toolbar=document.createElement('div');toolbar.className='photo-toolbar';
+			const photoTitle=document.createElement('span');photoTitle.className='photo-title';photoTitle.textContent='Fotos Fußbodenheizungsverteiler';
+			const inputId=`photo-manifold-${circuit.id}`;const photoButton=document.createElement('label');photoButton.className='button small';photoButton.htmlFor=inputId;photoButton.textContent='＋ Foto hinzufügen';
+			const photoInput=document.createElement('input');photoInput.id=inputId;photoInput.type='file';photoInput.accept='image/*';photoInput.capture='environment';photoInput.multiple=true;photoInput.className='photo-input';photoInput.dataset.category='circuit-manifold';photoInput.dataset.circuitId=circuit.id;photoInput.addEventListener('change',()=>addCircuitPhotos(photoInput,circuit.id));
+			toolbar.append(photoTitle,photoButton,photoInput);
+			const gallery=document.createElement('div');gallery.className='photo-grid';gallery.dataset.circuitGallery=circuit.id;
+			photoArea.append(toolbar,gallery);card.append(photoArea);
+		}
+		if(circuit.type==='Heizkörper'){
+			const valveSection=document.createElement('div');valveSection.className='valve-section';
+			const valveHead=document.createElement('div');valveHead.className='valve-head';
+			const valveTitle=document.createElement('strong');valveTitle.textContent='Oventrop-Heizkörperventile';
+			const addValve=document.createElement('button');addValve.type='button';addValve.className='button small';addValve.textContent='＋ Ventil hinzufügen';
+			valveHead.append(valveTitle,addValve);
+			const valveList=document.createElement('div');valveList.className='valve-list';
+			circuit.valves.forEach((valve,valveIndex)=>{
+				const row=document.createElement('div');row.className='valve-row';
+				const quantity=document.createElement('input');quantity.type='number';quantity.min='1';quantity.step='1';quantity.value=valve.quantity||1;quantity.dataset.role='valve-quantity';
+				const size=circuitSelect('', 'valve-size',['DN 10 (3/8")','DN 15 (1/2")','DN 20 (3/4")','DN 25 (1")','DN 32 (1 1/4")'],valve.size||'DN 15 (1/2")');
+				const shape=circuitSelect('', 'valve-shape',['Eck','Axial links','Axial rechts','Durchgang'],valve.shape||'Eck');
+				row.append(labeledControl('Anzahl',`valve-quantity-${index+1}-${valveIndex+1}`,quantity),labeledControl('Ventilgröße',`valve-size-${index+1}-${valveIndex+1}`,size),labeledControl('Bauform',`valve-shape-${index+1}-${valveIndex+1}`,shape));
+				const removeValve=document.createElement('button');removeValve.type='button';removeValve.className='button small danger';removeValve.textContent='Entfernen';
+				removeValve.addEventListener('click',()=>{const state=readCircuitState();state[index].valves.splice(valveIndex,1);renderCircuitEditor(state);queueSave()});row.append(removeValve);valveList.append(row);
+			});
+			addValve.addEventListener('click',()=>{const state=readCircuitState();state[index].valves.push({quantity:1,size:'DN 15 (1/2")',shape:'Eck'});renderCircuitEditor(state);queueSave()});
+			valveSection.append(valveHead,valveList);card.append(valveSection);
+		}
+		circuitList.append(card);
+	});
+	circuitData.value=JSON.stringify(readCircuitState());renderCircuitPhotos();
+	addCircuitButton.disabled=circuits.length>=5;
+}
+addCircuitButton.addEventListener('click',()=>{const circuits=readCircuitState();if(circuits.length<5)circuits.push({id:crypto.randomUUID(),designation:`Heizkreis ${circuits.length+1}`,type:'Fußbodenheizung',count:'',valves:[]});renderCircuitEditor(circuits);queueSave()});
+circuitList.addEventListener('input',()=>{circuitData.value=JSON.stringify(readCircuitState());queueSave()});
+circuitList.addEventListener('change',()=>{circuitData.value=JSON.stringify(readCircuitState());queueSave()});
+updateManufacturerFields();renderCircuitEditor('');
+function request(req){return new Promise((resolve,reject)=>{req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB,1);req.onupgradeneeded=()=>req.result.createObjectStore(STORE,{keyPath:'id'});req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+function getAll(){return request(db.transaction(STORE).objectStore(STORE).getAll()).then(items=>items.sort((a,b)=>b.updatedAt-a.updatedAt))}
+function save(item){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(item);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+function remove(id){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+function fields(){const result={};for(const el of form.querySelectorAll('[name]')){if(el.type==='radio'){if(el.checked)result[el.name]=el.value}else if(el.type==='checkbox'){if(!Array.isArray(result[el.name]))result[el.name]=[];if(el.checked)result[el.name].push(el.value)}else result[el.name]=el.value}return result}
+function setFields(data={}){
+	const restored={...data};
+	if(!restored.solarPvPresent&&restored.pvPresent)restored.solarPvPresent=restored.pvPresent;
+	if(restored.solarPvPresent==='Geplant'){restored.solarPvPresent='Nein';if(!restored.solarPvPlan)restored.solarPvPlan='Angebot gewünscht'}
+	if(restored.solarPvPlan==='PV neu installieren')restored.solarPvPlan='Angebot gewünscht';
+	for(const el of form.querySelectorAll('[name]')){
+		if(el.type==='radio'||el.type==='checkbox')el.checked=false;
+		else el.value='';
+	}
+	for(const el of form.querySelectorAll('[name]')){
+		if(!(el.name in restored))continue;
+		if(el.type==='radio')el.checked=el.value===restored[el.name];
+		else if(el.type==='checkbox')el.checked=Array.isArray(restored[el.name])?restored[el.name].includes(el.value):restored[el.name]===el.value;
+		else if(el.name!=='solarPvPlan')el.value=restored[el.name]??'';
+	}
+	syncGroundObstacleNote();syncHakFields();updateManufacturerFields();
+	if(restored.solarPvPlan)solarPvPlan.value=restored.solarPvPlan;
+	syncSolarPvFields();renderCircuitEditor(restored.heatingCircuits);updateOutdoorCatalog()
+}
+function showToast(text){const node=document.querySelector('#toast');node.textContent=text;node.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>node.classList.remove('show'),2400)}
+function nameOf(item){const customerName=String(item.fields?.customerName??'').trim();return customerName.split(/\s+/)[0]||String(item.name??'').trim()||'Neue Aufnahme'}
+function normalizeSearch(value){return String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('de-DE').trim()}
+async function renderProjectSearch(){
+ const input=document.querySelector('#projectSearch'),results=document.querySelector('#projectSearchResults'),query=normalizeSearch(input.value);
+ if(!searchFocused){results.hidden=true;input.setAttribute('aria-expanded','false');return}
+ const items=await getAll();
+ if(normalizeSearch(input.value)!==query||!searchFocused)return;
+ const matches=items.filter(item=>{
+  const data=item.fields||{},searchable=[data.customerName,data.orderNumber,data.street,data.postalCity,data.customerPhone,item.name,item.reference].filter(Boolean).join(' ');
+  return !query||normalizeSearch(searchable).includes(query);
+ }).slice(0,12);
+ results.replaceChildren();
+ if(!matches.length){
+  const empty=document.createElement('div');empty.className='search-empty';empty.textContent='Keine passende Aufnahme gefunden.';results.append(empty);
+ }else{
+  for(const item of matches){
+   const option=document.createElement('button');option.type='button';option.className='search-result';option.setAttribute('role','option');option.setAttribute('aria-selected',String(item.id===project?.id));
+   const name=document.createElement('span');name.className='search-result-name';name.textContent=nameOf(item);
+   const fullName=String(item.fields?.customerName||'').trim(),details=[fullName&&normalizeSearch(fullName)!==normalizeSearch(nameOf(item))?fullName:'',item.fields?.orderNumber,item.reference].filter(Boolean);
+   const detail=document.createElement('span');detail.className='search-result-detail';detail.textContent=details.join(' · ')||'Noch keine Kundendaten';
+   option.append(name,detail);option.addEventListener('click',async()=>{const selected=(await getAll()).find(entry=>entry.id===item.id);if(selected)await fill(selected);input.value='';searchFocused=false;results.hidden=true;input.setAttribute('aria-expanded','false');input.blur()});results.append(option);
+  }
+ }
+ results.hidden=false;input.setAttribute('aria-expanded','true');
+}
+async function renderSelect(){if(!db)return;const select=document.querySelector('#jobSelect');select.replaceChildren();for(const item of await getAll()){const option=new Option(nameOf(item),item.id,item.id===project?.id,item.id===project?.id);select.add(option)}if(searchFocused)await renderProjectSearch()}
+function reportValue(control){
+	if(control.type==='radio'||control.type==='checkbox')return control.checked?(control.value||'Ja'):'';
+	if(control.tagName==='SELECT')return control.value?control.selectedOptions[0]?.textContent.trim()||'':'';
+	return control.value.trim()
+}
+function reportLabel(control){
+	const field=control.closest('.field');
+	const label=field?.querySelector('label')?.textContent.trim()||field?.querySelector('.field-label')?.textContent.trim();
+	if(label)return label;
+	const row=control.closest('.check-row'),name=row?.querySelector('.check-name');
+	return name?.childNodes[0]?.textContent.trim()||control.getAttribute('aria-label')||control.name
+}
+function reportBox(box){
+	const values=[],seen=new Set();
+	for(const control of box.querySelectorAll('[name]')){
+		if(seen.has(control.name)||control.type==='file'||control.closest('[hidden]'))continue;
+		seen.add(control.name);
+		if(control.name==='heatingCircuits'){
+			try{
+				const circuits=JSON.parse(control.value||'[]');
+				for(const [index,circuit] of circuits.entries()){
+					const valves=(circuit.valves||[]).map(valve=>`${valve.quantity||1} × ${valve.size||''}, ${valve.shape||''}`).join('; ');
+					values.push([circuit.designation||`Heizkreis ${index+1}`,[circuit.type,circuit.count?`${circuit.count} Stück`:null,circuit.manifoldLocation,valves?`Ventile: ${valves}`:null].filter(Boolean).join(' · ')])
+				}
+			}catch(error){console.error('Heizkreise konnten nicht für den Bericht aufbereitet werden.',error)}
+			continue
+		}
+		const group=[...box.querySelectorAll(`[name="${CSS.escape(control.name)}"]`)];
+		const value=group.map(reportValue).filter(Boolean).join(', ');
+		if(value)values.push([reportLabel(control),value])
+	}
+	return values
+}
+function createReportWindow(){
+	const popup=window.open('', '_blank', 'noopener,noreferrer');
+	if(!popup)return null;
+	return popup;
+}
+async function printProject(){
+	if(!project)return;
+	project.fields=fields();project.name=nameOf(project);project.updatedAt=Date.now();
+	try{await save(project);document.querySelector('#saveStatus').textContent='Lokal gespeichert'}
+	catch(error){console.error(error);document.querySelector('#saveStatus').textContent='Speichern fehlgeschlagen';showToast('Aufnahme konnte nicht gespeichert werden.');return}
+	const sections=[];
+	for(const panel of form.querySelectorAll('.panel')){
+		const panelName=panel.querySelector('.intro h2')?.textContent.trim()||titles[panel.id.replace('panel-','')];
+		for(const box of panel.querySelectorAll(':scope > .box')){
+			const values=reportBox(box);
+			if(!values.length)continue;
+			const heading=box.querySelector('.box-head h2')?.textContent.trim()||panelName;
+			sections.push(`<section class="report-section"><h2>${escapeHTML(heading)}</h2><div class="report-grid">${values.map(([label,value])=>`<div class="report-field"><span class="report-label">${escapeHTML(label)}</span><span class="report-value">${escapeHTML(value)}</span></div>`).join('')}</div></section>`)
+		}
+	}
+	const photoCategories=[...new Set([...Object.keys(categories),...(project.photos||[]).map(photo=>photo.category)])];
+	const photosByCategory=photoCategories.map(category=>[category,(project.photos||[]).filter(photo=>photo.category===category).sort((a,b)=>(a.addedAt||0)-(b.addedAt||0))]).filter(([,items])=>items.length);
+	if(photosByCategory.length){
+		const photos=photosByCategory.map(([category,items])=>`<section class="report-photo-group"><h3>${escapeHTML(categories[category]||category)}</h3><div class="report-photos">${items.map(photo=>{const source=/^data:image\/(?:jpeg|png|webp|gif);base64,[a-z0-9+/]+={0,2}$/i.test(photo.data||'')?photo.data:'';return`<figure class="report-photo">${source?`<img src="${source}" alt="${escapeHTML(categories[category]||category)}">`:'<div class="report-photo-missing">Bilddatei nicht verfügbar</div>'}<figcaption>${escapeHTML(photo.name||categories[category]||'Foto')}</figcaption></figure>`}).join('')}</div></section>`).join('');
+		sections.push(`<section class="report-section report-photo-section"><h2>Fotodokumentation</h2>${photos}</section>`)
+	}
+	const customer=escapeHTML(String(project.fields.customerName||project.name||'Aufnahme'));
+	const safeReference=escapeHTML(project.reference||'');
+	const dateValue=project.fields.visitDate?new Date(`${project.fields.visitDate}T00:00:00`):new Date();
+	const safeDate=escapeHTML(dateValue.toLocaleDateString('de-DE'));
+	const orderNumber=escapeHTML(String(project.fields.orderNumber||'–'));
+	const phone=escapeHTML(String(project.fields.customerPhone||'–'));
+	const address=escapeHTML([project.fields.street,project.fields.postalCity].filter(Boolean).join(', ')||'–');
+	const filename=(project.name.replace(/[^a-z0-9äöüß-]+/gi,'-').replace(/^-|-$/g,'')||project.reference).toLowerCase();
+	const reportHtml=`<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHTML(filename)}-SD-Planer</title><style>
+@page{size:A4;margin:15mm 14mm 17mm}*{box-sizing:border-box}html{color-scheme:light}body{margin:0;color:#202923;background:#fff;font:11px/1.5 Arial,Helvetica,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}.report{max-width:850px;margin:auto;padding:30px}.report-header{position:relative;padding:20px 22px 18px;margin-bottom:24px;overflow:hidden;color:#fff;background:#173f36;border-radius:5px}.report-header:after{position:absolute;right:0;bottom:0;width:35%;height:5px;background:#d8f078;content:""}.report-brand{margin-bottom:15px;color:#d8f078;font-size:9px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase}.report-title{margin:0;color:#fff;font:600 27px/1.15 Arial,Helvetica,sans-serif}.report-customer{margin:6px 0 0;color:#e1ebe4;font-size:15px}.report-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:18px}.report-meta div{min-width:0;padding:8px 10px;background:#ffffff12;border:1px solid #ffffff32;border-radius:3px}.report-meta span{display:block;margin-bottom:2px;color:#d3e2d6;font-size:8px;font-weight:bold;letter-spacing:.5px;text-transform:uppercase}.report-meta strong{display:block;overflow-wrap:anywhere;color:white;font-size:11px}.report-contact{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;padding:12px 14px;margin:0 0 23px;background:#f4f6f2;border-left:3px solid #9bbd9a}.report-contact div{min-width:0}.report-contact span{display:block;color:#6f7972;font-size:8px;font-weight:bold;letter-spacing:.5px;text-transform:uppercase}.report-contact strong{display:block;margin-top:2px;overflow-wrap:anywhere;font-size:10px;font-weight:600}.report-section{margin:0 0 20px;break-inside:auto}.report-section>h2{padding:0 0 7px;margin:0 0 10px;color:#173f36;font-size:14px;border-bottom:1px solid #cfd8d0;break-after:avoid}.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.report-field{min-width:0;padding:7px 9px;border:1px solid #e4e8e0;border-radius:3px;break-inside:avoid}.report-label{display:block;margin-bottom:2px;color:#6f7972;font-size:8px;font-weight:bold;letter-spacing:.3px;text-transform:uppercase}.report-value{overflow-wrap:anywhere;white-space:pre-wrap}.report-photo-group{margin:14px 0 0;break-inside:auto}.report-photo-group h3{padding-bottom:5px;margin:0 0 8px;color:#465249;font-size:10px;break-after:avoid}.report-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.report-photo{min-width:0;padding:6px;margin:0;border:1px solid #e4e8e0;border-radius:3px;break-inside:avoid}.report-photo img{display:block;width:100%;height:190px;object-fit:contain;background:#f3f4ee}.report-photo figcaption{padding-top:5px;color:#465249;font-size:8px;overflow-wrap:anywhere}.report-photo-missing{height:190px;display:grid;place-items:center;color:#6f7972;background:#f3f4ee;font-size:10px}.report-empty{padding:14px;color:#6f7972;background:#f4f6f2;border:1px dashed #cfd8d0}.report-action{position:fixed;right:18px;bottom:18px;padding:11px 16px;color:white;background:#173f36;border:0;border-radius:5px;font:bold 13px Arial,sans-serif;cursor:pointer;box-shadow:0 3px 12px #0003}@media(max-width:650px){.report{padding:16px}.report-header{padding:17px}.report-title{font-size:23px}.report-meta{grid-template-columns:1fr}.report-contact,.report-grid{grid-template-columns:1fr}.report-photo img,.report-photo-missing{height:180px}}@media print{.report{max-width:none;padding:0}.report-header{border-radius:0}.report-action{display:none}.report-section{margin-bottom:16px}.report-field{padding:6px 8px}.report-photo img,.report-photo-missing{height:170px}.report-photo-section{break-before:page}.report-photo-section>h2{break-after:avoid}.report-photo-group h3{break-after:avoid}.report-photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head><body><main class="report"><header class="report-header"><div class="report-brand">Ebersbach Energiekonzepte · SD-Planer</div><h1 class="report-title">Vor-Ort-Aufnahme</h1><p class="report-customer">${customer}</p><div class="report-meta"><div><span>Auftragsnummer</span><strong>${orderNumber}</strong></div><div><span>Vorgangs-ID</span><strong>${safeReference||'–'}</strong></div><div><span>Besichtigung</span><strong>${safeDate}</strong></div></div></header><section class="report-contact"><div><span>Ansprechpartner</span><strong>${customer}</strong></div><div><span>Telefon</span><strong>${phone}</strong></div><div><span>Objektadresse</span><strong>${address}</strong></div><div><span>Bericht erstellt</span><strong>${escapeHTML(new Date().toLocaleDateString('de-DE'))}</strong></div></section>${sections.join('')||'<p class="report-empty">Für diese Aufnahme wurden noch keine Angaben erfasst.</p>'}</main><button class="report-action" id="printReport" type="button">PDF speichern / Drucken</button></body></html>`;
+	if(postNativeMessage({type:'print',html:reportHtml})){showToast('PDF-Bericht wird vorbereitet.');return}
+	const reportWindow=createReportWindow();
+	if(!reportWindow){showToast('Bericht konnte nicht geöffnet werden. Bitte Pop-ups für diese App erlauben.');return}
+	reportWindow.document.open();
+	reportWindow.document.write(reportHtml);
+	reportWindow.document.close();
+	const printButton=reportWindow.document.querySelector('#printReport');
+	if(!printButton){reportWindow.focus();reportWindow.print();return}
+	printButton.addEventListener('click',async()=>{const button=reportWindow.document.querySelector('#printReport');button.disabled=true;button.textContent='Bericht wird vorbereitet …';try{await Promise.all([...reportWindow.document.images].map(image=>image.decode().catch(error=>{console.error('Berichtsfoto konnte nicht geladen werden.',error)})));reportWindow.focus();reportWindow.print()}finally{button.disabled=false;button.textContent='PDF speichern / Drucken'}});
+	showToast('Der strukturierte Aufnahmebericht ist bereit. Über „PDF speichern / Drucken“ kannst du ihn als PDF sichern oder teilen.')
+}
+function renderPhotos(){document.querySelectorAll('[data-gallery]').forEach(grid=>{const photos=(project.photos||[]).filter(photo=>photo.category===grid.dataset.gallery);grid.replaceChildren();if(!photos.length){const empty=document.createElement('div');empty.className='photo-empty';empty.textContent='Noch keine Fotos hinzugefügt.';grid.append(empty);return}for(const photo of photos){const item=document.createElement('div');item.className='photo-item';const img=document.createElement('img');img.src=photo.data;img.alt=`${categories[photo.category]}: ${photo.name}`;img.loading='lazy';const caption=document.createElement('div');caption.className='photo-caption';caption.textContent=photo.name;const remove=document.createElement('button');remove.type='button';remove.className='photo-delete';remove.title='Foto entfernen';remove.setAttribute('aria-label',`Foto ${photo.name} entfernen`);remove.textContent='×';remove.onclick=()=>{project.photos=project.photos.filter(p=>p.id!==photo.id);renderPhotos();updateSummary();queueSave()};item.append(img,caption,remove);grid.append(item)}})}
+function updateSummary(){
+ if(!project)return;
+ project.fields=fields();
+ const data=project.fields;
+ const completed=[['phases','cabinetDecision','pvPresent'],['existingSystem','hpBrand','hpPower','dhwSize','bufferSize'],['outdoorBrand','clearanceFront','noiseSensitive'],['locationType','foundation','accessRoute'],['solarThermalPresent','solarThermalPlan','solarPvPresent']].filter(keys=>keys.some(key=>data[key]?.trim())).length;
+ const photos=project.photos.length;
+ document.querySelector('#progressText').textContent=`${completed} von 5 Bereichen`;
+ document.querySelector('#progressFill').style.width=`${completed*20}%`;
+ document.querySelector('#summaryProgress').textContent=completed;
+ document.querySelector('#summaryPhotos').textContent=photos;
+ document.querySelector('#summaryPower').innerHTML=data.hpPower?`${escapeHTML(data.hpPower)}<span class="unit"> kW</span>`:'–<span class="unit"> kW</span>';
+ const counts={elektro:0,waermepumpe:0,ausseneinheit:0,aufstellort:0,solar:0};
+ for(const photo of project.photos){
+	if(['elektro','pv-elektro','hak'].includes(photo.category))counts.elektro++;
+  else if(['existing-unit','existing-label','heizraum','circuit-manifold'].includes(photo.category))counts.waermepumpe++;
+  else if(photo.category==='ausseneinheit')counts.ausseneinheit++;
+  else if(photo.category==='aufstellort')counts.aufstellort++;
+  else counts.solar++;
+ }
+ for(const [key,value] of Object.entries(counts)){const badge=document.querySelector(`[data-count="${key}"]`);if(badge)badge.textContent=value}
+}
+function renderCircuitPhotos(){document.querySelectorAll('[data-circuit-gallery]').forEach(grid=>{const photos=(project?.photos||[]).filter(photo=>photo.category==='circuit-manifold'&&photo.circuitId===grid.dataset.circuitGallery);grid.replaceChildren();if(!photos.length){const empty=document.createElement('div');empty.className='photo-empty';empty.textContent='Noch keine Verteilerfotos hinzugefügt.';grid.append(empty);return}for(const photo of photos){const item=document.createElement('div');item.className='photo-item';const img=document.createElement('img');img.src=photo.data;img.alt=`Fußbodenheizungsverteiler: ${photo.name}`;img.loading='lazy';const caption=document.createElement('div');caption.className='photo-caption';caption.textContent=photo.name;const remove=document.createElement('button');remove.type='button';remove.className='photo-delete';remove.title='Foto entfernen';remove.setAttribute('aria-label',`Foto ${photo.name} entfernen`);remove.textContent='×';remove.onclick=()=>{project.photos=project.photos.filter(entry=>entry.id!==photo.id);renderCircuitPhotos();updateSummary();queueSave()};item.append(img,caption,remove);grid.append(item)}})}
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function changePanel(name){if(!titles[name])return;activePanel=name;document.querySelectorAll('.panel').forEach(panel=>panel.classList.toggle('active',panel.id===`panel-${name}`));document.querySelectorAll('[data-panel]').forEach(button=>button.classList.toggle('active',button.dataset.panel===name));document.querySelector('#pageTitle').textContent=titles[name];document.querySelector('#pageSubtitle').textContent=subtitles[name];document.querySelector('#eyebrow').firstChild.textContent=name==='overview'?'VOR-ORT-AUFNAHME · ':'AUFNAHMEBEREICH · ';window.scrollTo({top:0,behavior:'smooth'})}
+async function fill(item){if(project&&project.id!==item.id&&!await saveCurrentProject()){await renderSelect();return false}project=item;project.photos ||= [];setFields(item.fields);if(!document.querySelector('#visitDate').value)document.querySelector('#visitDate').value=new Date().toISOString().slice(0,10);document.querySelector('#jobReference').textContent=item.reference;renderPhotos();updateSummary();await renderSelect();changePanel(activePanel);return true}
+async function saveCurrentProject(){if(!project)return true;clearTimeout(saveTimer);saveTimer=null;try{project.fields=fields();project.name=nameOf(project);project.updatedAt=Date.now();await save(project);document.querySelector('#saveStatus').textContent='Lokal gespeichert';return true}catch(error){console.error(error);document.querySelector('#saveStatus').textContent='Speichern fehlgeschlagen';showToast('Speichern fehlgeschlagen. Speicherplatz prüfen.');return false}}
+function queueSave(){if(!project)return;document.querySelector('#saveStatus').textContent='Speichert …';clearTimeout(saveTimer);saveTimer=setTimeout(async()=>{if(await saveCurrentProject()){await renderSelect();updateSummary()}},350)}
+function reference(){const date=new Date(),pad=n=>String(n).padStart(2,'0');return`SD-${date.getFullYear()}${pad(date.getMonth()+1)}${pad(date.getDate())}-${Math.floor(Math.random()*900)+100}`}
+async function createProject(name=''){const now=Date.now(),customerName=name.trim(),item={id:crypto.randomUUID(),reference:reference(),name:customerName.split(/\s+/)[0]||'Neue Aufnahme',createdAt:now,updatedAt:now,fields:{visitDate:new Date().toISOString().slice(0,10),...(customerName?{customerName}:{})},photos:[]};await save(item);await fill(item);changePanel('overview');showToast('Aufnahme lokal gespeichert.')}
+async function imageData(file){const url=URL.createObjectURL(file);try{const img=new Image();img.src=url;await img.decode();const scale=Math.min(1,1800/Math.max(img.naturalWidth,img.naturalHeight)),canvas=document.createElement('canvas');canvas.width=Math.round(img.naturalWidth*scale);canvas.height=Math.round(img.naturalHeight*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);return canvas.toDataURL('image/jpeg',.78)}finally{URL.revokeObjectURL(url)}}
+async function addPhotos(input){const files=[...input.files].filter(file=>file.type.startsWith('image/'));input.value='';if(!files.length)return;showToast(`${files.length} Foto${files.length===1?'':'s'} wird verarbeitet …`);try{for(const file of files)project.photos.push({id:crypto.randomUUID(),category:input.dataset.category,name:file.name||categories[input.dataset.category],addedAt:Date.now(),data:await imageData(file)});project.fields=fields();project.updatedAt=Date.now();await save(project);renderPhotos();updateSummary();await renderSelect();showToast('Fotos gespeichert.')}catch(error){console.error(error);showToast('Foto konnte nicht verarbeitet werden.')}}
+async function addCircuitPhotos(input,circuitId){const files=[...input.files].filter(file=>file.type.startsWith('image/'));input.value='';if(!files.length)return;showToast(`${files.length} Verteilerfoto${files.length===1?'':'s'} wird verarbeitet …`);try{for(const file of files)project.photos.push({id:crypto.randomUUID(),category:'circuit-manifold',circuitId,name:file.name||categories['circuit-manifold'],addedAt:Date.now(),data:await imageData(file)});project.fields=fields();project.updatedAt=Date.now();await save(project);renderCircuitPhotos();updateSummary();await renderSelect();showToast('Verteilerfotos gespeichert.')}catch(error){console.error(error);showToast('Verteilerfoto konnte nicht gespeichert werden.')}}
+function downloadJSON(data,filename){const url=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=filename;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+async function exportProject(){if(!await saveCurrentProject())return;const filename=(nameOf(project).replace(/[^a-z0-9äöüß-]+/gi,'-').replace(/^-|-$/g,'')||project.reference).toLowerCase(),data={format:'sd-planer-aufnahme',version:1,project};if(!postNativeMessage({type:'export',filename:`${filename}.sd-planer.json`,data}))downloadJSON(data,`${filename}.sd-planer.json`);showToast('Aufnahme inklusive Fotos exportiert.')}
+async function importProject(file){try{const parsed=JSON.parse(await file.text()),item=parsed.project||parsed;if(!item.fields||!Array.isArray(item.photos))throw Error('Format');item.id=crypto.randomUUID();item.reference=reference();item.name=item.fields.customerName?.trim()||item.name||'Importierte Aufnahme';item.updatedAt=Date.now();await save(item);await fill(item);showToast('Aufnahme mit Fotos importiert.')}catch{showToast('Datei ist keine gültige SD-Planer-Aufnahme.')}}
+function postNativeMessage(message){const bridge=window.ReactNativeWebView;if(!bridge?.postMessage)return false;bridge.postMessage(JSON.stringify(message));return true}
+window.__sdPlanerImport=serialized=>importProject({text:async()=>serialized});
+async function deleteCurrentProject(){
+	if(!project)return;
+	clearTimeout(saveTimer);
+	const deletedId=project.id;
+	try{
+		await remove(deletedId);
+		project=null;
+		const remaining=await getAll();
+		if(remaining.length)await fill(remaining[0]);else await createProject();
+		document.querySelector('#deleteDialog').close();
+		showToast('Aufnahme und zugehörige Fotos wurden gelöscht.')
+	}catch(error){console.error(error);showToast('Aufnahme konnte nicht gelöscht werden.')}
+}
+document.querySelectorAll('[data-panel]').forEach(button=>button.addEventListener('click',()=>changePanel(button.dataset.panel)));document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>changePanel(button.dataset.go)));form.addEventListener('input',queueSave);form.addEventListener('change',queueSave);document.querySelectorAll('.photo-input').forEach(input=>input.addEventListener('change',()=>addPhotos(input)));document.querySelector('#jobSelect').addEventListener('change',async event=>{const item=(await getAll()).find(entry=>entry.id===event.target.value);if(item)await fill(item)});document.querySelector('#newJobButton').onclick=()=>document.querySelector('#newDialog').showModal();document.querySelector('#cancelNew').onclick=()=>document.querySelector('#newDialog').close();document.querySelector('#confirmNew').onclick=async()=>{const name=document.querySelector('#newName').value.trim();await createProject(name);document.querySelector('#newName').value='';document.querySelector('#newDialog').close()};document.querySelector('#printButton').onclick=printProject;document.querySelector('#deleteProjectButton').onclick=()=>{if(!project)return;document.querySelector('#deleteConfirmationText').textContent=`„${nameOf(project)}“ (${project.reference}) wird einschließlich aller Fotos dauerhaft von diesem Gerät gelöscht.`;document.querySelector('#deleteDialog').showModal()};document.querySelector('#cancelDelete').onclick=()=>document.querySelector('#deleteDialog').close();document.querySelector('#confirmDelete').onclick=deleteCurrentProject;document.querySelector('#exportButton').onclick=exportProject;document.querySelector('#importButton').onclick=()=>document.querySelector('#importFile').click();document.querySelector('#importFile').onchange=event=>{if(event.target.files[0])importProject(event.target.files[0]);event.target.value=''};
+const projectSearch=document.querySelector('#projectSearch'),projectSearchResults=document.querySelector('#projectSearchResults');
+document.querySelector('#importButton').onclick=()=>{if(!postNativeMessage({type:'import'}))document.querySelector('#importFile').click()};
+projectSearch.addEventListener('focus',()=>{searchFocused=true;renderProjectSearch()});
+projectSearch.addEventListener('input',renderProjectSearch);
+projectSearch.addEventListener('keydown',event=>{if(event.key==='Escape'){searchFocused=false;projectSearchResults.hidden=true;projectSearch.setAttribute('aria-expanded','false');projectSearch.blur()}});
+projectSearchResults.addEventListener('mousedown',event=>event.preventDefault());
+projectSearch.addEventListener('blur',()=>{setTimeout(()=>{if(document.activeElement!==projectSearch){searchFocused=false;projectSearchResults.hidden=true;projectSearch.setAttribute('aria-expanded','false')}},120)});
+openDB().then(async value=>{db=value;const projects=await getAll(),last=localStorage.getItem('nuos-active-project'),item=projects.find(entry=>entry.id===last)||projects[0];if(item)await fill(item);else await createProject();window.addEventListener('pagehide',()=>{if(project)localStorage.setItem('nuos-active-project',project.id)})}).catch(error=>{console.error(error);showToast('Lokaler Speicher nicht verfügbar. Bitte aktuellen Browser verwenden.')});
+})();
+</script>
+<script>if('serviceWorker'in navigator&&window.isSecureContext&&!window.ReactNativeWebView){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(error=>{console.error('Offline-Modus konnte nicht eingerichtet werden.',error);showToast('Offline-Modus konnte nicht eingerichtet werden. Bitte App erneut laden.')}))}</script>
+</body>
+</html>

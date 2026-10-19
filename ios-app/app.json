@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "SD-Planer",
+    "slug": "sd-planer",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "bundleIdentifier": "de.ebersbach.sdplaner",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Die Kamera wird benötigt, um Fotos für die Vor-Ort-Aufnahme zu erstellen.",
+        "NSPhotoLibraryUsageDescription": "Die Fotomediathek wird benötigt, um Bilder zur Vor-Ort-Aufnahme hinzuzufügen.",
+        "NSPhotoLibraryAddUsageDescription": "Der Zugriff wird benötigt, wenn Aufnahmen in der Fotomediathek gesichert werden."
+      }
+    }
+  }
+}

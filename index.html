@@ -165,6 +165,388 @@ function createLabeledField(labelText,id,tag='input'){
 	const label=document.createElement('label');label.htmlFor=id;label.textContent=labelText;
 	const control=document.createElement(tag);control.id=id;field.append(label,control);return{field,control};
 }
+const outdoorCatalog={
+	Viessmann:{
+		'Vitocal 150-A':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-150-a/Datenblatt-Vitocal-150-A.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/Datenblatt-Vitocal-150-A.pdf',title:'Datenblatt Vitocal 150-A, S. 7–12'},stages:[
+			{code:'AWMOF-151.A1.04/230 V',kw:4.0,point:'A7/W35 · LWA max. A7/W55',sound:56},{code:'AWMOF-151.A1.06/230 V',kw:4.8,point:'A7/W35 · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-151.A1.08/230 V',kw:5.6,point:'A7/W35 · LWA max. A7/W55',sound:59},{code:'AWMOF-151.A1.10/230 V',kw:7.3,point:'A7/W35 · LWA max. A7/W55',sound:61},
+			{code:'AWMOF-151.A1.10/400 V',kw:7.4,point:'A7/W35 · LWA max. A7/W55',sound:61},{code:'AWMOF-151.A1.13/400 V',kw:8.1,point:'A7/W35 · LWA max. A7/W55',sound:61},
+			{code:'AWMOF-151.A1.16/400 V',kw:9.1,point:'A7/W35 · LWA max. A7/W55',sound:66}
+		]},
+		'Vitocal 200-A ie':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-200-a-ie/kpr-vitocal-200-a-ie.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/kpr-vitocal-200-a-ie.pdf',title:'Vorläufige technische Daten 9444 982-1 (09/2026), S. 16'},stages:[
+			{code:'Baugröße 06',kw:5.5,point:'vorläufig · Nennleistung A−7/W35 · Schall max. bei A7/W55',sound:57,soundMetric:'Schallleistung max.'},
+			{code:'Baugröße 08',kw:6.8,point:'vorläufig · Nennleistung A−7/W35 · Schall max. bei A7/W55',sound:59,soundMetric:'Schallleistung max.'},
+			{code:'Baugröße 10',kw:8.7,point:'vorläufig · Nennleistung A−7/W35 · Schall max. bei A7/W55',sound:62,soundMetric:'Schallleistung max.'},
+			{code:'Baugröße 12',kw:9.7,point:'vorläufig · Nennleistung A−7/W35 · Schall max. bei A7/W55',sound:63,soundMetric:'Schallleistung max.'}
+		]},
+		'Vitocal 250-A':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-250-a/db-6246346-vitocal-250-a.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/db-6246346-vitocal-250-a.pdf',title:'Datenblatt 6246346 Vitocal 250-A, S. 10–15'},stages:[
+			{code:'AWMOF-251.A1.04/230 V',kw:4.0,point:'A7/W35 · LWA max. A7/W55',sound:54},{code:'AWMOF-251.A1.06/230 V',kw:4.8,point:'A7/W35 · LWA max. A7/W55',sound:55},
+			{code:'AWMOF-251.A1.08/230 V',kw:5.6,point:'A7/W35 · LWA max. A7/W55',sound:57},{code:'AWMOF-251.A1.10/230 V',kw:7.3,point:'A7/W35 · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-251.A1.10/400 V',kw:7.4,point:'A7/W35 · LWA max. A7/W55',sound:58},{code:'AWMOF-251.A1.13/400 V',kw:8.1,point:'A7/W35 · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-251.A1.16/400 V',kw:8.5,point:'A7/W35 · LWA max. A7/W55',sound:56},{code:'AWMOF-251.A1.19/400 V',kw:9.0,point:'A7/W35 · LWA max. A7/W55',sound:57}
+		]},
+		'Vitocal 200-A PRO':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-200-a-pro/kpr-vitocal-200-a-pro-05-2024.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/kpr-vitocal-200-a-pro-05-2024.pdf',title:'Vitocal 200-A PRO · Produktdaten 9444 471-3, S. 4'},stages:[
+			{code:'AWO-AC 201.A032',kw:32.2,point:'A7/W35 · A−7/W35: 22,1 kW',sound:70},
+			{code:'AWO-AC 202.A064',kw:66.4,point:'A7/W35 · A−7/W35: 44,2 kW',sound:70},
+			{code:'AWO-AC 204.A128',kw:128.7,point:'A7/W35 · A−7/W35: 88,2 kW',sound:72}
+		]},
+		'Vitocal 250-A Compact':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-250-a/compact/db-6246345-vitocal-250-a-compact.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/db-6246345-vitocal-250-a-compact.pdf',title:'Datenblatt 6246345 Vitocal 250-A Compact, S. 9, 11–12, 17–18'},stages:[
+			{code:'AWMOF-251.A1.04-230 V001/V002',kw:4.0,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:54},
+			{code:'AWMOF-251.A1.06-230 V001/V002',kw:4.8,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:55},
+			{code:'AWMOF-251.A1.08-230 V001/V002',kw:5.6,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:57},
+			{code:'AWMOF-251.A1.10-230 V001/V002',kw:7.3,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-251.A1.10-400 V001/V002',kw:7.4,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-251.A1.13-400 V001/V002',kw:8.1,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:58},
+			{code:'AWMOF-251.A1.16-400 V001/V002',kw:8.5,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:56},
+			{code:'AWMOF-251.A1.19-400 V001/V002',kw:9.0,point:'A7/W35 Nennwärmeleistung · LWA max. A7/W55',sound:57}
+		]},
+		'Vitocal 200-S':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-200-s/kpr-vitocal-200-s.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/kpr-vitocal-200-s.pdf',title:'Herstellerbroschüre Vitocal 200-S, 12/2024, S. 4'},stages:[
+			{code:'201.D010',kwLabel:'5,5–12,6',point:'A7/W35 · Ausgangsleistungsbereich · LWA ErP 55 dB(A)',sound:55},
+			{code:'201.D10',kwLabel:'5,5–12,6',point:'A7/W35 · Ausgangsleistungsbereich · LWA ErP 55 dB(A)',sound:55},
+			{code:'201.D13',kwLabel:'5,9–13,7',point:'A7/W35 · Ausgangsleistungsbereich · LWA ErP 55 dB(A)',sound:55},
+			{code:'201.D16',kwLabel:'6,4–14,7',point:'A7/W35 · Ausgangsleistungsbereich · LWA ErP 55 dB(A)',sound:55}
+		]},
+		'Vitocal 222-S R32':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-222-s-r32/DB-6195455-vitocal-222-s.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/DB-6195455-vitocal-222-s.pdf',title:'Datenblatt 6195455 Vitocal 222-S, S. 6–8'},stages:[
+			{code:'221.E06',kw:5.3,point:'A7/W35 · LWA reduzierter Betrieb A7/W55',sound:50},
+			{code:'221.E08',kw:6.8,point:'A7/W35 · LWA reduzierter Betrieb A7/W55',sound:50},
+			{code:'221.E10',kw:8.32,point:'A7/W35 · LWA reduzierter Betrieb A7/W55',sound:50}
+		]},
+		'Vitocal 300-A':{source:{url:'https://www.viessmann.de/content/dam/public-brands/master/products/heat-pump/vitocal-300-a/DB-5680568_Vitocal_300-A_50-kW.pdf/_jcr_content/renditions/original.media_file.download_attachment.file/DB-5680568_Vitocal_300-A_50-kW.pdf',title:'Herstellerdatenblatt Vitocal 300-A, S. 4–5'},stages:[
+			{code:'AWO 302.B25, 1-stufig',kw:13.2,point:'A7/W35 · LWA max. A7/W55',sound:67},
+			{code:'AWO 302.B25, 2-stufig',kw:24.5,point:'A7/W35 · LWA max. A7/W55',sound:67},
+			{code:'AWO 302.B40, 1-stufig',kw:19.5,point:'A7/W35 · LWA max. A7/W55',sound:70},
+			{code:'AWO 302.B40, 2-stufig',kw:32.7,point:'A7/W35 · LWA max. A7/W55',sound:70},
+			{code:'AWO 302.B60, 1-stufig',kw:30.1,point:'A7/W35 · LWA max. A7/W55',sound:74},
+			{code:'AWO 302.B60, 2-stufig',kw:55.8,point:'A7/W35 · LWA max. A7/W55 · Nachtbetrieb 70 dB(A)',sound:74}
+		]}
+	},
+	Vaillant:{
+		'aroTHERM plus':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-plus_1483561.pdf',title:'Installationsanleitungen 8000041775_03 / 8000035176_05, S. 17–22 und 48–49'},additionalSources:[{url:'https://www.vaillant.de/api/download/product/de/flyer_produktinfo-arotherm-plus8.1_1429692.pdf',title:'Produktinfo aroTHERM plus 8.1, S. 2'},{url:'https://www.vaillant.de/api/download/product/de/erp-datenblatt_arotherm-plus_782705.pdf',title:'ErP-Datenblatt aroTHERM plus 8.1, S. 1'}],flexibleSpace:true,protectionZone:{below400:1000,above400:500,flexible:500},clearances:{front:100,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A',back:'Maß B',left:'Maß C',right:'Maß D',above:'Maß E'},stages:[
+			{code:'VWL 35/8.1 A 230V',kw:4.26,point:'A−7/W35',sound:52.7,soundMetric:'LWA max. Tag'},{code:'VWL 55/8.1 A 230V',kw:5.59,point:'A−7/W35',sound:55.6,soundMetric:'LWA max. Tag'},
+			{code:'VWL 75/8.1 A 230V',kw:6.94,point:'A−7/W35',sound:57.4,soundMetric:'LWA max. Tag'},{code:'VWL 105/8.1 A 400V',kw:10.58,point:'A−7/W35',sound:58.2,soundMetric:'LWA max. Tag'},
+			{code:'VWL 125/8.1 A 400V',kw:12.14,point:'A−7/W35',sound:59.9,soundMetric:'LWA max. Tag'},			{code:'VWL 105/8.1 A 230V',point:'A−7/W35 nicht separat ausgewiesen',sound:50,soundMetric:'LWA ErP 55 °C'}
+		]},
+		'aroTHERM pro':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-pro_1500353.pdf',title:'Installationsanleitung 8000026880_02, S. 15–25 und 53–54'},additionalSources:[{url:'https://www.vaillant.de/api/download/product/de/flyer_produktinfo-arotherm-pro_1511399.pdf',title:'Produktinfo aroTHERM pro, S. 2'},{url:'https://www.vaillant.de/api/download/product/de/erp-datenblatt_arotherm-pro_794700.pdf',title:'ErP-Datenblatt aroTHERM pro, S. 1'}],flexibleSpace:true,protectionZone:{below400:1000,above400:500},clearances:{front:250,back:300,left:250,right:450,above:600},clearanceLabels:{front:'Maß A',back:'Maß B',left:'Maß C',right:'Maß D',above:'Maß E'},stages:[
+			{code:'VWL 55/7.1 A 230V',kw:4.84,point:'A−7/W35',sound:57.7,soundMetric:'LWA max. Tag'},{code:'VWL 75/7.1 A 230V',kw:6.37,point:'A−7/W35',sound:60.9,soundMetric:'LWA max. Tag'},
+			{code:'VWL 115/7.1 A 400V',kw:11.12,point:'A−7/W35',sound:65.6,soundMetric:'LWA max. Tag'}
+		]},
+		'aroTHERM perform':{source:{url:'https://www.vaillant.de/api/download/product/de/installationsanleitung_arotherm-perform_1519550.pdf',title:'Installationsanleitung 8000032825_02, S. 14–24, 47–48'},additionalSources:[{url:'https://www.vaillant.de/api/download/product/de/flyer_produktinfo-arotherm-perform_1485141.pdf',title:'Produktinfo aroTHERM perform, S. 2'},{url:'https://www.vaillant.de/api/download/product/de/erp-datenblatt_arotherm-perform_1517327.pdf',title:'ErP-Datenblatt aroTHERM perform, S. 1–2'}],flexibleSpace:true,protectionZone:{below400:1200,above400:500},clearances:{front:500,back:300,left:400,right:500,above:600},clearanceLabels:{front:'Maß A',back:'Maß B',left:'Maß C (Anschlusskonsole beachten)',right:'Maß D',above:'Maß E'},stages:[
+			{code:'VWL 155/8.1 A S2 Q',point:'A−7/W35 im Produktblatt nicht ausgewiesen',sound:49,soundMetric:'LWA ErP 55 °C'},{code:'VWL 205/8.1 A S2 Q',kw:19.6,point:'A−7/W35',sound:50,soundMetric:'LWA ErP 55 °C'}
+		]},
+		'aroTHERM Split plus':{source:{url:'https://www.vaillant.de/api/download/product/de/betriebs--und-installationsanleitung_arotherm-split-plus_1411481.pdf',title:'Installations- und Wartungsanleitung 8000015888_03, S. 18, 42–43'},additionalSources:[{url:'https://www.vaillant.de/api/download/product/de/flyer_produktinfo-arotherm-split-plus_1413678.pdf',title:'Produktinfo aroTHERM Split plus, S. 2'}],clearances:{front:300,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A',back:'Maß B',left:'Maß C',right:'Maß D',above:'Maß E'},stages:[
+			{code:'VWL 35/8.2 AS 230V S2',kw:3.54,point:'A−7/W35',sound:57,soundMetric:'LWA max. Tag'},{code:'VWL 55/8.2 AS 230V S2',kw:4.89,point:'A−7/W35',sound:57,soundMetric:'LWA max. Tag'},
+			{code:'VWL 75/8.2 AS 230V S2',kw:6.39,point:'A−7/W35',sound:58,soundMetric:'LWA max. Tag'}
+		]},
+		'aroTHERM Split':{source:{url:'https://www.vaillant.de/api/download/product/de/betriebs--und-installationsanleitung_arotherm-split_1459720.pdf',title:'Installations- und Wartungsanleitung 8000016459_03, S. 17'},additionalSources:[{url:'https://www.vaillant.de/api/download/product/de/flyer_produktinfo-arotherm-split_1359266.pdf',title:'Produktinfo aroTHERM Split, S. 2'}],clearances:{front:100,back:1000,left:250,right:500,above:600},clearanceLabels:{front:'Maß A',back:'Maß B',left:'Maß C',right:'Maß D',above:'Maß E'},stages:[
+			{code:'VWL 105/5 AS S2',kw:10.15,point:'A−7/W35',sound:52,soundMetric:'LWA ErP A7/W55'},{code:'VWL 125/5 AS S2',kw:11.8,point:'A−7/W35',sound:52,soundMetric:'LWA ErP A7/W55'}
+		]}
+	},
+	Solvis:{
+		SolvisMia:{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvismia/34404_MAL-MIA.pdf',title:'MAL-MIA 34404-2b, Abstände S. 8, Schall S. 21, Leistungsdaten S. 22'},strictClearances:true,clearances:{left:500,above:300,right:1000,back:300,front:3000},stages:[
+			{code:'SolvisMia 8',kw:4.0,point:'A2/W35 · Nennklasse 8 kW · LWA max. Außenaufstellung',sound:64},
+			{code:'SolvisMia 10',kw:5.65,point:'A2/W35 · Nennklasse 10 kW · LWA max. Außenaufstellung',sound:64},
+			{code:'SolvisMia 14',kw:8.6,point:'A2/W35 · Nennklasse 14 kW · LWA max. Außenaufstellung',sound:64}
+		]},
+		SolvisLea:{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvislea/31427_MAL-LEA.pdf',title:'MAL-LEA 31427-2c, Abstände S. 8, Schall S. 27'},strictClearances:true,clearances:{left:1000,above:800,right:500,back:300,front:2000},stages:[
+			{code:'SolvisLea 7 kW',kw:7,point:'Hersteller-Leistungsklasse · LWA max. Außenaufstellung',sound:61},
+			{code:'SolvisLea 11 kW',kw:11,point:'Hersteller-Leistungsklasse · LWA max. Außenaufstellung',sound:66},
+			{code:'SolvisLea 14 kW',kw:14,point:'Hersteller-Leistungsklasse · LWA max. Außenaufstellung',sound:66}
+		]},
+		'SolvisLea Eco':{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvislea/32704_MAL-LEA-E.pdf',title:'MAL-LEA-E 32704-2a, Abstände S. 7; technische Daten im Handbuch'},strictClearances:true,clearances:{left:1000,above:800,right:500,back:300,front:2000},stages:[
+			{code:'SolvisLea Eco 8 kW',kw:8,point:'Nennklasse · LWA max. Außenaufstellung',sound:66}
+		]},
+		'SolvisLea Premium':{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvislea/33395_MAL-LEA-8P.pdf',title:'MAL-LEA-8P 33395-2f, Abstände S. 10; technische Daten im Handbuch'},strictClearances:true,clearances:{left:1000,above:800,right:500,back:300,front:2000},stages:[
+			{code:'SolvisLea 8,3 Premium',kw:8.3,point:'Nennklasse · LWA max. Außenaufstellung',sound:66}
+		]},
+		'SolvisLea Pro':{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvislea/35081_MAL-LEA-PRO.pdf',title:'MAL-LEA-PRO 35081-2b, Abstände S. 11, Schutzbereich S. 13; Schall und Leistungsdaten S. 40'},protectionZone:{allDirections:1000},strictClearances:true,clearances:{left:500,above:800,right:100,back:300,front:600},stages:[
+			{code:'SolvisLea 5 Pro',kw:3.05,point:'A7/W35 Nennleistung; Modulation 2,77–6,63 kW · LWA max.',sound:54},
+			{code:'SolvisLea 7 Pro',kw:3.05,point:'A7/W35 Nennleistung; Modulation 2,76–8,47 kW · LWA max.',sound:57.1},
+			{code:'SolvisLea 10 Pro',kw:4.32,point:'A7/W35 Nennleistung; Modulation 3,69–11,97 kW · LWA max.',sound:58.8},
+			{code:'SolvisLea 13 Pro',kw:5.79,point:'A7/W35 Nennleistung; Modulation 5,11–15,31 kW · LWA max.',sound:60}
+		]},
+		SolvisPia:{source:{url:'https://solvis-files.s3.eu-central-1.amazonaws.com/downloads-fk/solvispia/35029_MAL-PIA-1317.pdf',title:'MAL-PIA-1317 35029-2c, Abstände S. 11–13; Schallwerte Typenschild-/Seriennummer beachten'},protectionZone:{allDirections:1000},stages:[
+			{code:'SolvisPia 13',kw:8.3,point:'A7/W35 Nennleistung; LWA max. Außenaufstellung',sound:65,clearances:{left:200,above:600,right:700,back:300,front:3000},strictClearances:{front:true}},
+			{code:'SolvisPia 17',kw:11.1,point:'A7/W35 Nennleistung; konservativ max. LWA Außenaufstellung',sound:67,clearances:{left:400,above:1000,right:1000,back:450,front:3000},strictClearances:{front:true}}
+		]}
+	}
+};
+const outdoorBrandControl=document.querySelector('#outdoorBrand');
+const outdoorModelControl=document.querySelector('#outdoorModel');
+const outdoorOutputControl=document.querySelector('#outdoorOutput');
+const outdoorModelField=outdoorModelControl.closest('.field');
+outdoorModelField.querySelector('label').textContent='Modell / Baureihe (Freitext für Altbestand)';
+const outdoorModelChoice=createLabeledField('Offizielle Gerätebaureihe','outdoorModelChoice','select');
+outdoorModelChoice.control.add(new Option('Zuerst Hersteller auswählen',''));
+outdoorModelField.before(outdoorModelChoice.field);
+const outdoorStageChoice=createLabeledField('Offizielle Leistungsstufe / Typ','outdoorStageCode','select');
+outdoorStageChoice.control.name='outdoorStageCode';
+outdoorModelField.after(outdoorStageChoice.field);
+const outdoorStageIndex=new Map();
+for(const [brand,models] of Object.entries(outdoorCatalog))for(const [model,data] of Object.entries(models))for(const stage of data.stages){
+	const key=`${brand}|${model}|${stage.code}`;
+	const point=stage.point?` · ${stage.point}`:'';
+	const rating=stage.kw!==undefined?` · ${stage.kw.toLocaleString('de-DE')} kW${point}`:stage.kwLabel?` · ${stage.kwLabel} kW${point}`:'';
+	const sound=stage.sound!==undefined?` · ${outdoorSoundMetric(stage)} ${stage.sound.toLocaleString('de-DE')} dB(A)`:'';
+	const option=new Option(`${stage.code}${rating}${sound}`,key);
+	outdoorStageIndex.set(key,{brand,model,...stage});
+}
+outdoorStageChoice.control.add(new Option('Zuerst Baureihe auswählen',''));
+const outdoorEvidenceBox=document.createElement('div');outdoorEvidenceBox.className='box soft outdoor-evidence';
+const outdoorEvidenceHead=document.createElement('div');outdoorEvidenceHead.className='box-head';
+const outdoorEvidenceTitle=document.createElement('div');outdoorEvidenceTitle.innerHTML='<h3>Herstellerdaten &amp; Abstandsprüfung</h3><p>Nur dokumentierte Mindestwerte werden automatisch bewertet.</p>';
+outdoorEvidenceHead.append(outdoorEvidenceTitle);outdoorEvidenceBox.append(outdoorEvidenceHead);
+const outdoorCatalogNote=document.createElement('div');outdoorCatalogNote.className='note outdoor-catalog-note';
+const outdoorStyle=document.createElement('style');
+outdoorStyle.textContent='.outdoor-evidence .outdoor-source-field a{display:block;margin:0 0 8px;font-size:12px;font-weight:650}.outdoor-evidence .note{margin:12px 0}.outdoor-evidence .outdoor-zone-note{margin-bottom:0}.field.clearance-pass input{border-color:#4c8b60;background:#f2f8f2}.field.clearance-fail input{border-color:#b75e52;background:#fcf1ef}.field.clearance-pass>label,.field.clearance-pass .clearance-status{color:#32734a}.field.clearance-fail>label,.field.clearance-fail .clearance-status{color:#a43f35}.clearance-status{display:block;min-height:14px;margin-top:5px;color:var(--muted);font-size:11px}';
+document.head.append(outdoorStyle);
+const outdoorSourceField=document.createElement('div');outdoorSourceField.className='field outdoor-source-field';
+const outdoorSourceLabel=document.createElement('label');outdoorSourceLabel.textContent='Herstellerquelle';
+const outdoorSourceLinks=document.createElement('div');
+const outdoorSourceValue=document.createElement('input');outdoorSourceValue.type='text';outdoorSourceValue.name='outdoorSource';outdoorSourceValue.readOnly=true;
+outdoorSourceField.append(outdoorSourceLabel,outdoorSourceLinks,outdoorSourceValue);
+const outdoorNoiseNote=document.createElement('div');outdoorNoiseNote.className='note outdoor-noise-note';
+const outdoorSoundPower=createLabeledField('Schallleistungspegel laut Hersteller (LWA)','outdoorSoundPower');
+outdoorSoundPower.control.name='outdoorSoundPower';outdoorSoundPower.control.type='number';outdoorSoundPower.control.min='0';outdoorSoundPower.control.step='0.1';outdoorSoundPower.control.placeholder='dB(A), falls bekannt';
+const outdoorNoiseLimit=createLabeledField('Richtwert am Nachbar-Immissionsort (nachts)','outdoorNoiseLimit','select');
+outdoorNoiseLimit.control.name='outdoorNoiseLimit';
+outdoorNoiseLimit.control.append(
+	new Option('Bitte auswählen',''),
+	new Option('35 dB(A) · reines Wohngebiet / Kurgebiet','35'),
+	new Option('40 dB(A) · allgemeines Wohngebiet','40'),
+	new Option('45 dB(A) · urbanes, Kern-, Dorf- oder Mischgebiet','45'),
+	new Option('50 dB(A) · Gewerbegebiet','50'),
+	new Option('70 dB(A) · Industriegebiet','70')
+);
+const outdoorNoiseFields=document.createElement('div');outdoorNoiseFields.className='fields three';
+outdoorNoiseFields.append(outdoorSoundPower.field,outdoorNoiseLimit.field);
+const outdoorZoneTitle=document.createElement('div');outdoorZoneTitle.className='subhead';outdoorZoneTitle.textContent='R290-Schutzbereich (Propan)';
+const outdoorZoneFields=document.createElement('div');outdoorZoneFields.className='fields three';
+const outdoorMountType=createLabeledField('Aufstellart','outdoorMountType','select');
+outdoorMountType.control.name='outdoorMountType';
+outdoorMountType.control.add(new Option('Bitte auswählen',''));
+outdoorMountType.control.add(new Option('Freistehend: Boden / Flachdach','free'));
+outdoorMountType.control.add(new Option('Wand / Ecke / Sonderaufstellung','other'));
+const outdoorMountHeight=createLabeledField('Montagehöhe über Boden','outdoorMountHeight');
+outdoorMountHeight.control.name='outdoorMountHeight';outdoorMountHeight.control.type='number';outdoorMountHeight.control.min='0';outdoorMountHeight.control.step='1';outdoorMountHeight.control.placeholder='cm';
+const outdoorFlexibleSpace=createLabeledField('Flexible Space Funktion','outdoorFlexibleSpace','select');
+outdoorFlexibleSpace.control.name='outdoorFlexibleSpace';
+outdoorFlexibleSpace.control.add(new Option('Bitte auswählen',''));
+outdoorFlexibleSpace.control.add(new Option('Ja','Ja'));
+outdoorFlexibleSpace.control.add(new Option('Nein','Nein'));
+const outdoorOpening=createLabeledField('Nächste Gebäudeöffnung','outdoorDistanceOpening');
+outdoorOpening.control.name='outdoorDistanceOpening';outdoorOpening.control.type='number';outdoorOpening.control.min='0';outdoorOpening.control.step='0.01';outdoorOpening.control.placeholder='Meter';
+const outdoorIgnition=createLabeledField('Nächste Zündquelle','outdoorDistanceIgnition');
+outdoorIgnition.control.name='outdoorDistanceIgnition';outdoorIgnition.control.type='number';outdoorIgnition.control.min='0';outdoorIgnition.control.step='0.01';outdoorIgnition.control.placeholder='Meter';
+const outdoorRecess=createLabeledField('Nächste Vertiefung / Ablauf','outdoorDistanceRecess');
+outdoorRecess.control.name='outdoorDistanceRecess';outdoorRecess.control.type='number';outdoorRecess.control.min='0';outdoorRecess.control.step='0.01';outdoorRecess.control.placeholder='Meter';
+for(const item of [outdoorMountType,outdoorMountHeight,outdoorFlexibleSpace,outdoorOpening,outdoorIgnition,outdoorRecess])outdoorZoneFields.append(item.field);
+const outdoorZoneNote=document.createElement('div');outdoorZoneNote.className='note outdoor-zone-note';
+outdoorEvidenceBox.append(outdoorCatalogNote,outdoorSourceField,outdoorNoiseFields,outdoorNoiseNote,outdoorZoneTitle,outdoorZoneFields,outdoorZoneNote);
+document.querySelector('#panel-ausseneinheit .box').after(outdoorEvidenceBox);
+const outdoorClearanceFields=[
+	{key:'front',id:'clearanceFront',label:'Luftausblas / Vorderseite'},
+	{key:'back',id:'clearanceBack',label:'Rückseite'},
+	{key:'left',id:'clearanceLeft',label:'Linke Seite'},
+	{key:'right',id:'clearanceRight',label:'Rechte Seite'},
+	{key:'above',id:'clearanceAbove',label:'Freiraum nach oben'}
+].map(item=>({...item,control:document.getElementById(item.id)}));
+const outdoorSafetyFields=[
+	{control:outdoorOpening.control,key:'outdoorDistanceOpening',label:'Gebäudeöffnung'},
+	{control:outdoorIgnition.control,key:'outdoorDistanceIgnition',label:'Zündquelle'},
+	{control:outdoorRecess.control,key:'outdoorDistanceRecess',label:'Vertiefung / Ablauf'}
+];
+function outdoorEntry(){
+	const brand=outdoorBrandControl.value,model=outdoorModelControl.value.trim();
+	return outdoorCatalog[brand]?.[model]||null
+}
+function formatOutdoorDistance(mm){
+	return mm>=1000?`${(mm/1000).toLocaleString('de-DE')} m`:`${(mm/10).toLocaleString('de-DE')} cm`
+}
+function outdoorSoundMetric(stage){
+	return stage.soundMetric||(
+		stage.point?.includes('LWA ErP')?'LWA ErP':
+		stage.point?.includes('LWA max')?'LWA max':'LWA'
+	)
+}
+function formatNoiseDistance(meters){
+	return `${meters.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1})} m`
+}
+function setOutdoorFieldStatus(control,state,text){
+	const field=control.closest('.field');
+	field.classList.remove('clearance-pass','clearance-fail');
+	if(state)field.classList.add(`clearance-${state}`);
+	let status=field.querySelector('.clearance-status');
+	if(!status){status=document.createElement('small');status.className='clearance-status';field.append(status)}
+	status.textContent=text||''
+}
+function selectedOutdoorStage(){
+	return outdoorStageIndex.get(outdoorStageChoice.control.value)||null
+}
+function updateOutdoorCatalog(){
+	const brand=outdoorBrandControl.value,models=outdoorCatalog[brand]||{};
+	const previous=outdoorModelControl.value.trim();
+	outdoorModelChoice.control.replaceChildren(new Option('Bitte Baureihe auswählen',''));
+	for(const model of Object.keys(models))outdoorModelChoice.control.add(new Option(model,model));
+	outdoorModelChoice.control.value=Object.prototype.hasOwnProperty.call(models,previous)?previous:'';
+	const entry=outdoorEntry();
+	const previousStage=selectedOutdoorStage();
+	const previousStageKey=previousStage&&previousStage.brand===brand&&previousStage.model===previous
+		?outdoorStageChoice.control.value:'';
+	outdoorStageChoice.control.replaceChildren(new Option(entry?.stages.length?'Leistungsstufe auswählen':'Keine verifizierten Leistungsstufen hinterlegt',''));
+	if(entry)for(const item of entry.stages){
+		const key=`${brand}|${previous}|${item.code}`;
+		const point=item.point?` · ${item.point}`:'';
+		const rating=item.kw!==undefined?` · ${item.kw.toLocaleString('de-DE')} kW${point}`:item.kwLabel?` · ${item.kwLabel} kW${point}`:'';
+		const sound=item.sound!==undefined
+			?` · ${outdoorSoundMetric(item)} ${item.sound.toLocaleString('de-DE')} dB(A)`
+			:'';
+		outdoorStageChoice.control.add(new Option(`${item.code}${rating}${sound}`,key));
+	}
+	outdoorStageChoice.control.value=previousStageKey;
+	outdoorStageChoice.field.hidden=!entry?.stages.length;
+	outdoorModelField.hidden=!!entry;
+	if(entry&&!outdoorStageChoice.control.value&&outdoorOutputControl.value){
+		const matchingStages=entry.stages.filter(item=>item.kw!==undefined&&item.kw===Number(outdoorOutputControl.value));
+		if(matchingStages.length===1)outdoorStageChoice.control.value=`${brand}|${previous}|${matchingStages[0].code}`
+	}
+	const stage=selectedOutdoorStage();
+	if(entry&&stage&&stage.brand===brand&&stage.model===previous&&stage.kw!==undefined&&!outdoorOutputControl.value)outdoorOutputControl.value=stage.kw;
+	updateOutdoorChecks(entry,stage)
+}
+function updateOutdoorChecks(entry=outdoorEntry(),stage=selectedOutdoorStage()){
+	const clearance=stage?.clearances||entry?.clearances;
+	const hasClearances=!!clearance;
+	const mountType=outdoorMountType.control.value;
+	const compareClearances=hasClearances&&mountType==='free';
+	for(const item of outdoorClearanceFields){
+		const label=item.control.closest('.field').querySelector('label');
+		const minimum=clearance?.[item.key];
+		const strictConfiguration=stage?.strictClearances||entry?.strictClearances;
+		const strictMinimum=typeof strictConfiguration==='object'?!!strictConfiguration[item.key]:!!strictConfiguration;
+		const fieldLabel=entry?.clearanceLabels?.[item.key]||item.label;
+		label.textContent=minimum==null?fieldLabel:`${fieldLabel} (min. ${strictMinimum?'> ':''}${formatOutdoorDistance(minimum)})`;
+		const value=Number(item.control.value),validValue=item.control.value.trim()!=='';
+		if(minimum==null){setOutdoorFieldStatus(item.control,null,'');continue}
+		if(!compareClearances){setOutdoorFieldStatus(item.control,null,'Aufstellart Boden-/Flachdach wählen, um automatisch zu prüfen.');continue}
+		const clearanceMet=strictMinimum?value*1000>minimum:value*1000+0.0001>=minimum;
+		setOutdoorFieldStatus(item.control,!validValue?null:clearanceMet?'pass':'fail',
+			!validValue?`Hersteller-Minimum: ${strictMinimum?'> ':''}${formatOutdoorDistance(minimum)}`:clearanceMet?'Mindestabstand eingehalten':'Mindestabstand unterschritten')
+	}
+	const soundPower=Number(outdoorSoundPower.control.value),hasSoundPower=outdoorSoundPower.control.value.trim()!=='';
+	const soundLimit=Number(outdoorNoiseLimit.control.value),hasSoundLimit=outdoorNoiseLimit.control.value!=='';
+	const noiseDistance=hasSoundPower&&hasSoundLimit?10**((soundPower-soundLimit-8)/20):null;
+	for(const control of [document.querySelector('#distanceWindow'),neighborDistanceField.control]){
+		const field=control.closest('.field'),label=field.querySelector('label');
+		const baseLabel=control===document.querySelector('#distanceWindow')?'Abstand zum nächsten Fenster / Immissionsort':'Abstand zum Nachbargrundstück / Immissionsort';
+		label.textContent=noiseDistance===null?baseLabel:`${baseLabel} (Schall-Orientierung: min. ca. ${formatNoiseDistance(noiseDistance)})`;
+		const validValue=control.value.trim()!=='',value=Number(control.value);
+		if(noiseDistance===null){
+			setOutdoorFieldStatus(control,null,'Schallleistung und nächtlichen Richtwert auswählen, um eine Orientierung zu berechnen.');
+			continue
+		}
+		setOutdoorFieldStatus(control,!validValue?null:value>=noiseDistance?'pass':'fail',
+			!validValue?`Orientierungsabstand: ca. ${formatNoiseDistance(noiseDistance)}`:value>=noiseDistance?'Orientierungsabstand erreicht':'Orientierungsabstand unterschritten')
+	}
+	const specialMount=mountType==='other';
+	const clearanceMessage=entry
+		?hasClearances
+			?specialMount?'Für Wand-, Eck- und Sonderaufstellungen gelten andere Herstellerdiagramme; die folgende Ampel ist dafür deaktiviert.':mountType==='free'?entry.clearanceLabels?'Mindestmaße gemäß Maßbuchstaben A–E der Herstellerzeichnung für Boden-/Flachdachaufstellung.':'Mindestmaße gemäß Herstellerdiagramm für Boden-/Flachdachaufstellung.':'Aufstellart auswählen. Die Ampel prüft nur freistehende Boden-/Flachdachaufstellungen.'
+			:'Für diese Baureihe sind in den hier geprüften Herstellerunterlagen keine vollständigen, modellbezogenen Mindestabstände hinterlegt. Deshalb bleibt die Abstandsampel neutral.'
+		:'Baureihe auswählen. Für nicht gelistete oder ältere Geräte werden keine Mindestabstände geschätzt.';
+	const stageMessage=entry&&!entry.stages.length?'Für diese Baureihe sind hier noch keine Leistungsstufen verifiziert; die kW-Angabe bitte dem Angebot oder Typenschild entnehmen.'
+		:entry?.stages.some(item=>item.kw===undefined&&!item.kwLabel)?'Für einzelne Typstufen ist hier noch keine offizielle kW-Leistungsangabe hinterlegt; bitte Angebot oder Typenschild prüfen.':'';
+	outdoorCatalogNote.textContent=[clearanceMessage,stageMessage].filter(Boolean).join(' ');
+	const sources=entry?[entry.source,...(entry.additionalSources||[])].filter(Boolean):[];
+	outdoorSourceField.hidden=!sources.length;
+	outdoorSourceLinks.replaceChildren(...sources.map(source=>{
+		const link=document.createElement('a');link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=`${source.title} ↗`;return link
+	}));
+	outdoorSourceValue.value=sources.map(source=>source.title).join('; ');
+	const sound=stage?.sound;
+	outdoorSoundPower.field.querySelector('label').textContent=sound===undefined
+		?'Schallleistungspegel laut Hersteller (LWA)'
+		:`Schallleistungspegel laut Hersteller (${outdoorSoundMetric(stage)})`;
+	if(sound!==undefined&&outdoorSoundPower.control.value!==String(sound))outdoorSoundPower.control.value=sound;
+	const hasVerifiedSound=sound!==undefined;
+	outdoorSoundPower.control.readOnly=hasVerifiedSound;
+	outdoorNoiseNote.textContent=hasVerifiedSound
+		?`Hersteller-Schallleistungspegel für den gewählten Typ (${outdoorSoundMetric(stage)}): ${sound} dB(A). Die angezeigte Entfernung ist eine überschlägige Freifeld-Orientierung mit kugelförmiger Ausbreitung aus Schallleistung und gewähltem Nacht-Richtwert; Reflexionen, Betriebsmodus, Zuschläge und örtliche Situation fehlen. Sie ersetzt keine Schallberechnung.`
+		:'Schallleistungspegel (LWA) bei Bedarf aus dem Herstellerdatenblatt eintragen. Die überschlägige Freifeld-Orientierung mit kugelförmiger Ausbreitung ist keine verbindliche Schallberechnung; Gelände, Reflexionen, Betriebsmodus und örtliche Vorgaben bleiben zu prüfen.';
+	const isVaillant=brand==='Vaillant';
+	const supportsFlexible=!!entry?.flexibleSpace;
+	const hasProtectionZone=!!entry?.protectionZone;
+	outdoorZoneTitle.hidden=!hasProtectionZone;
+	outdoorMountType.field.hidden=!(supportsFlexible||hasProtectionZone||hasClearances);
+	outdoorFlexibleSpace.field.hidden=!isVaillant;
+	outdoorFlexibleSpace.control.disabled=isVaillant&&!!entry&&!supportsFlexible;
+	setOutdoorFieldStatus(outdoorFlexibleSpace.control,null,isVaillant&&entry&&!supportsFlexible?'Diese Baureihe unterstützt Flexible Space nicht.':'');
+	for(const item of [outdoorOpening,outdoorIgnition,outdoorRecess])item.field.hidden=!hasProtectionZone;
+	const freeStanding=hasProtectionZone&&outdoorMountType.control.value==='free';
+	outdoorMountHeight.field.hidden=!(freeStanding&&isVaillant&&supportsFlexible);
+	const height=Number(outdoorMountHeight.control.value),hasHeight=outdoorMountHeight.control.value.trim()!=='';
+	const flexible=outdoorFlexibleSpace.control.value==='Ja';
+	const hasFlexibleChoice=outdoorFlexibleSpace.control.value==='Ja'||outdoorFlexibleSpace.control.value==='Nein';
+	const canCheckZone=freeStanding&&(!isVaillant||!supportsFlexible||hasHeight&&hasFlexibleChoice);
+	const zoneMinimum=!canCheckZone?null:isVaillant&&supportsFlexible
+		?flexible?entry.protectionZone?.flexible??null:height<40?entry.protectionZone?.below400??null:entry.protectionZone?.above400??null
+		:entry.protectionZone?.allDirections??null;
+	for(const item of outdoorSafetyFields){
+		const label=item.control.closest('.field').querySelector('label');
+		label.textContent=zoneMinimum==null?item.label:`${item.label} (Schutzbereich, min. ${formatOutdoorDistance(zoneMinimum)})`;
+		const value=Number(item.control.value),validValue=item.control.value.trim()!=='';
+		if(zoneMinimum==null){
+			setOutdoorFieldStatus(item.control,null,flexible?'Für diese Variante ist kein pauschaler Mindestabstand aus der gewählten Montagezeichnung hinterlegt; bitte die Herstellerzeichnung prüfen.':'');
+			continue
+		}
+		setOutdoorFieldStatus(item.control,!validValue?null:value*1000+0.0001>=zoneMinimum?'pass':'fail',
+			!validValue?`Hersteller-Schutzbereich: min. ${formatOutdoorDistance(zoneMinimum)}`:value*1000+0.0001>=zoneMinimum?'Mindestabstand eingehalten':'Mindestabstand unterschritten')
+	}
+	outdoorZoneNote.textContent=!hasProtectionZone?''
+		:!isVaillant
+		?outdoorMountType.control.value!=='free'?'Die automatische Schutzbereichsprüfung gilt nur für freistehende Boden-/Flachdachaufstellung; bei Sonderaufstellungen die Herstellerzeichnung prüfen.':`Die Herstellerzeichnung weist eine richtungsabhängige R290-Schutzzone aus. Für die Ampel wird konservativ ${formatOutdoorDistance(entry.protectionZone.allDirections)} in jeder Richtung angesetzt; Form und Höhe der Zone sowie Sonderfälle (z. B. Flachdach) bitte anhand der Anleitung prüfen.`
+		:!supportsFlexible?'Für diese Vaillant-Baureihe sind hier keine verifizierten Flexible-Space-Schutzbereichsdaten hinterlegt. Bitte die verlinkte Anleitung des konkreten Geräts prüfen; die Schutzbereichsampel bleibt deaktiviert.'
+			:outdoorMountType.control.value!=='free'?'Bei Wand-, Eck- oder Sondermontage ist die Schutzbereichskizze der verlinkten Vaillant-Anleitung maßgeblich; keine automatische Zonenampel.'
+				:flexible&&entry.protectionZone?.flexible==null?'Für Flexible Space ist bei dieser Baureihe kein einzelner, belastbarer Mindestabstand als Zahl hinterlegt; maßgeblich bleibt die konkrete Herstellerzeichnung.'
+					:flexible?'Bei aktivierter Flexible Space Funktion gilt der in der freistehenden Montagezeichnung ausgewiesene Schutzbereich. Die Mindestabstände für Luftstrom und Wartung bleiben unverändert.'
+						:!hasHeight||!hasFlexibleChoice?'Montagehöhe und Flexible Space Ja/Nein eingeben. Für freistehende Boden-/Flachdachmontage gilt unter 40 cm Montagehöhe der konservative Maximalwert aus der Herstellerzeichnung; ab 40 cm der dort angegebene kleinere Schutzbereich. Die Abbildung des konkreten Geräts bleibt maßgeblich.'
+							:`Für freistehende Boden-/Flachdachmontage wird der größte Schutzbereich aus der Herstellerzeichnung vorsorglich als Mindestabstand zu Öffnungen, Zündquellen und Vertiefungen angesetzt (${formatOutdoorDistance(zoneMinimum)}). Die tatsächliche Schutzbereichsform ist der verlinkten Anleitung zu entnehmen.`;
+	if(specialMount&&hasClearances)for(const item of outdoorClearanceFields)setOutdoorFieldStatus(item.control,null,'Für diese Aufstellart nicht automatisch bewertet.')
+}
+outdoorBrandControl.addEventListener('change',()=>{
+	outdoorModelControl.value='';outdoorModelChoice.control.value='';outdoorOutputControl.value='';outdoorStageChoice.control.value='';
+	outdoorSoundPower.control.value='';
+	outdoorMountType.control.value='';outdoorMountHeight.control.value='';outdoorFlexibleSpace.control.value='';
+	updateOutdoorCatalog()
+});
+outdoorModelChoice.control.addEventListener('change',()=>{
+	outdoorModelControl.value=outdoorModelChoice.control.value;outdoorStageChoice.control.value='';outdoorOutputControl.value='';
+	outdoorSoundPower.control.value='';
+	updateOutdoorCatalog()
+});
+outdoorModelControl.addEventListener('input',()=>{
+	outdoorModelChoice.control.value='';outdoorStageChoice.control.value='';outdoorOutputControl.value='';
+	outdoorSoundPower.control.value='';updateOutdoorCatalog()
+});
+outdoorStageChoice.control.addEventListener('change',()=>{
+	const stage=selectedOutdoorStage();
+	if(stage){outdoorModelControl.value=stage.model;outdoorOutputControl.value=stage.kw??''}
+	outdoorSoundPower.control.value=stage?.sound??'';
+	updateOutdoorCatalog()
+});
+for(const control of [outdoorSoundPower.control,outdoorNoiseLimit.control]){
+	control.addEventListener('input',()=>updateOutdoorChecks());
+	control.addEventListener('change',()=>updateOutdoorChecks())
+}
+for(const item of [...outdoorClearanceFields,...outdoorSafetyFields])item.control.addEventListener('input',()=>updateOutdoorChecks());
+for(const control of [outdoorMountType.control,outdoorMountHeight.control,outdoorFlexibleSpace.control])control.addEventListener('change',()=>updateOutdoorChecks());
+outdoorOutputControl.closest('.field').querySelector('label').textContent='Leistung laut Angebot / Typenschild (kW)';
+document.querySelector('#distanceWindow').closest('.field').querySelector('label').textContent='Abstand Fenster / Nachbar (Schall-Orientierung)';
+const existingOutdoorFields=document.querySelector('#clearanceFront').closest('.fields');
+const neighborDistanceField=createLabeledField('Abstand zum Nachbargrundstück / Immissionsort','distanceNeighbor');
+neighborDistanceField.control.name='distanceNeighbor';neighborDistanceField.control.type='number';neighborDistanceField.control.min='0';neighborDistanceField.control.step='0.01';neighborDistanceField.control.placeholder='Meter';
+existingOutdoorFields.append(neighborDistanceField.field);
+for(const item of outdoorClearanceFields){item.control.step='0.01';item.control.min='0'}
+updateOutdoorCatalog();
 const solarPvPresent=document.querySelector('#solarPvPresent'),solarPvPresentField=solarPvPresent.closest('.field');
 const overviewFields=document.querySelector('#panel-overview .box .fields');
 const visitDateField=document.querySelector('#visitDate').closest('.field');
@@ -347,7 +729,7 @@ function setFields(data={}){
 	}
 	syncGroundObstacleNote();syncHakFields();updateManufacturerFields();
 	if(restored.solarPvPlan)solarPvPlan.value=restored.solarPvPlan;
-	syncSolarPvFields();renderCircuitEditor(restored.heatingCircuits)
+	syncSolarPvFields();renderCircuitEditor(restored.heatingCircuits);updateOutdoorCatalog()
 }
 function showToast(text){const node=document.querySelector('#toast');node.textContent=text;node.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>node.classList.remove('show'),2400)}
 function nameOf(item){const customerName=String(item.fields?.customerName??'').trim();return customerName.split(/\s+/)[0]||String(item.name??'').trim()||'Neue Aufnahme'}
