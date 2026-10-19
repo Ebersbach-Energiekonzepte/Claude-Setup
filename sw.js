@@ -1,4 +1,4 @@
-const CACHE_NAME = "sd-planer-shell-v4";
+const CACHE_NAME = "sd-planer-shell-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -12,7 +12,16 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then((cache) => cache.addAll(APP_SHELL))
+      .then((cache) =>
+        cache.addAll(
+          APP_SHELL.map(
+            (path) =>
+              new Request(new URL(path, self.registration.scope), {
+                cache: "reload",
+              }),
+          ),
+        ),
+      )
       .then(() => self.skipWaiting()),
   );
 });
@@ -39,7 +48,10 @@ self.addEventListener("fetch", (event) => {
 
   if (request.mode === "navigate") {
     event.respondWith(
-      fetch(request)
+      fetch(request.url, {
+        cache: "no-cache",
+        headers: request.headers,
+      })
         .then((response) => {
           if (response.ok) {
             const copy = response.clone();

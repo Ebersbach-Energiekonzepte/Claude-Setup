@@ -21,6 +21,8 @@ Wichtig: Für die erste Einrichtung muss die App per HTTPS erreichbar sein.
 Danach bleibt sie auch ohne aktive Internetverbindung nutzbar, sofern der
 Offline-Cache bereits initialisiert wurde. Aufnahmen bleiben auf genau diesem
 Gerät gebunden. Für Sicherung oder Übertragung nutzt man **Auftrag exportieren**.
+Nach einer Aktualisierung die Browser-Seite einmal neu laden; eine installierte
+PWA bei Bedarf vollständig schließen und erneut öffnen.
 
 ## 2. PDF erstellen und teilen
 
