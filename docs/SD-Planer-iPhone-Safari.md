@@ -36,22 +36,25 @@ PDF mit zwei Fingern geöffnet und anschließend über **Teilen** zum Beispiel i
 **Dateien**, per Mail, per AirDrop oder an andere Apps weitergegeben werden.
 Die Aufnahme bleibt zusätzlich lokal in der App gespeichert.
 
-## 3. Herstellerdaten an der Außeneinheit
+## 3. Außeneinheit und Abstände
 
 Im Bereich **Außeneinheit** zuerst Hersteller, Baureihe und danach die passende
 Leistungsstufe bzw. Typnummer auswählen. Die Liste der Leistungsstufen passt
-sich an die gewählte Baureihe an. Bei vorhandenen Herstellerdaten zeigt die
-Aufnahme die Mindestabstände an und färbt gemessene Werte grün oder rot.
-Für Vaillant-Baureihen mit hinterlegten Flexible-Space-Angaben lässt sich
-zusätzlich **Ja** oder **Nein** auswählen. Die Schutzbereichsprüfung richtet
-sich nach der ausgewählten Baureihe und Montagehöhe. Bei aktivierter Funktion
-wird der R290-Schutzbereich gemäß der freistehenden Montagezeichnung bewertet;
-Luftstrom- und Wartungsabstände gelten unabhängig davon weiter. Für Solvis Pia
-und Lea Pro sind die R290-Schutzbereiche ebenfalls hinterlegt. Deren
-richtungsabhängige Schutzform wird in der Eingabe konservativ mit einem
-Mindestabstand für alle Richtungen bewertet; maßgeblich bleiben die
-Herstellerzeichnungen und deren Sonderregeln (zum Beispiel Flachdach oder
-Trennwand).
+sich an die gewählte Baureihe an. Die Außeneinheit wird standardmäßig als
+Bodenaufstellung im Vor- oder Hintergarten aufgenommen; eine Auswahl für
+Wand-, Eck- oder Dachaufstellung wird nicht angezeigt. Abstände werden mit
+verständlichen Richtungsbeschreibungen erfasst. Wo Vaillant-Maßbuchstaben
+hinterlegt sind, erscheinen A–E zusätzlich in der jeweils passenden
+Abstandsbeschreibung.
+
+Es werden keine Herstellerquellen oder Links in der Oberfläche angezeigt.
+Hinterlegte Gerätewerte dienen weiterhin der Abstands- und Schallorientierung;
+gemessene Mindestabstände werden grün oder rot markiert. Für Vaillant-
+Baureihen mit Flexible-Space-Unterstützung wird die Funktion standardmäßig
+als **Nein** angesetzt und kann bei Bedarf auf **Ja** gestellt werden. Die
+Montagehöhe wird für die angenommene Bodenaufstellung mit 0 cm angesetzt.
+Für Solvis Pia und Lea Pro werden die R290-Schutzbereiche konservativ mit
+einem Mindestabstand für alle Richtungen bewertet.
 
 Für die Vitocal 200-A ie sind vier Baugrößen mit Leistungs- und Schallwerten
 aus dem vorläufigen Viessmann-Datenblatt 9444 982-1 (09/2026) hinterlegt.
@@ -61,12 +64,9 @@ prüfen.
 Die Abstands- und Schallanzeige ist eine Vor-Ort-Orientierung und ersetzt weder
 die vollständige Montageanleitung noch die Schallprognose oder Prüfung der
 örtlichen Anforderungen. Für nicht hinterlegte, ältere oder abweichende
-Gerätevarianten werden keine Mindestwerte geschätzt; in diesen Fällen die
-verlinkte Anleitung des exakten Geräts heranziehen. Vaillant-Montagewerte
-werden bei Maßbuchstaben A–E mit der Bezeichnung aus der Herstellerzeichnung
-angezeigt, statt eine nicht belegte Zuordnung zu Vorder-/Rückseite zu vermuten.
-Wo die offizielle Unterlage für eine Baureihe oder Leistungsstufe keine
-eindeutige Zahl liefert, bleibt die betreffende Prüfung neutral.
+Gerätevarianten werden keine Mindestwerte geschätzt; maßgeblich bleiben die
+Unterlagen des konkreten Geräts. Wo für eine Baureihe oder Leistungsstufe
+keine eindeutige Zahl hinterlegt ist, bleibt die betreffende Prüfung neutral.
 
 ## 4. Hosting und GitHub Pages
 

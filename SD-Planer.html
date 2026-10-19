@@ -293,17 +293,12 @@ for(const [brand,models] of Object.entries(outdoorCatalog))for(const [model,data
 outdoorStageChoice.control.add(new Option('Zuerst Baureihe auswählen',''));
 const outdoorEvidenceBox=document.createElement('div');outdoorEvidenceBox.className='box soft outdoor-evidence';
 const outdoorEvidenceHead=document.createElement('div');outdoorEvidenceHead.className='box-head';
-const outdoorEvidenceTitle=document.createElement('div');outdoorEvidenceTitle.innerHTML='<h3>Herstellerdaten &amp; Abstandsprüfung</h3><p>Nur dokumentierte Mindestwerte werden automatisch bewertet.</p>';
+const outdoorEvidenceTitle=document.createElement('div');outdoorEvidenceTitle.innerHTML='<h3>Abstände und Schall</h3><p>Richtwerte für die angenommene Bodenaufstellung im Vor- oder Hintergarten.</p>';
 outdoorEvidenceHead.append(outdoorEvidenceTitle);outdoorEvidenceBox.append(outdoorEvidenceHead);
 const outdoorCatalogNote=document.createElement('div');outdoorCatalogNote.className='note outdoor-catalog-note';
 const outdoorStyle=document.createElement('style');
-outdoorStyle.textContent='.outdoor-evidence .outdoor-source-field a{display:block;margin:0 0 8px;font-size:12px;font-weight:650}.outdoor-evidence .note{margin:12px 0}.outdoor-evidence .outdoor-zone-note{margin-bottom:0}.field.clearance-pass input{border-color:#4c8b60;background:#f2f8f2}.field.clearance-fail input{border-color:#b75e52;background:#fcf1ef}.field.clearance-pass>label,.field.clearance-pass .clearance-status{color:#32734a}.field.clearance-fail>label,.field.clearance-fail .clearance-status{color:#a43f35}.clearance-status{display:block;min-height:14px;margin-top:5px;color:var(--muted);font-size:11px}';
+outdoorStyle.textContent='.outdoor-evidence .note{margin:12px 0}.outdoor-evidence .outdoor-zone-note{margin-bottom:0}.field.clearance-pass input{border-color:#4c8b60;background:#f2f8f2}.field.clearance-fail input{border-color:#b75e52;background:#fcf1ef}.field.clearance-pass>label,.field.clearance-pass .clearance-status{color:#32734a}.field.clearance-fail>label,.field.clearance-fail .clearance-status{color:#a43f35}.clearance-status{display:block;min-height:14px;margin-top:5px;color:var(--muted);font-size:11px}';
 document.head.append(outdoorStyle);
-const outdoorSourceField=document.createElement('div');outdoorSourceField.className='field outdoor-source-field';
-const outdoorSourceLabel=document.createElement('label');outdoorSourceLabel.textContent='Herstellerquelle';
-const outdoorSourceLinks=document.createElement('div');
-const outdoorSourceValue=document.createElement('input');outdoorSourceValue.type='text';outdoorSourceValue.name='outdoorSource';outdoorSourceValue.readOnly=true;
-outdoorSourceField.append(outdoorSourceLabel,outdoorSourceLinks,outdoorSourceValue);
 const outdoorNoiseNote=document.createElement('div');outdoorNoiseNote.className='note outdoor-noise-note';
 const outdoorSoundPower=createLabeledField('Schallleistungspegel laut Hersteller (LWA)','outdoorSoundPower');
 outdoorSoundPower.control.name='outdoorSoundPower';outdoorSoundPower.control.type='number';outdoorSoundPower.control.min='0';outdoorSoundPower.control.step='0.1';outdoorSoundPower.control.placeholder='dB(A), falls bekannt';
@@ -322,12 +317,10 @@ outdoorNoiseFields.append(outdoorSoundPower.field,outdoorNoiseLimit.field);
 const outdoorZoneTitle=document.createElement('div');outdoorZoneTitle.className='subhead';outdoorZoneTitle.textContent='R290-Schutzbereich (Propan)';
 const outdoorZoneFields=document.createElement('div');outdoorZoneFields.className='fields three';
 const outdoorMountType=createLabeledField('Aufstellart','outdoorMountType','select');
-outdoorMountType.control.name='outdoorMountType';
-outdoorMountType.control.add(new Option('Bitte auswählen',''));
 outdoorMountType.control.add(new Option('Freistehend: Boden / Flachdach','free'));
-outdoorMountType.control.add(new Option('Wand / Ecke / Sonderaufstellung','other'));
+outdoorMountType.control.value='free';
 const outdoorMountHeight=createLabeledField('Montagehöhe über Boden','outdoorMountHeight');
-outdoorMountHeight.control.name='outdoorMountHeight';outdoorMountHeight.control.type='number';outdoorMountHeight.control.min='0';outdoorMountHeight.control.step='1';outdoorMountHeight.control.placeholder='cm';
+outdoorMountHeight.control.type='number';outdoorMountHeight.control.min='0';outdoorMountHeight.control.step='1';outdoorMountHeight.control.value='0';
 const outdoorFlexibleSpace=createLabeledField('Flexible Space Funktion','outdoorFlexibleSpace','select');
 outdoorFlexibleSpace.control.name='outdoorFlexibleSpace';
 outdoorFlexibleSpace.control.add(new Option('Bitte auswählen',''));
@@ -339,15 +332,15 @@ const outdoorIgnition=createLabeledField('Nächste Zündquelle','outdoorDistance
 outdoorIgnition.control.name='outdoorDistanceIgnition';outdoorIgnition.control.type='number';outdoorIgnition.control.min='0';outdoorIgnition.control.step='0.01';outdoorIgnition.control.placeholder='Meter';
 const outdoorRecess=createLabeledField('Nächste Vertiefung / Ablauf','outdoorDistanceRecess');
 outdoorRecess.control.name='outdoorDistanceRecess';outdoorRecess.control.type='number';outdoorRecess.control.min='0';outdoorRecess.control.step='0.01';outdoorRecess.control.placeholder='Meter';
-for(const item of [outdoorMountType,outdoorMountHeight,outdoorFlexibleSpace,outdoorOpening,outdoorIgnition,outdoorRecess])outdoorZoneFields.append(item.field);
+for(const item of [outdoorFlexibleSpace,outdoorOpening,outdoorIgnition,outdoorRecess])outdoorZoneFields.append(item.field);
 const outdoorZoneNote=document.createElement('div');outdoorZoneNote.className='note outdoor-zone-note';
-outdoorEvidenceBox.append(outdoorCatalogNote,outdoorSourceField,outdoorNoiseFields,outdoorNoiseNote,outdoorZoneTitle,outdoorZoneFields,outdoorZoneNote);
+outdoorEvidenceBox.append(outdoorCatalogNote,outdoorNoiseFields,outdoorNoiseNote,outdoorZoneTitle,outdoorZoneFields,outdoorZoneNote);
 document.querySelector('#panel-ausseneinheit .box').after(outdoorEvidenceBox);
 const outdoorClearanceFields=[
 	{key:'front',id:'clearanceFront',label:'Luftausblas / Vorderseite'},
-	{key:'back',id:'clearanceBack',label:'Rückseite'},
-	{key:'left',id:'clearanceLeft',label:'Linke Seite'},
-	{key:'right',id:'clearanceRight',label:'Rechte Seite'},
+	{key:'back',id:'clearanceBack',label:'Luftansaugung / Rückseite'},
+	{key:'left',id:'clearanceLeft',label:'Abstand linke Seite'},
+	{key:'right',id:'clearanceRight',label:'Abstand rechte Seite'},
 	{key:'above',id:'clearanceAbove',label:'Freiraum nach oben'}
 ].map(item=>({...item,control:document.getElementById(item.id)}));
 const outdoorSafetyFields=[
@@ -417,21 +410,22 @@ function updateOutdoorChecks(entry=outdoorEntry(),stage=selectedOutdoorStage()){
 	const brand=outdoorBrandControl.value;
 	const clearance=stage?.clearances||entry?.clearances;
 	const hasClearances=!!clearance;
-	const mountType=outdoorMountType.control.value;
-	const compareClearances=hasClearances&&mountType==='free';
+	outdoorMountType.control.value='free';
+	outdoorMountHeight.control.value='0';
 	for(const item of outdoorClearanceFields){
 		const label=item.control.closest('.field').querySelector('label');
 		const minimum=clearance?.[item.key];
 		const strictConfiguration=stage?.strictClearances||entry?.strictClearances;
 		const strictMinimum=typeof strictConfiguration==='object'?!!strictConfiguration[item.key]:!!strictConfiguration;
-		const fieldLabel=entry?.clearanceLabels?.[item.key]||item.label;
+		const measure=entry?.clearanceLabels?.[item.key]?.match(/^Maß\s+([A-E])(?:\s*\((.*)\))?$/);
+		const measureLabel=measure?` (Maß ${measure[1]}${measure[2]?`: ${measure[2]}`:''})`:'';
+		const fieldLabel=`${item.label}${measureLabel}`;
 		label.textContent=minimum==null?fieldLabel:`${fieldLabel} (min. ${strictMinimum?'> ':''}${formatOutdoorDistance(minimum)})`;
 		const value=Number(item.control.value),validValue=item.control.value.trim()!=='';
 		if(minimum==null){setOutdoorFieldStatus(item.control,null,'');continue}
-		if(!compareClearances){setOutdoorFieldStatus(item.control,null,'Aufstellart Boden-/Flachdach wählen, um automatisch zu prüfen.');continue}
 		const clearanceMet=strictMinimum?value*1000>minimum:value*1000+0.0001>=minimum;
 		setOutdoorFieldStatus(item.control,!validValue?null:clearanceMet?'pass':'fail',
-			!validValue?`Hersteller-Minimum: ${strictMinimum?'> ':''}${formatOutdoorDistance(minimum)}`:clearanceMet?'Mindestabstand eingehalten':'Mindestabstand unterschritten')
+			!validValue?`Mindestabstand: ${strictMinimum?'> ':''}${formatOutdoorDistance(minimum)}`:clearanceMet?'Mindestabstand eingehalten':'Mindestabstand unterschritten')
 	}
 	const soundPower=Number(outdoorSoundPower.control.value),hasSoundPower=outdoorSoundPower.control.value.trim()!=='';
 	const soundLimit=Number(outdoorNoiseLimit.control.value),hasSoundLimit=outdoorNoiseLimit.control.value!=='';
@@ -448,21 +442,14 @@ function updateOutdoorChecks(entry=outdoorEntry(),stage=selectedOutdoorStage()){
 		setOutdoorFieldStatus(control,!validValue?null:value>=noiseDistance?'pass':'fail',
 			!validValue?`Orientierungsabstand: ca. ${formatNoiseDistance(noiseDistance)}`:value>=noiseDistance?'Orientierungsabstand erreicht':'Orientierungsabstand unterschritten')
 	}
-	const specialMount=mountType==='other';
 	const clearanceMessage=entry
 		?hasClearances
-			?specialMount?'Für Wand-, Eck- und Sonderaufstellungen gelten andere Herstellerdiagramme; die folgende Ampel ist dafür deaktiviert.':mountType==='free'?entry.clearanceLabels?'Mindestmaße gemäß Maßbuchstaben A–E der Herstellerzeichnung für Boden-/Flachdachaufstellung.':'Mindestmaße gemäß Herstellerdiagramm für Boden-/Flachdachaufstellung.':'Aufstellart auswählen. Die Ampel prüft nur freistehende Boden-/Flachdachaufstellungen.'
+			?entry.clearanceLabels?'Mindestabstände für die Bodenaufstellung; Maßbuchstaben A–E stehen zusätzlich in den jeweiligen Abstandsbeschreibungen.':'Mindestabstände für die angenommene Bodenaufstellung.'
 			:'Für diese Baureihe sind in den hier geprüften Herstellerunterlagen keine vollständigen, modellbezogenen Mindestabstände hinterlegt. Deshalb bleibt die Abstandsampel neutral.'
 		:'Baureihe auswählen. Für nicht gelistete oder ältere Geräte werden keine Mindestabstände geschätzt.';
 	const stageMessage=entry&&!entry.stages.length?'Für diese Baureihe sind hier noch keine Leistungsstufen verifiziert; die kW-Angabe bitte dem Angebot oder Typenschild entnehmen.'
 		:entry?.stages.some(item=>item.kw===undefined&&!item.kwLabel)?'Für einzelne Typstufen ist hier noch keine offizielle kW-Leistungsangabe hinterlegt; bitte Angebot oder Typenschild prüfen.':'';
 	outdoorCatalogNote.textContent=[clearanceMessage,stageMessage].filter(Boolean).join(' ');
-	const sources=entry?[entry.source,...(entry.additionalSources||[])].filter(Boolean):[];
-	outdoorSourceField.hidden=!sources.length;
-	outdoorSourceLinks.replaceChildren(...sources.map(source=>{
-		const link=document.createElement('a');link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=`${source.title} ↗`;return link
-	}));
-	outdoorSourceValue.value=sources.map(source=>source.title).join('; ');
 	const sound=stage?.sound;
 	outdoorSoundPower.field.querySelector('label').textContent=sound===undefined
 		?'Schallleistungspegel laut Hersteller (LWA)'
@@ -477,17 +464,14 @@ function updateOutdoorChecks(entry=outdoorEntry(),stage=selectedOutdoorStage()){
 	const supportsFlexible=!!entry?.flexibleSpace;
 	const hasProtectionZone=!!entry?.protectionZone;
 	outdoorZoneTitle.hidden=!hasProtectionZone;
-	outdoorMountType.field.hidden=!(supportsFlexible||hasProtectionZone||hasClearances);
 	outdoorFlexibleSpace.field.hidden=!isVaillant;
 	outdoorFlexibleSpace.control.disabled=isVaillant&&!!entry&&!supportsFlexible;
 	setOutdoorFieldStatus(outdoorFlexibleSpace.control,null,isVaillant&&entry&&!supportsFlexible?'Diese Baureihe unterstützt Flexible Space nicht.':'');
 	for(const item of [outdoorOpening,outdoorIgnition,outdoorRecess])item.field.hidden=!hasProtectionZone;
-	const freeStanding=hasProtectionZone&&outdoorMountType.control.value==='free';
-	outdoorMountHeight.field.hidden=!(freeStanding&&isVaillant&&supportsFlexible);
 	const height=Number(outdoorMountHeight.control.value),hasHeight=outdoorMountHeight.control.value.trim()!=='';
 	const flexible=outdoorFlexibleSpace.control.value==='Ja';
 	const hasFlexibleChoice=outdoorFlexibleSpace.control.value==='Ja'||outdoorFlexibleSpace.control.value==='Nein';
-	const canCheckZone=freeStanding&&(!isVaillant||!supportsFlexible||hasHeight&&hasFlexibleChoice);
+	const canCheckZone=hasProtectionZone&&(!isVaillant||!supportsFlexible||hasHeight&&hasFlexibleChoice);
 	const zoneMinimum=!canCheckZone?null:isVaillant&&supportsFlexible
 		?flexible?entry.protectionZone?.flexible??null:height<40?entry.protectionZone?.below400??null:entry.protectionZone?.above400??null
 		:entry.protectionZone?.allDirections??null;
@@ -504,19 +488,17 @@ function updateOutdoorChecks(entry=outdoorEntry(),stage=selectedOutdoorStage()){
 	}
 	outdoorZoneNote.textContent=!hasProtectionZone?''
 		:!isVaillant
-		?outdoorMountType.control.value!=='free'?'Die automatische Schutzbereichsprüfung gilt nur für freistehende Boden-/Flachdachaufstellung; bei Sonderaufstellungen die Herstellerzeichnung prüfen.':`Die Herstellerzeichnung weist eine richtungsabhängige R290-Schutzzone aus. Für die Ampel wird konservativ ${formatOutdoorDistance(entry.protectionZone.allDirections)} in jeder Richtung angesetzt; Form und Höhe der Zone sowie Sonderfälle (z. B. Flachdach) bitte anhand der Anleitung prüfen.`
-		:!supportsFlexible?'Für diese Vaillant-Baureihe sind hier keine verifizierten Flexible-Space-Schutzbereichsdaten hinterlegt. Bitte die verlinkte Anleitung des konkreten Geräts prüfen; die Schutzbereichsampel bleibt deaktiviert.'
-			:outdoorMountType.control.value!=='free'?'Bei Wand-, Eck- oder Sondermontage ist die Schutzbereichskizze der verlinkten Vaillant-Anleitung maßgeblich; keine automatische Zonenampel.'
-				:flexible&&entry.protectionZone?.flexible==null?'Für Flexible Space ist bei dieser Baureihe kein einzelner, belastbarer Mindestabstand als Zahl hinterlegt; maßgeblich bleibt die konkrete Herstellerzeichnung.'
-					:flexible?'Bei aktivierter Flexible Space Funktion gilt der in der freistehenden Montagezeichnung ausgewiesene Schutzbereich. Die Mindestabstände für Luftstrom und Wartung bleiben unverändert.'
-						:!hasHeight||!hasFlexibleChoice?'Montagehöhe und Flexible Space Ja/Nein eingeben. Für freistehende Boden-/Flachdachmontage gilt unter 40 cm Montagehöhe der konservative Maximalwert aus der Herstellerzeichnung; ab 40 cm der dort angegebene kleinere Schutzbereich. Die Abbildung des konkreten Geräts bleibt maßgeblich.'
-							:`Für freistehende Boden-/Flachdachmontage wird der größte Schutzbereich aus der Herstellerzeichnung vorsorglich als Mindestabstand zu Öffnungen, Zündquellen und Vertiefungen angesetzt (${formatOutdoorDistance(zoneMinimum)}). Die tatsächliche Schutzbereichsform ist der verlinkten Anleitung zu entnehmen.`;
-	if(specialMount&&hasClearances)for(const item of outdoorClearanceFields)setOutdoorFieldStatus(item.control,null,'Für diese Aufstellart nicht automatisch bewertet.')
+		?`Für die angenommene Bodenaufstellung im Vor- oder Hintergarten wird konservativ ${formatOutdoorDistance(entry.protectionZone.allDirections)} in jeder Richtung angesetzt. Die tatsächliche Form und Höhe der R290-Schutzzone bitte vor der Montage prüfen.`
+		:!supportsFlexible?'Für diese Vaillant-Baureihe sind keine Flexible-Space-Schutzbereichsdaten hinterlegt. Die Schutzbereichsampel bleibt deaktiviert.'
+			:flexible&&entry.protectionZone?.flexible==null?'Für Flexible Space ist bei dieser Baureihe kein einzelner, belastbarer Mindestabstand als Zahl hinterlegt; vor der Montage die Herstellerzeichnung prüfen.'
+				:flexible?'Bei aktivierter Flexible Space Funktion gilt der ausgewiesene Schutzbereich. Die Mindestabstände für Luftstrom und Wartung bleiben unverändert.'
+					:!hasHeight||!hasFlexibleChoice?'Flexible Space Ja/Nein auswählen. Für die angenommene Bodenaufstellung wird die Montagehöhe mit 0 cm angesetzt.'
+						:`Für die angenommene Bodenaufstellung wird der Mindestabstand zu Öffnungen, Zündquellen und Vertiefungen konservativ mit ${formatOutdoorDistance(zoneMinimum)} angesetzt. Die tatsächliche Schutzbereichsform bitte vor der Montage prüfen.`;
 }
 outdoorBrandControl.addEventListener('change',()=>{
 	outdoorModelControl.value='';outdoorModelChoice.control.value='';outdoorOutputControl.value='';outdoorStageChoice.control.value='';
 	outdoorSoundPower.control.value='';
-	outdoorMountType.control.value='';outdoorMountHeight.control.value='';outdoorFlexibleSpace.control.value='';
+	outdoorMountType.control.value='free';outdoorMountHeight.control.value='0';outdoorFlexibleSpace.control.value=outdoorBrandControl.value==='Vaillant'?'Nein':'';
 	updateOutdoorCatalog()
 });
 outdoorModelChoice.control.addEventListener('change',()=>{
@@ -539,7 +521,7 @@ for(const control of [outdoorSoundPower.control,outdoorNoiseLimit.control]){
 	control.addEventListener('change',()=>updateOutdoorChecks())
 }
 for(const item of [...outdoorClearanceFields,...outdoorSafetyFields])item.control.addEventListener('input',()=>updateOutdoorChecks());
-for(const control of [outdoorMountType.control,outdoorMountHeight.control,outdoorFlexibleSpace.control])control.addEventListener('change',()=>updateOutdoorChecks());
+outdoorFlexibleSpace.control.addEventListener('change',()=>updateOutdoorChecks());
 outdoorOutputControl.closest('.field').querySelector('label').textContent='Leistung laut Angebot / Typenschild (kW)';
 document.querySelector('#distanceWindow').closest('.field').querySelector('label').textContent='Abstand Fenster / Nachbar (Schall-Orientierung)';
 const existingOutdoorFields=document.querySelector('#clearanceFront').closest('.fields');
