@@ -312,8 +312,9 @@ outdoorNoiseLimit.control.append(
 	new Option('50 dB(A) · Gewerbegebiet','50'),
 	new Option('70 dB(A) · Industriegebiet','70')
 );
+const windowDistanceField=document.querySelector('#distanceWindow').closest('.field');
 const outdoorNoiseFields=document.createElement('div');outdoorNoiseFields.className='fields three';
-outdoorNoiseFields.append(outdoorSoundPower.field,outdoorNoiseLimit.field);
+outdoorNoiseFields.append(outdoorSoundPower.field,windowDistanceField,outdoorNoiseLimit.field);
 const outdoorZoneTitle=document.createElement('div');outdoorZoneTitle.className='subhead';outdoorZoneTitle.textContent='R290-Schutzbereich (Propan)';
 const outdoorZoneFields=document.createElement('div');outdoorZoneFields.className='fields three';
 const outdoorMountType=createLabeledField('Aufstellart','outdoorMountType','select');
@@ -430,17 +431,16 @@ function updateOutdoorChecks(entry=outdoorEntry(),stage=selectedOutdoorStage()){
 	const soundPower=Number(outdoorSoundPower.control.value),hasSoundPower=outdoorSoundPower.control.value.trim()!=='';
 	const soundLimit=Number(outdoorNoiseLimit.control.value),hasSoundLimit=outdoorNoiseLimit.control.value!=='';
 	const noiseDistance=hasSoundPower&&hasSoundLimit?10**((soundPower-soundLimit-8)/20):null;
-	for(const control of [document.querySelector('#distanceWindow'),neighborDistanceField.control]){
-		const field=control.closest('.field'),label=field.querySelector('label');
-		const baseLabel=control===document.querySelector('#distanceWindow')?'Abstand zum nächsten Fenster / Immissionsort':'Abstand zum Nachbargrundstück / Immissionsort';
-		label.textContent=noiseDistance===null?baseLabel:`${baseLabel} (Schall-Orientierung: min. ca. ${formatNoiseDistance(noiseDistance)})`;
-		const validValue=control.value.trim()!=='',value=Number(control.value);
-		if(noiseDistance===null){
-			setOutdoorFieldStatus(control,null,'Schallleistung und nächtlichen Richtwert auswählen, um eine Orientierung zu berechnen.');
-			continue
-		}
-		setOutdoorFieldStatus(control,!validValue?null:value>=noiseDistance?'pass':'fail',
-			!validValue?`Orientierungsabstand: ca. ${formatNoiseDistance(noiseDistance)}`:value>=noiseDistance?'Orientierungsabstand erreicht':'Orientierungsabstand unterschritten')
+	const windowDistance=document.querySelector('#distanceWindow');
+	const windowDistanceLabel=windowDistance.closest('.field').querySelector('label');
+	const baseLabel='Abstand zum nächsten Fenster / Immissionsort';
+	windowDistanceLabel.textContent=noiseDistance===null?baseLabel:`${baseLabel} (Schall-Orientierung: min. ca. ${formatNoiseDistance(noiseDistance)})`;
+	const hasWindowDistance=windowDistance.value.trim()!=='',windowDistanceValue=Number(windowDistance.value);
+	if(noiseDistance===null){
+		setOutdoorFieldStatus(windowDistance,null,'Schallleistung und nächtlichen Richtwert auswählen, um eine Orientierung zu berechnen.');
+	}else{
+		setOutdoorFieldStatus(windowDistance,!hasWindowDistance?null:windowDistanceValue>=noiseDistance?'pass':'fail',
+			!hasWindowDistance?`Orientierungsabstand: ca. ${formatNoiseDistance(noiseDistance)}`:windowDistanceValue>=noiseDistance?'Orientierungsabstand erreicht':'Orientierungsabstand unterschritten')
 	}
 	const clearanceMessage=entry
 		?hasClearances
@@ -523,11 +523,7 @@ for(const control of [outdoorSoundPower.control,outdoorNoiseLimit.control]){
 for(const item of [...outdoorClearanceFields,...outdoorSafetyFields])item.control.addEventListener('input',()=>updateOutdoorChecks());
 outdoorFlexibleSpace.control.addEventListener('change',()=>updateOutdoorChecks());
 outdoorOutputControl.closest('.field').querySelector('label').textContent='Leistung laut Angebot / Typenschild (kW)';
-document.querySelector('#distanceWindow').closest('.field').querySelector('label').textContent='Abstand Fenster / Nachbar (Schall-Orientierung)';
-const existingOutdoorFields=document.querySelector('#clearanceFront').closest('.fields');
-const neighborDistanceField=createLabeledField('Abstand zum Nachbargrundstück / Immissionsort','distanceNeighbor');
-neighborDistanceField.control.name='distanceNeighbor';neighborDistanceField.control.type='number';neighborDistanceField.control.min='0';neighborDistanceField.control.step='0.01';neighborDistanceField.control.placeholder='Meter';
-existingOutdoorFields.append(neighborDistanceField.field);
+windowDistanceField.querySelector('label').textContent='Abstand zum nächsten Fenster / Immissionsort';
 for(const item of outdoorClearanceFields){item.control.step='0.01';item.control.min='0'}
 updateOutdoorCatalog();
 const solarPvPresent=document.querySelector('#solarPvPresent'),solarPvPresentField=solarPvPresent.closest('.field');
