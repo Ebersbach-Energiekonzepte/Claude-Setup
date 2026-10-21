@@ -26,14 +26,13 @@ PWA bei Bedarf vollständig schließen und erneut öffnen.
 
 ## 2. PDF erstellen und teilen
 
-Im SD-Planer die gewünschte Aufnahme öffnen und oben auf **PDF** tippen. Es
-öffnet sich ein eigenständiger, druckoptimierter Aufnahmebericht mit
-Auftragsdaten, Kontakt- und Objektadresse, den ausgefüllten Angaben je
-Aufnahmebereich sowie einer nach Kategorien geordneten Fotodokumentation.
-
-Im Bericht **PDF speichern / Drucken** wählen. In der Druckvorschau kann das
-PDF mit zwei Fingern geöffnet und anschließend über **Teilen** zum Beispiel in
-**Dateien**, per Mail, per AirDrop oder an andere Apps weitergegeben werden.
+Im SD-Planer die gewünschte Aufnahme öffnen und oben auf **PDF** tippen. Der
+druckoptimierte Aufnahmebericht mit Auftragsdaten, Kontakt- und Objektadresse,
+den ausgefüllten Angaben je Aufnahmebereich sowie der Fotodokumentation wird
+im selben Safari-Fenster geöffnet und die iOS-Druckvorschau direkt gestartet.
+Es wird kein zusätzliches Popup-Fenster geöffnet. In der Druckvorschau das PDF
+über **Teilen** sichern, zum Beispiel in **Dateien**, per Mail oder per AirDrop.
+Nach dem Drucken kannst du über **Zurück zur Aufnahme** wieder zur App wechseln.
 Die Aufnahme bleibt zusätzlich lokal in der App gespeichert.
 
 ## 3. Außeneinheit und Abstände
